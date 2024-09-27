@@ -1,0 +1,161 @@
+
+:root{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
+.image{
+    width: 60%;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadastro {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Transição suave */
+}
+
+/* Definir a tela visível */
+.tela-visivel {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.5s ease; /* Transição suave */
+}
+
+.login, .cadastro {
+    transition: opacity 0.5s ease; /* Suavizando a transição entre as telas */
+}
+
+.container-fluid{
+    margin-top: 4rem;
+    padding-bottom: 4rem;
+}
+.login h1, .cadastro h1{
+    font-size: 3.5em;
+    font-weight: 700;
+}
+.login h1 span, .cadastro h1 span{
+    color: #4339F2;
+}
+
+input[type="email"], input[type="password"], input[type="text"]  {
+    font-family: "Montserrat", 'Font Awesome 5 Free', Arial, sans-serif;
+    font-weight: 900; 
+    padding-left: 40px; 
+    height: 5rem;
+    width: 30rem;
+    font-size: 1.4em;
+    background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/svgs/solid/envelope.svg');
+    background-size: 20px 20px; 
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+    border-color: #D9D9D9;
+}
+
+input[type="password"] {  
+    background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/svgs/solid/lock.svg');
+}
+input[type="text"] {  
+    background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/svgs/solid/lock.svg');
+}
+
+.forms div input{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    box-shadow: 14px 23px 24px -9px rgba(0,0,0,0.20);
+-webkit-box-shadow: 14px 23px 24px -9px rgba(0,0,0,0.20);
+-moz-box-shadow: 14px 23px 24px -9px rgba(0,0,0,0.20);
+}
+.forms div.btns{
+    display: flex; 
+    gap: 1rem; 
+}
+
+.forms button.btn{
+    width: 16rem;
+    height: 4.2rem;
+    border-color: #4339F2;
+    border: #4339F2 2px solid;
+    font-weight: 500;
+    font-size: 2em;
+    color: #4339F2;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    cursor: pointer !important;
+}
+
+.forms button.btn.btn-primary{
+    background-color: #4339F2 !important;
+    color: #ffffff;
+    width: 10rem;
+}
+
+.forms button.btn.btn-outline-primary:hover{
+    background-color: #4339F2 !important;
+    color: #ffffff;
+}
+
+
+@media (max-width: 992px) {
+    .image{
+        width: 50%;
+    }
+
+    .login h1, .cadastro h1{
+        font-size: 3em;
+    }
+}
+
+@media (max-width: 600px) {
+    .image{
+        width: 40%;
+    }
+
+    input[type="email"], input[type="password"], input[type="text"]  {
+        
+        height: 4rem;
+        width: 70vw;
+        font-size: 1.4em;
+     
+    }
+
+    .forms button.btn{
+        width: 35vw;
+        height: 4rem;
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 450px) {
+    .login h1, .cadastro h1{
+        font-size: 2em;
+    }
+    input[type="email"], input[type="password"], input[type="text"]  {
+        font-size: 1em;
+     
+    }
+
+    .forms button.btn{
+        font-size: 1em;    
+    }
+}
