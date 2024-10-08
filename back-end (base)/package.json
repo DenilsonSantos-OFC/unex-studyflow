@@ -25,10 +25,7 @@
   "author": "Denilson Santos, Rafael Pinto, Luan Vinicius",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.4.5",
-    "dotenv-expand": "^11.0.6",
     "express": "^4.21.0",
-    "jsonwebtoken": "^9.0.2",
-    "pg": "^8.13.0"
+    "jsonwebtoken": "^9.0.2"
   }
 }
