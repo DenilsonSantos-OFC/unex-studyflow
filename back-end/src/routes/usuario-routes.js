@@ -1,5 +1,7 @@
 /**
+ * @module UsuarioRoutes
  * @file usuario-routes.js
+ * @author Denilson Santos
  * @description Define as rotas relacionadas à gestão dos usuários cadastrados no banco de dados.
  * Este módulo lida com o cadastro, autenticação, alteração e consulta destes dados.
  * Cada operação requerida por meio da requisição precisa ser autorizada antes de ser realizada.
@@ -8,15 +10,13 @@
  * Ela faz isso por analisar a assinatura do token e verificar se o "segredo" armazenado na assinatura do token bate com o "segredo" armazenado no lado do servidor.
  * Como as requisições recebidas contém o token de acesso no cabeçalho (que contém o ID do usuário), o ID não precisa ser informado na URl ou como um parâmetro da requisição.
  * Se a requisição não incluir o token, ela será tratada como vinda de um usuário que não está logado.
- * @author Denilson Santos
  */
 
 // ------------------------------------------------------------------ //
 //                 IMPORTAÇÕES DE RECURSOS NECESSÁRIOS
 // ------------------------------------------------------------------ //
 
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router()
 const Controller = require('../controllers/usuario-controller')
 
 // ------------------------------------------------------------------ //

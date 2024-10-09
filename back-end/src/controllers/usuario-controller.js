@@ -6,6 +6,7 @@
  * e o que será retornado para a aplicação que enviou a requisição.
  * O que os métodos aqui têm em comum?
  * Todos eles trabalham com par de parâmetros "req" e "res", "requisição" e "resposta", respectivamente.
+ * Este controlador manipula os dados recebidos por meio da requisição e encaminha uma resposta adequada para o solicitante.
  * @author Denilson Santos
  */
 
@@ -40,46 +41,3 @@ class UsuarioController {
     }
     
 } module.exports = UsuarioController
-
-
-
-
-
-
-
-// ------------------------------------------------------------------------------------------------ //
-
-
-
-
-// /**
-//  * Verifica as credenciais passadas para autenticação (email e senha).
-//  * @param {string} email - Email do usuário.
-//  * @param {string} senha - Senha do usuário.
-//  * @returns {JSON} Retornará um objeto JSON. Este objeto é a resposta da requisição recebida, indicando se a operação foi bem-sucedida ou não. Contém o código HTTP e a mensagem de erro (caso ocorra).
-//  */
-// function autenticar(email, senha) {
-//     throw new Error("Método ainda não implementado")
-// }
-
-// /**
-//  * Cadastra um novo usuário no banco de dados utilizando as informações passadas.
-//  * @param {string} nome - Nome do usuário (inclui nome e sobrenome).
-//  * @param {string} email - Email do usuário.
-//  * @param {string} senha - Senha do usuário (nova senha a ser cadastrada pode conter até 16 caracteres, conforme limitação do banco de dados).
-//  * @returns {JSON} Retornará um objeto JSON. Este objeto é a resposta da requisição recebida, indicando se a operação foi bem-sucedida ou não. Contém o código HTTP e a mensagem de erro (caso ocorra).
-//  */
-// function cadastrar (nome, email, senha) {
-//     throw new Error("Método ainda não implementado")
-// }
-
-// /**
-//  * Altera as informações de.
-//  * @param {string} nome - Nome do usuário (inclui nome e sobrenome).
-//  * @param {string} email - Email do usuário.
-//  * @param {string} senha - Senha do usuário (nova senha a ser cadastrada pode conter até 16 caracteres, conforme limitação do banco de dados).
-//  * @returns {JSON} Retornará um objeto JSON. Este objeto é a resposta da requisição recebida, indicando se a operação foi bem-sucedida ou não. Contém o código HTTP e a mensagem de erro (caso ocorra).
-//  */
-// function alterar (id, nome, genero, email, senha, img_perfil, data_nasc) {
-//     throw new Error("Método ainda não implementado")
-// }
