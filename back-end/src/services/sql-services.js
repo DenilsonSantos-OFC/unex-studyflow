@@ -23,37 +23,33 @@ class SqlServices {
             connectionString: process.env.DB_URL,
             ssl: { ca: ler(process.env.CERTIFICADO)}
         }).connect()
+
     }
 
     /**
      * Executa um comando Sql a partir da string que for passada.
      * @static
      * @param {string} comandoSql - Comando a ser executado, em formato de string.
-     * @returns {QueryResult} (1) Retorna o Resultado, contendo todos os detalhes da operação, caso o código seja executado com sucesso.
-     * @returns {Error} (2) Caso o código não seja executado com sucesso, retorna o Erro como um objeto, contendo todos os detalhes sobre a exceção.
+     * @returns {QueryResult} Retorna o Resultado, contendo todos os detalhes da operação.
+     * @throws {Error} Caso o código Sql não seja executado com sucesso, um erro será disparado. Precisa tratar isso na camada superior da aplicação.
     */
     static async executar (comandoSql) {
         const controladorDb = await SqlServices.conectar()
-        let resultado;
-        try {
-            resultado = await controladorDb.query(comandoSql)
-        } catch (erro) {
-            resultado = erro
-        } finally {
-            controladorDb.release()
-            return resultado
-        }
+        const resultado = await controladorDb.query(comandoSql)
+        controladorDb.release()
+        return resultado;
     }
-
-    /**
-     * Verifica se a operação de insert adicionou algum novo registro no banco de dados.
-     * @static
-     * @param {QueryResult} resultado - O retorno obtido após o uso do método *.query().
-     * @returns {boolean} Retorna um resultado positivo se no resultado passado, 1 ou mais linhas foram adicionadas. Caso contrário, retorna False.
-    */
-    static async insertOk(resultado) {
-        const linhasNovasNaTabela = resultado.rowCount
-        return linhasNovasNaTabela > 0
-    }
+    // static async executar (comandoSql) {
+    //     const controladorDb = await SqlServices.conectar()
+    //     let resultado;
+    //     try {
+    //         resultado = await controladorDb.query(comandoSql)
+    //     } catch (erro) {
+    //         resultado = erro
+    //     } finally {
+    //         controladorDb.release()
+    //         return resultado
+    //     }
+    // }
 
 } module.exports = SqlServices

@@ -1,3 +1,8 @@
+const { readFileSync: ler } = require('fs');
+const { existsSync: existe } = require('fs');
+const { unlink: remover } = require('fs');
+const { writeFile: escreverConteudo} = require('fs')
+
 /**
  * @module ArquivoServices
  * @class ArquivoServices
@@ -16,14 +21,24 @@ class ArquivoServices {
      * @returns {string|null} O conteúdo interno do arquivo. Se o arquivo não existir, retorna null.
      */
     static ler(arquivo) {
-        const { readFileSync: ler } = require('fs');
-        const { existsSync: existe } = require('fs');
         if ( existe (arquivo) ) {
             const conteudoDoArquivo = ler(arquivo, 'utf8')
             return conteudoDoArquivo
         } else {
             return null
         }
+    }
+
+    static deletar(arquivo) {
+        remover(arquivo, (erro) => {
+            return erro
+        })
+    }
+
+    static escrever(conteudo, destino) {
+        escreverConteudo(destino, conteudo, (erro) => {
+            return erro
+        })
     }
 
 } module.exports = ArquivoServices

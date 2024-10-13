@@ -1,18 +1,20 @@
+const express = require('express')
+const rotasDeUsuario = require('./routes/usuario-routes')
 const { config: variaveisDeAmbiente } = require('dotenv')
 const { expand: preparar } = require('dotenv-expand')
 
 preparar(variaveisDeAmbiente())
 
-async function main() {
-    const Usuario = require('./models/usuario')
-    // const usuario = await Usuario.autenticar("sadsdad@email.com", "lucas0029")
-    // const usuario = await Usuario.consultar('dasd')
-    // const usuario = await Usuario.cadastrar("lucas silva", "jkgasd@email.com", "lucas0029")
-    // console.log(Object.getOwnPropertyNames(usuario))
+const app = express()
 
-    console.log(usuario)
+app.use(express.json())
+app.use(rotasDeUsuario)
+app.use('/perfil/imagens', express.static(process.env.IMG_PROFILES))
+app.use((erro, req, res, next) => {
+    console.error(erro)
+    res.status(500).json({mensagem: "Erro interno no servidor durante o processamento da requisição."})
+})
 
-
-}
-
-main()
+app.listen(process.env.SRV_PORTA, () => {
+    console.log(`Servidor StudyFlow rodando na porta ${process.env.SRV_PORTA}...`)
+})

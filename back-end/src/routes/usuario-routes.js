@@ -18,6 +18,10 @@
 
 const router = require('express').Router()
 const Controller = require('../controllers/usuario-controller')
+const UsuarioServices = require('../services/usuario-services')
+const { checarAutenticacao, checarCredenciais } = require('../middlewares/usuarios/autenticacao')
+const { checarDadosDeCadastro } = require('../middlewares/usuarios/cadastro')
+const { checarUpload, checarMudancasNoBD, tratarNovosDados } = require('../middlewares/usuarios/alteracao')
 
 // ------------------------------------------------------------------ //
 //                             ROTAS
@@ -28,25 +32,27 @@ const Controller = require('../controllers/usuario-controller')
  * @description Rota para verificar se as credenciais passadas batem com algum registro no banco de dados.
  * @returns {Object} JSON contendo o código HTTP, a mensagem de retorno e o token de acesso (se ação bem-sucedida).
  */
-router.post('/autenticar', Controller.autenticar)
+router.post('/autenticar', checarCredenciais, Controller.autenticar)
 
 /**
  * @route POST /cadastrar
  * @description Rota para cadastrar um novo usuário no banco de dados usando as informações passadas por meio da requisição.
  * @returns {Object} JSON contendo o código HTTP, a mensagem de retorno e o token de acesso (se ação bem-sucedida).
  */
-router.post('/cadastrar', Controller.cadastrar)
+router.post('/cadastrar', checarDadosDeCadastro, Controller.cadastrar)
 
 /**
  * @route GET /perfil
  * @description Rota para obter todas as informações do usuário a partir do banco de dados.
  * @returns {Object} JSON contendo o código HTTP, a mensagem de retorno e as informações do usuário (se ação bem-sucedida).
  */
-router.get('/perfil', Controller.consultar)
+router.get('/perfil', checarAutenticacao, Controller.consultar)
 
 /**
  * @route PUT /perfil
  * @description Rota para atualizar as informações do usuário armazenadas no banco de dados.
  * @returns {Object} JSON contendo o código HTTP e a mensagem de retorno.
  */
-router.put('/perfil', Controller.alterar)
+router.put('/perfil', checarAutenticacao, checarUpload, checarMudancasNoBD, tratarNovosDados, Controller.alterar)
+
+module.exports = router;
