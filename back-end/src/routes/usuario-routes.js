@@ -39,7 +39,7 @@ router.post('/autenticar', checarCredenciais, Controller.autenticar)
  * @description Rota para cadastrar um novo usuário no banco de dados usando as informações passadas por meio da requisição.
  * @returns {Object} JSON contendo o código HTTP, a mensagem de retorno e o token de acesso (se ação bem-sucedida).
  */
-router.post('/cadastrar', checarDadosDeCadastro, Controller.cadastrar)
+router.post('/cadastrar', checarDadosDeCadastro, tratarNovosDados, Controller.cadastrar)
 
 /**
  * @route GET /perfil

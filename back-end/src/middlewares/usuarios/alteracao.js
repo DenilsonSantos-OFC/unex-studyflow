@@ -12,6 +12,7 @@ function checarMudancasNoBD(req, res, next) {
 
 function checarUpload(req, res, next) {
     const upload = UsuarioServices.obterUploaderDeImgDoUsuario(req)
+    console.log(req.body)
     upload(req, res, (erro) => {
         const alteracoesRestantes = Object.keys(req.body).length
         if (erro instanceof MulterError) {

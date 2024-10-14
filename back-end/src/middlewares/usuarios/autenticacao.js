@@ -1,11 +1,12 @@
 const UsuarioServices = require('../../services/usuario-services')
 
 function checarAutenticacao(req, res, next) {
+    
     const token = UsuarioServices.obterToken(req)
     if (token === undefined)
         return res.status(401).json({mensagem: "Estado de login não detectado, um novo login deve ser feito."})
     if (token === null)
-        return res.status(403).json({mensagem: "Token invalidado. Autenticação rejeitada!"})
+        return res.status(403).json({mensagem: "Token adulterado. Autenticação rejeitada!"})
     next()
 }
 
@@ -26,5 +27,6 @@ function tratarNovosDados(req, res, next) {
 
 module.exports = {
     checarAutenticacao,
-    checarCredenciais
+    checarCredenciais,
+    tratarNovosDados
 }
