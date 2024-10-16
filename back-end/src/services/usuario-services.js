@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken')
 const Usuario = require('../models/usuario')
 const ArquivoServices = require('./arquivo-services')
-const {join: mesclar} = require('path')
 const multer = require('multer')
+const { existsSync: existe } = require('fs');
 
 /**
  * @module UsuarioServices
@@ -119,7 +119,14 @@ class UsuarioServices {
             }
         })
         const uploader = multer({storage: configDeDestino})
-        return uploader.single('img')
+    }
+
+    static obterRefDeImagem(idDoUsuario){
+        const refDaImgDoPerfil = `${process.env.IMG_PROFILES}/${idDoUsuario}.${process.env.IMG_EXT}`
+        if (existe(refDaImgDoPerfil)) {
+            return refDaImgDoPerfil
+        }
+        return null
     }
 
 } module.exports = UsuarioServices

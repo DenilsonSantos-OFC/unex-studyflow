@@ -1,7 +1,6 @@
 const UsuarioServices = require('../../services/usuario-services')
 
 function checarAutenticacao(req, res, next) {
-    
     const token = UsuarioServices.obterToken(req)
     if (token === undefined)
         return res.status(401).json({mensagem: "Estado de login não detectado, um novo login deve ser feito."})

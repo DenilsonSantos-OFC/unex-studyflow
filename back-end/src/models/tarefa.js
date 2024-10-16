@@ -48,14 +48,9 @@ class Tarefa {
      * @returns {Tarefa|null} A tarefa encontrada ou null, se não existir.
      */
     static async consultar(id) {
-        try {
-            const resultado = await SqlServices.executar(`SELECT * FROM tarefas WHERE id = ${id}`);
-            const linha = resultado.rows[0];
-            return linha ? Tarefa.criarUsandoSql(linha) : null;
-        } catch (error) {
-            console.error('Erro ao consultar tarefa:', error);
-            return null;
-        }
+        const resultado = await SqlServices.executar(`SELECT * FROM tarefas WHERE id = ${id}`);
+        const linha = resultado.rows[0];
+        return linha ? Tarefa.criarUsandoSql(linha) : null;
     }
 
     /**
@@ -66,11 +61,11 @@ class Tarefa {
      * @param {string} categoria - Categoria da tarefa.
      * @returns {boolean} True se a tarefa foi cadastrada com sucesso, False caso contrário.
      */
-    static async cadastrar(titulo, descricao, prioridade, categoria) {
+    static async cadastrar(idUsuario, titulo, descricao, prioridade, categoria) {
         try {
             const RetornoDoCadastro = await SqlServices.executar(
-                `INSERT INTO tarefas (titulo, descricao, prioridade, categoria) 
-                VALUES('${titulo}', '${descricao}', '${prioridade}', '${categoria}');`
+                `INSERT INTO ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} ("idUsuario", "titulo", "descricao", "prioridade", categoria) 
+                VALUES('${idUsuario}', '${titulo}', '${descricao}', '${prioridade}', '${categoria}');`
             );
             return RetornoDoCadastro.rowCount > 0;
         } catch (error) {

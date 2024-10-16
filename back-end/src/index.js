@@ -1,5 +1,6 @@
 const express = require('express')
 const rotasDeUsuario = require('./routes/usuario-routes')
+const rotasDeTarefas = require('./routes/tarefa-routes')
 const { config: variaveisDeAmbiente } = require('dotenv')
 const { expand: preparar } = require('dotenv-expand')
 
@@ -9,6 +10,7 @@ const app = express()
 
 app.use(express.json())
 app.use(rotasDeUsuario)
+app.use(rotasDeTarefas)
 app.use('/perfil/imagens', express.static(process.env.IMG_PROFILES))
 app.use((erro, req, res, next) => {
     console.error(erro)

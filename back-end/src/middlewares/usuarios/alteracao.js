@@ -1,5 +1,6 @@
 const { MulterError } = require('multer')
 const UsuarioServices = require('../../services/usuario-services')
+const RespostaHTTP = require('../../models/resposta-http')
 
 function checarMudancasNoBD(req, res, next) {
     const numDeCamposPraEditar = Object.keys(req.body).length
@@ -12,20 +13,25 @@ function checarMudancasNoBD(req, res, next) {
 
 function checarUpload(req, res, next) {
     const upload = UsuarioServices.obterUploaderDeImgDoUsuario(req)
-    console.log(req.body)
+    const respostaHTTP = new RespostaHTTP(res)
     upload(req, res, (erro) => {
+        const arquivoNaoRecebido = (!req.files.imagem)
         const alteracoesRestantes = Object.keys(req.body).length
         if (erro instanceof MulterError) {
             console.error(erro)
-            return res.status(400).json({mensagem: "Erro durante upload."})
+            return respostaHTTP.erro(400, "Erro durante upload.")
         }
         if (erro) {
             console.error(erro)
-            return res.status(500).json({mensagem: "Erro interno do servidor."})
+            return respostaHTTP.erroInterno()
         }
-        if (alteracoesRestantes === 0)
-            return res.status(200).json({mensagem: "Imagem de perfil alterada com sucesso."})
-        next()
+        if (alteracoesRestantes > 0) {
+            return next()
+        }
+        if (arquivoNaoRecebido) {
+            return respostaHTTP.sucesso("Nenhum campo foi alterado, mas OK.")
+        }
+        return respostaHTTP.sucesso("Imagem de perfil alterada com sucesso.")
     })
 }
 
