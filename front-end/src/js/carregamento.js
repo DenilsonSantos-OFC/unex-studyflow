@@ -1,5 +1,5 @@
 // Função para criar a tela de carregamento
-function createLoadingScreen() {
+export function createLoadingScreen() {
     // Criar o elemento da tela de carregamento
     const loadingScreen = document.createElement('div');
     loadingScreen.id = 'loading-screen';
@@ -38,12 +38,12 @@ function createLoadingScreen() {
 }
 
 // Função para mostrar a tela de carregamento
-function showLoading() {
+export function showLoading() {
     document.getElementById('loading-screen').style.display = 'flex';
 }
 
 // Função para ocultar a tela de carregamento
-function hideLoading() {
+export function hideLoading() {
     document.getElementById('loading-screen').style.display = 'none';
 }
 

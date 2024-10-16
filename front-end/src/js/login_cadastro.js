@@ -7,7 +7,7 @@ var telaLogin = document.querySelector(".login");
 var telaCadastro = document.querySelector(".cadastro");
 
 const form = document.getElementById("forms");
-
+showLoading();
 
 cadastrar.addEventListener("click", function(){
     form.reset();
@@ -37,10 +37,10 @@ logar.addEventListener("click", function() {
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Impede o envio padrão do formulário
 
-    showLoading();
-
     const email = document.getElementById('Email').value;
     const password = document.getElementById('Password').value;
+
+    showLoading(); // Exibe a tela de carregamento
 
     fetch('http://localhost:3000/login', {
         method: 'POST',
@@ -53,9 +53,11 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     .then(data => {
         console.log(data);
         alert(data.message);
+        hideLoading(); // Oculta a tela de carregamento após a resposta
     })
     .catch(error => {
         console.error('Erro:', error);
+        hideLoading(); // Oculta a tela de carregamento em caso de erro
     });
 });
 
@@ -65,6 +67,8 @@ document.getElementById('register-form').addEventListener('submit', function(eve
     const nome = document.getElementById('Nome').value;
     const email = document.getElementById('Email').value;
     const password = document.getElementById('Password').value;
+
+    showLoading(); // Exibe a tela de carregamento
 
     fetch('http://localhost:3000/register', {
         method: 'POST',
@@ -77,9 +81,11 @@ document.getElementById('register-form').addEventListener('submit', function(eve
     .then(data => {
         console.log(data);
         alert(data.message);
+        hideLoading(); // Oculta a tela de carregamento após a resposta
     })
     .catch(error => {
         console.error('Erro:', error);
+        hideLoading(); // Oculta a tela de carregamento em caso de erro
     });
 });
 
