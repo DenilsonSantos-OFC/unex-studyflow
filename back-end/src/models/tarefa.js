@@ -86,10 +86,10 @@ class Tarefa {
     static async atualizar(id, titulo, descricao, prioridade, categoria) {
         try {
             const ComandoAtualizar = `
-                UPDATE tarefas
-                SET titulo = '${titulo}', descricao = '${descricao}', 
-                prioridade = '${prioridade}', categoria = '${categoria}'
-                WHERE id = ${id};`;
+            UPDATE ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
+            SET titulo = '${titulo}', 
+            descricao = '${descricao}', prioridade = '${prioridade}', categoria = '${categoria}'
+            WHERE id = ${id};`;
             const resultado = await SqlServices.executar(ComandoAtualizar);
             return resultado.rowCount > 0;
         } catch (error) {
@@ -105,9 +105,9 @@ class Tarefa {
      */
     static async remover(id) {
         try {
-            const ComandoRemover = `DELETE FROM tarefas WHERE id = ${id};`;
+            const ComandoRemover = `DELETE FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} WHERE id = ${id};`;
             const resultado = await SqlServices.executar(ComandoRemover);
-            return resultado.rowCount > 0;
+            return resultado.rowCount > 0;  
         } catch (error) {
             console.error('Erro ao remover tarefa:', error);
             return false;
@@ -120,7 +120,7 @@ class Tarefa {
      */
     static async listar() {
         try {
-            const resultado = await SqlServices.executar('SELECT * FROM tarefas;');
+            const resultado = await SqlServices.executar(`SELECT * FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS};`);
             return resultado.rows.map(Tarefa.criarUsandoSql);
         } catch (error) {
             console.error('Erro ao listar tarefas:', error);
