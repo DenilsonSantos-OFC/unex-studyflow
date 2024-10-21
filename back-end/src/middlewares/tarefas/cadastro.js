@@ -6,13 +6,11 @@ class CadastroMiddleware {
         const respostaHTTP = new RespostaHTTP(res);
         const { titulo, descricao, prioridade, categoria } = req.body;
 
-        if (!titulo || !descricao || !prioridade || !categoria) {
-            return respostaHTTP.erro(400, "Todos os campos são obrigatórios.");
+        if (!titulo  || !prioridade || !categoria) {
+            return respostaHTTP.erro(400, "Campos obrigatórios não preenchidos.");
         }
 
         // Se todos os dados estiverem corretos, passa para o próximo middleware
         next();
     }
-}
-
-module.exports = CadastroMiddleware;
+} module.exports = CadastroMiddleware;

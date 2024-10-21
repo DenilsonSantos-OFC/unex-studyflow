@@ -7,8 +7,8 @@ class AlteracaoMiddleware {
         const respostaHTTP = new RespostaHTTP(res);
         const { titulo, descricao, prioridade, categoria } = req.body;
 
-        if (!titulo || !descricao || !prioridade || !categoria) {
-            return respostaHTTP.erro(400, "Todos os campos são obrigatórios.");
+        if (!titulo  || !prioridade || !categoria) {
+            return respostaHTTP.erro(400, "Campos obrigatórios não preenchidos.");
         }
 
         // Se todos os dados estiverem corretos, passa para o próximo middleware
@@ -18,7 +18,7 @@ class AlteracaoMiddleware {
     // Middleware para validar a existência de uma tarefa
     static async validarIdTarefa(req, res, next) {
         const respostaHTTP = new RespostaHTTP(res);
-        const { id } = req.params;
+        const id = req.params;
 
         const tarefa = await Tarefa.consultar(id);
         if (!tarefa) {
@@ -28,6 +28,4 @@ class AlteracaoMiddleware {
         // Se a tarefa existir, passa para o próximo middleware
         next();
     }
-}
-
-module.exports = AlteracaoMiddleware;
+} module.exports = AlteracaoMiddleware;

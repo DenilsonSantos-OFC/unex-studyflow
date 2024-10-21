@@ -14,6 +14,4 @@ class AutenticacaoMiddleware {
         // Se o usuário estiver autenticado, passa para o próximo middleware
         next();
     }
-}
-
-module.exports = AutenticacaoMiddleware;
+} module.exports = AutenticacaoMiddleware;
