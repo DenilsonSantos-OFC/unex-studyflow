@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>StudyFlow</title>
         <!-- BOOTSTRAP -->
-            <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
 
         <!-- ICONE -->
-            <link rel="icon" href="src/img/icone.png">
+            <link rel="icon" href="../src/img/icone.png">
        
         <!-- FONT -->
             <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,61 +16,155 @@
             <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         
         <!-- CSS -->
-            <link rel="stylesheet" href="src/css/login.css">
+            <link rel="stylesheet" href="../src/css/home.css">
 
         <!-- FONT AWASOME -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
         
         <!-- Js -->
-            <script src="" defer></script>
-        </head>
+            <script src="../src/js/home.js" defer></script>
+      </head>
       <body>
         <div class="container-fluid">
+            
             <div class="row">
-                <div class="col-lg-6 center">
-                    <img src="src/img/Login.png" class="image" alt="Login">
+                <div class="col-lg-3 center">
+                    <img src="../src/img/logo.png" class="image" alt="Login">
                 </div>
-                <div class="col-lg-6 center login">
-                    <div >
-                        <h1>BEM-VINDO AO <br> <span>STUDY FLOW!</span></h1>
-                    </div>
-                    <form action="">
-                        <div class="forms center">
-                            <div>
-                                <input type="email" name="Email" id="Email" placeholder="&#xf0e0;     Email*" required>
-    
-                                <input type="password" name="Password" id="Password" placeholder="&#xf023;     Senha*" required>
-                            </div>
-                            <div class="btns ">
-                                <button type="submit" class="btn btn-primary">Entrar</button>
-                                <button type="button" class="btn btn-outline-primary btn-login">Cadastre-se</button>
-                            </div>
-    
-                        </div>
-                    </form>
-                    
-                </div>
-                <div class="col-lg-6 center cadastro">
-                    <div >
-                        <h1>FAÇA O SEU <br> <span>CADASTRO!</span></h1>
-                    </div>
-                    <form action="" id="forms">
-                        <div class="forms center">
-                            <div>
-                                <input type="text" name="Nome" id="Nome" placeholder="&#xf007;     Nome de Usuário*" required>
 
-                                <input type="email" name="Email" id="Email" placeholder="&#xf0e0;     Email*" required>
-    
-                                <input type="password" name="Password" id="Password" placeholder="&#xf023;     Senha*" required>
-                            </div>
-                            <div class="btns ">
-                                <button type="button" class="btn btn-primary btn-cadastro">Voltar</button>
-                                <button type="submit" class="btn btn-outline-primary ">Cadastre-se</button>
-                            </div>
-    
+                <div class="col-lg-6 center">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 center">
+                    <div class="perfil">
+                        <div>
+                            <a href="" class="ajuda">
+                                <img src="../src/img/ajuda-icon.png" alt="Perfil">
+                            </a>
                         </div>
-                    </form>
+                       <div>
+                            <a href="" class="perfil">
+                                <img class="perfil" src="../src/img/Group 560.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2 center">
+                    <div class="links">
+                        <ul>
+                            <li>
+                                <a href="" class="center">
+                                    <img src="../src/img/task-square-icon.png" alt="">
+                                    <p>Tarefa</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <img src="../src/img/config-icon.png" alt="">
+                                    <p>Ajuda</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="apoio">
+                        <div class="fundo-apoio">
+                            <img src="../src/img/medical-doctor.png" alt="Medico">
+                        </div>
+                        <div>
+                            <h2>Apoio profissional</h2>
+                            <p>Precisa de apoio? Converse diretamente com um profissional de saúde para orientação e suporte</p>
+                            <button type="button">Falar Agora</button>
+                        </div>
+                    </div>
                     
+                </div>
+                <div class="col-lg-10 center cadastro">
+                    <div class="row container-tarefas">
+                        <div class="col-lg-4 fazer">
+                            <h2>Fazer</h2>
+                            <div class="tarefas">
+                                <div> 
+                                    <div class="tipo">
+                                        <div class="circulo"></div>
+                                        <p></p>
+                                    </div>
+                                    <div class="icones">
+                                        <button type="button" class="editar">
+                                            <img src="../src/img/editar-icon.png" alt="editar">
+                                        </button>
+                                        <button type="button" class="deletar">
+                                            <img src="../src/img/deletar-icon.png" alt="editar">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="titulo">
+                                    <title>teste</title>
+                                </div>
+                                <div class="texto">
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur aliquam sint dignissimos eos aut, consectetur mollitia aperiam maxime tempore inventore delectus tempora blanditiis explicabo voluptatem voluptatum molestias minima necessitatibus! Iste?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 andamento">
+                            <h2>Em Andamento</h2>
+                            <div class="tarefas">
+                                <div> 
+                                    <div class="tipo">
+                                        <div class="circulo"></div>
+                                        <p></p>
+                                    </div>
+                                    <div class="icones">
+                                        <button type="button" class="editar">
+                                            <img src="../src/img/editar-icon.png" alt="editar">
+                                        </button>
+                                        <button type="button" class="deletar">
+                                            <img src="../src/img/deletar-icon.png" alt="editar">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="titulo">
+                                    <title>teste</title>
+                                </div>
+                                <div class="texto">
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur aliquam sint dignissimos eos aut, consectetur mollitia aperiam maxime tempore inventore delectus tempora blanditiis explicabo voluptatem voluptatum molestias minima necessitatibus! Iste?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 concluida">
+                            <h2>Concluída</h2>
+                            <div class="tarefas">
+                                <div class="tarefas">
+                                    <div> 
+                                        <div class="tipo">
+                                            <div class="circulo"></div>
+                                            <p></p>
+                                        </div>
+                                        <div class="icones">
+                                            <button type="button" class="editar">
+                                                <img src="../src/img/editar-icon.png" alt="editar">
+                                            </button>
+                                            <button type="button" class="deletar">
+                                                <img src="../src/img/deletar-icon.png" alt="editar">
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="titulo">
+                                        <title>teste</title>
+                                    </div>
+                                    <div class="texto">
+                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur aliquam sint dignissimos eos aut, consectetur mollitia aperiam maxime tempore inventore delectus tempora blanditiis explicabo voluptatem voluptatum molestias minima necessitatibus! Iste?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
