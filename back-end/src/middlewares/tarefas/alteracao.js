@@ -1,5 +1,5 @@
-const RespostaHTTP = require('../models/resposta-http');
-const Tarefa = require('../models/tarefa');
+const RespostaHTTP = require('../../models/resposta-http');
+const Tarefa = require('../../models/tarefa');
 
 class AlteracaoMiddleware {
     // Middleware para validar os dados da tarefa ao atualizar

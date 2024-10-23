@@ -1,4 +1,4 @@
-const RespostaHTTP = require('../models/resposta-http');
+const RespostaHTTP = require('../../models/resposta-http');
 
 class CadastroMiddleware {
     // Middleware para validar os dados da tarefa ao cadastrar

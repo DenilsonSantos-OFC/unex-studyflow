@@ -1,5 +1,5 @@
-const RespostaHTTP = require('../models/resposta-http');
-const UsuarioServices = require('../services/usuario-services');
+const RespostaHTTP = require('../../models/resposta-http');
+const UsuarioServices = require('../../services/usuario-services');
 
 class AutenticacaoMiddleware {
     // Middleware para verificar a autenticação do usuário

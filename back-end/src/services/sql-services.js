@@ -23,7 +23,6 @@ class SqlServices {
             connectionString: process.env.DB_URL,
             ssl: { ca: ler(process.env.CERTIFICADO)}
         }).connect()
-
     }
 
     /**
