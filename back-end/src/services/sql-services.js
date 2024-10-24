@@ -1,3 +1,5 @@
+const { Pool: ConexaoSQL } = require('pg');
+
 /**
  * @module SqlServices
  * @class SqlServices
@@ -17,11 +19,12 @@ class SqlServices {
      * @returns {Client} O resultado da conexão, instanciado como um novo cliente.
      */
     static async conectar(){
-        const { Pool: ConexaoSQL } = require('pg');
-        const {ler} = require('../services/arquivo-services')
         return await new ConexaoSQL({
             connectionString: process.env.DB_URL,
-            ssl: { ca: ler(process.env.CERTIFICADO)}
+            ssl: {
+                ca: process.env.CERTIFICADO,
+                rejectUnauthorized: false
+            },
         }).connect()
     }
 
@@ -38,17 +41,5 @@ class SqlServices {
         controladorDb.release()
         return resultado;
     }
-    // static async executar (comandoSql) {
-    //     const controladorDb = await SqlServices.conectar()
-    //     let resultado;
-    //     try {
-    //         resultado = await controladorDb.query(comandoSql)
-    //     } catch (erro) {
-    //         resultado = erro
-    //     } finally {
-    //         controladorDb.release()
-    //         return resultado
-    //     }
-    // }
 
 } module.exports = SqlServices

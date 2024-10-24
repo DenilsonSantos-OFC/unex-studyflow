@@ -2,6 +2,7 @@
 const { config: variaveisDeAmbiente } = require('dotenv')
 const { expand: preparar } = require('dotenv-expand')
 preparar(variaveisDeAmbiente())
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 // Configuração das rotas
 const rotasDeUsuario = require('./routes/usuario-routes')
@@ -15,7 +16,6 @@ app.use(express.json())
 app.use(rotasDeUsuario)
 app.use(rotasDeTarefas)
 app.use(mostrarErroInternoSeOcorrer)
-console.log(process.env.IMG_PROFILES)
 app.use('/perfil/imagens', express.static(process.env.IMG_PROFILES))
 
 // Inicialização do Servidor
