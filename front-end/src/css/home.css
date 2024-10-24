@@ -1,0 +1,247 @@
+/* 
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} */
+
+p {
+    margin-top: unset; 
+    margin-bottom: 0; 
+}
+.horizontal-line {
+    margin-left: 5% !important;
+    width: 95%;        
+    height: 2px;        
+    background-color: #DBDBDB;  
+    margin: 10px 0;     
+}
+
+.vertical-line {
+    margin-top: -7rem !important;
+    width: 1px;         /* Largura da linha (espessura) */
+    height: 95vh;      /* Altura da linha */
+    background-color: #DBDBDB;  /* Cor da linha */
+    margin: 0 10px;     /* Espaçamento à esquerda e direita */
+    display: inline-block;  /* Garante que a linha vertical seja exibida como um bloco */
+    position: fixed;
+}
+  
+
+.nav1{
+    margin-top: 2rem;
+    
+}
+
+
+
+img.image{
+    display: flex;
+    justify-content: start;
+    margin-top: 0.5rem;
+    width: 11rem;
+    position: fixed;
+
+}
+
+.search{
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+}
+
+.perfil{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-right: 1rem;
+    gap: 2rem;   
+}
+ul, li, a{
+    list-style-type: none;    
+    text-decoration: none;
+}
+.links{
+    position: fixed;
+
+}
+
+.links ul li a{
+    display: flex;
+    gap: 2rem;
+    color: #787486;
+    font-size: 1.2em;
+    margin: 3rem 0;
+
+}
+
+.apoio{
+    width: 16.5%;
+    background-color: #e4e4e4ab;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: fixed;
+    bottom: 1rem;
+}
+
+.apoio div h2{
+    font-size: 1.2em;
+}
+
+.fundo-apoio {
+    background-color: #73fbfd; /* Cor de fundo azul */
+    width: 100px; /* Largura do círculo */
+    height: 100px; /* Altura do círculo */
+    border-radius: 50%; /* Torna o elemento circular */
+    filter: blur(8px); /* Aplica o efeito de blur */
+    margin-top: -5rem;
+}
+
+.fundo img{
+    justify-content: center;
+    display: flex;
+    position: absolute;
+    margin-left: 1.1rem;
+    margin-top: -5rem;
+    z-index: 100;
+}
+
+.apoio div p{
+    font-size: 0.7em;
+}
+
+.apoio button{
+    width: 100%;
+    height: 3rem;
+    list-style-type: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: 500;
+}
+
+.container-tarefas{
+    width: 100%;
+    height: auto;
+    background-color: #EEF2F5;
+    border-radius: 10px;
+}
+.container-tarefas div {
+    display: flex;
+    align-items: center;
+}
+
+.container-tarefas h2{
+    font-weight: 600;
+    font-size: 1em;
+    padding: 2rem;
+
+}
+
+.container-tarefas .tarefas{
+    width: 90%;
+    height: 14rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: #ffffff;
+    flex-direction: column;
+}
+.container-tarefas div{
+    justify-content: space-evenly;
+}
+
+.tipo{
+    width: 5rem;
+    height: 1rem;
+    border-radius: 5rem;
+    background-color: #E0F7E0;
+    font-size: 0.7em;
+    font-weight: 600;
+    color: #40A737;
+    padding: 0.4rem;
+    
+}
+.tipo.v{
+    background-color: #FFCCCC;
+    color: #FF0000;
+
+}
+
+.tipo.a{
+    background-color: #FFE5B4;
+    color: #FFA500;
+
+}
+
+.circulo{
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: #40A737;
+    margin-right: 0.5rem;
+}
+
+.circulo.v{
+    background-color: #FF0000;
+}
+
+.circulo.a{
+    background-color: #FFA500;
+}
+
+
+.nav-tarefas{
+    gap: 6rem;
+}
+
+.icones{
+    gap: 1rem;
+}
+.icones button{
+    background: none;    /* Remove o fundo */
+    border: none;        /* Remove as bordas */
+    padding: 0;          /* Remove o preenchimento interno */
+    margin: 0;           /* Remove qualquer margem */
+    outline: none;       /* Remove o contorno ao focar */
+    cursor: pointer;     /* Define o cursor para parecer clicável */
+}
+
+.titulo{
+    width: 100%;
+    justify-content: start !important;
+    margin-left: 2rem;
+}
+
+.texto p{
+    font-size: 0.7em;
+    padding: 15px;
+    font-weight: 600;
+}
+
+
+.add button{
+    display: flex;
+    width: 80%;
+    height: 3rem;
+    margin: 1rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
+    font-weight: 600;
+    border-radius: 10px;
+    border: #959BA3 solid 1px;
+    color: #959BA3;
+    background-color: #ffffff;
+    gap: 1rem;
+}
+
+.tarefas{
+    margin-top: 1rem;
+}

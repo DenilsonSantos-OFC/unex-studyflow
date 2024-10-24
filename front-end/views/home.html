@@ -27,145 +27,122 @@
       <body>
         <div class="container-fluid">
             
-            <div class="row">
+            <div class="row nav1">
                 <div class="col-lg-3 center">
-                    <img src="../src/img/logo.png" class="image" alt="Login">
+                    <img src="../src/img/logo.png" class="image" alt="logo">
                 </div>
 
                 <div class="col-lg-6 center">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    <div class="input-group mb-3 search">
+                        <span class="input-group-text" id="basic-addon1">
+                            <img src="../src/img/search-icon.png" alt="Procurar">
+                        </span>
+                        <input type="text" class="form-control" placeholder="Buscar tarefas...."  aria-describedby="basic-addon1">
                     </div>
                 </div>
 
                 <div class="col-lg-3 center">
                     <div class="perfil">
                         <div>
-                            <a href="" class="ajuda">
+                            <a href="../views/ajuda.html" class="ajuda">
                                 <img src="../src/img/ajuda-icon.png" alt="Perfil">
                             </a>
                         </div>
                        <div>
-                            <a href="" class="perfil">
-                                <img class="perfil" src="../src/img/Group 560.svg" alt="">
+                            <a href="../views/perfil.html" class="perfil-foto">
+                                <img class="perfil-img" src="../src/img/Group 560.svg" alt="">
                             </a>
                         </div>
                     </div>
                 </div>
+                <div class="horizontal-line"></div>
+
             </div>
 
-            <div class="row">
-                <div class="col-lg-2 center">
+            <div class="row ">
+                <div class="col-lg-2 center nav2">
                     <div class="links">
                         <ul>
                             <li>
-                                <a href="" class="center">
-                                    <img src="../src/img/task-square-icon.png" alt="">
+                                <a href="../views/home.html" class="center">
+                                    <div>
+                                        <img src="../src/img/task-square-icon.png" alt="">
+                                    </div>
                                     <p>Tarefa</p>
                                 </a>
                             </li>
                             <li>
-                                <a href="">
-                                    <img src="../src/img/config-icon.png" alt="">
+                                <a href="../views/ajuda.html">
+                                    <div>
+                                        <img src="../src/img/config-icon.png" alt="">
+                                    </div>
                                     <p>Ajuda</p>
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="apoio">
-                        <div class="fundo-apoio">
+                        <div class="fundo">
+                            <div class="fundo-apoio"></div>
                             <img src="../src/img/medical-doctor.png" alt="Medico">
                         </div>
                         <div>
                             <h2>Apoio profissional</h2>
                             <p>Precisa de apoio? Converse diretamente com um profissional de saúde para orientação e suporte</p>
-                            <button type="button">Falar Agora</button>
+                            <a href="">
+                                <button type="button">Falar Agora</button>
+                            </a>
                         </div>
                     </div>
-                    
                 </div>
-                <div class="col-lg-10 center cadastro">
-                    <div class="row container-tarefas">
-                        <div class="col-lg-4 fazer">
-                            <h2>Fazer</h2>
-                            <div class="tarefas">
-                                <div> 
-                                    <div class="tipo">
-                                        <div class="circulo"></div>
-                                        <p></p>
-                                    </div>
-                                    <div class="icones">
-                                        <button type="button" class="editar">
-                                            <img src="../src/img/editar-icon.png" alt="editar">
-                                        </button>
-                                        <button type="button" class="deletar">
-                                            <img src="../src/img/deletar-icon.png" alt="editar">
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="titulo">
-                                    <title>teste</title>
-                                </div>
-                                <div class="texto">
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur aliquam sint dignissimos eos aut, consectetur mollitia aperiam maxime tempore inventore delectus tempora blanditiis explicabo voluptatem voluptatum molestias minima necessitatibus! Iste?</p>
-                                </div>
+                <div class="col-lg-1">
+                    <div class="vertical-line"></div>
+                </div>
+
+                <div class="col-lg-9 center cadastro">
+                    <div class="row">
+                        <div class="col-lg-4 ">
+                            <div class="fazer container-tarefas">
+                                <h2>Fazer</h2>
+                                
+                                <div class="add">
+                                    <button type="button"  class="add-tarefa fazer">
+                                        <img src="../src/img/mais-icon.png" alt="add">
+                                        <p>Add Tarefa</p>
+                                    </button>
+                                </div> 
                             </div>
+                            
                         </div>
-                        <div class="col-lg-4 andamento">
-                            <h2>Em Andamento</h2>
-                            <div class="tarefas">
-                                <div> 
-                                    <div class="tipo">
-                                        <div class="circulo"></div>
-                                        <p></p>
-                                    </div>
-                                    <div class="icones">
-                                        <button type="button" class="editar">
-                                            <img src="../src/img/editar-icon.png" alt="editar">
-                                        </button>
-                                        <button type="button" class="deletar">
-                                            <img src="../src/img/deletar-icon.png" alt="editar">
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="titulo">
-                                    <title>teste</title>
-                                </div>
-                                <div class="texto">
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur aliquam sint dignissimos eos aut, consectetur mollitia aperiam maxime tempore inventore delectus tempora blanditiis explicabo voluptatem voluptatum molestias minima necessitatibus! Iste?</p>
-                                </div>
+                        <div class="col-lg-4 ">
+                            <div class="andamento container-tarefas">
+                                <h2>Em Andamento</h2>
+                                
+
+                                <div class="add">
+                                    <button type="button"  class="add-tarefa andamento">
+                                        <img src="../src/img/mais-icon.png" alt="add">
+                                        <p>Add Tarefa</p>
+                                    </button>
+                                </div> 
                             </div>
+                            
                         </div>
-                        <div class="col-lg-4 concluida">
-                            <h2>Concluída</h2>
-                            <div class="tarefas">
-                                <div class="tarefas">
-                                    <div> 
-                                        <div class="tipo">
-                                            <div class="circulo"></div>
-                                            <p></p>
-                                        </div>
-                                        <div class="icones">
-                                            <button type="button" class="editar">
-                                                <img src="../src/img/editar-icon.png" alt="editar">
-                                            </button>
-                                            <button type="button" class="deletar">
-                                                <img src="../src/img/deletar-icon.png" alt="editar">
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="titulo">
-                                        <title>teste</title>
-                                    </div>
-                                    <div class="texto">
-                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur aliquam sint dignissimos eos aut, consectetur mollitia aperiam maxime tempore inventore delectus tempora blanditiis explicabo voluptatem voluptatum molestias minima necessitatibus! Iste?</p>
-                                    </div>
+                        <div class="col-lg-4 ">
+                            <div class="concluida container-tarefas">
+                                <h2>Concluída</h2>
+                                
+                                <div class="add">
+                                    <button type="button" class="add-tarefa concluido">
+                                        <img src="../src/img/mais-icon.png" alt="add">
+                                        <p>Add Tarefa</p>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
 
