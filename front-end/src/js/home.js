@@ -1,72 +1,85 @@
+function create(tipo, nivel, titulo, texto) {
+    // Criando o elemento div que contém a nova tarefa
+    const tarefa = document.createElement('div');
 
-function create(tipo, nivel, titulo, texto){
-// Criando o elemento div que contém a nova tarefa
-const tarefa = document.createElement('div');
-
-switch (nivel) {
-    case "Alta":
-        var cor = "v";
-        break;
-    case "Média":
-        var cor = "a";
-        break;
-    default:
-        var cor = " "
-        break;
+    // Define a cor de acordo com o nível
+    let cor = "";
+    switch (nivel) {
+        case "Alta":
+            cor = "v";
+            break;
+        case "Média":
+            cor = "a";
+            break;
+        default:
+            cor = "";
+            break;
 }
 
-
-// Adicionando a estrutura interna da tarefa
-tarefa.innerHTML = `
-   <div class="tarefas">
-        <div class="nav-tarefas"> 
-            <div class="tipo `+cor+`">
-                <div class="circulo `+cor+`"></div>
-                <p>`+nivel+`</p>
+    // Adicionando a estrutura interna da tarefa
+    tarefa.innerHTML = `
+       <div class="tarefas">
+            <div class="nav-tarefas"> 
+                <div class="tipo ${cor}">
+                    <div class="circulo ${cor}"></div>
+                    <p>${nivel}</p>
+                </div>
+                <div class="icones">
+                    <button type="button" class="editar">
+                        <img src="../src/img/editar-icon.png" alt="editar">
+                    </button>
+                    <button type="button" class="deletar">
+                        <img src="../src/img/deletar-icon.png" alt="deletar">
+                    </button>
+                </div>
             </div>
-            <div class="icones">
-                <button type="button" class="editar">
-                    <img src="../src/img/editar-icon.png" alt="editar">
-                </button>
-                <button type="button" class="deletar">
-                    <img src="../src/img/deletar-icon.png" alt="editar">
-                </button>
+            <div class="titulo">
+                <h3>${titulo}</h3>
+            </div>
+            <div class="texto">
+                <p>${texto}</p>
             </div>
         </div>
-        <div class="titulo">
-            <h3>`+titulo+`</h3>
-        </div>
-        <div class="texto">
-            <p>`+texto+`</p>
-        </div>
-    </div>
-`;
-const button = document.querySelectorAll('.add');
+    `;
 
-switch (tipo) {
-    case 1:
-        var containerTarefas = document.querySelector('.fazer');
-        var addButton = button[0];
-        break;
-    case 2:
-        var containerTarefas = document.querySelector('.andamento');
-        var addButton = button[1];
+    const button = document.querySelectorAll('.add');
 
-        break;
-    case 3:
-        var containerTarefas = document.querySelector('.concluida');
-        var addButton = button[2];
+    let containerTarefas;
+    let addButton;
 
-        break;
-    default:
-        break;
+    switch (tipo) {
+        case 1:
+            containerTarefas = document.querySelector('.fazer');
+            addButton = button[0];
+            break;
+        case 2:
+            containerTarefas = document.querySelector('.andamento');
+            addButton = button[1];
+            break;
+        case 3:
+            containerTarefas = document.querySelector('.concluida');
+            addButton = button[2];
+            break;
+        default:
+            break;
+    }
+
+    containerTarefas.insertBefore(tarefa, addButton);
+
+    // Adiciona evento de deletar ao botão deletar
+    tarefa.querySelector('.deletar').addEventListener('click', function() {
+        // Encontra o elemento da tarefa e remove
+        if (tarefa && tarefa.parentNode) {
+            tarefa.parentNode.removeChild(tarefa); // Remove o elemento da árvore DOM
+        }
+    });
+
+    // Adiciona evento de editar ao botão editar
+    tarefa.querySelector('.editar').addEventListener('click', function() {
+        // Redireciona para a página de edição
+        window.location.href = '../views/editarTarefa.html'; // Altere para a URL da sua página de edição
+    });
 }
-
-containerTarefas.insertBefore(tarefa, addButton);
-
-}
-
-
 
 
 document.querySelector('.add-tarefa.fazer').addEventListener('click', function() {
@@ -79,18 +92,4 @@ document.querySelector('.add-tarefa.andamento').addEventListener('click', functi
 
 document.querySelector('.add-tarefa.concluido').addEventListener('click', function() {
     create(3,"Alta", "teste3", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur aliquam sint dignissimos eos aut, consectetur mollitia aperiam maxime tempore inventore delectus tempora blanditiis explicabo voluptatem voluptatum molestias minima necessitatibus! Iste?");
-});
-
-
-const editarButton = tarefa.querySelector('.editar');
-const deletarButton = tarefa.querySelector('.deletar');
-
-editarButton.addEventListener('click', function() {
-    // Redireciona para a página de edição
-    window.location.href = '../views/editarTarefa.html'; // Altere para a URL da sua página de edição
-});
-
-deletarButton.addEventListener('click', function() {
-    // Redireciona para a página de confirmação de deleção
-    window.location.href = '../views/editarTarefa.html'; // Altere para a URL da sua página de deleção
 });
