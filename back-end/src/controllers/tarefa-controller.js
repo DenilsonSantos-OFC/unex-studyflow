@@ -35,10 +35,10 @@ class TarefaController {
 
     static async cadastrar(req, res) {
         const respostaHTTP = new RespostaHTTP(res);
-        const { titulo, descricao, prioridade, categoria } = req.body;
+        const { titulo, descricao, prioridadeNv, categoriaNV} = req.body;
         try {
             const id = UsuarioServices.obterToken(req).id
-            const tarefaCriada = await Tarefa.cadastrar(id, titulo, descricao, prioridade, categoria);
+            const tarefaCriada = await Tarefa.cadastrar(id, titulo, descricao, prioridadeNv, categoriaNV);
             if (!tarefaCriada) {
                 return respostaHTTP.erroInterno("Erro ao cadastrar tarefa.");
             }
@@ -54,8 +54,8 @@ class TarefaController {
         const respostaHTTP = new RespostaHTTP(res);
         try {
             const id = req.params;
-            const { titulo, descricao, prioridade, categoria } = req.body
-            const tarefaAtualizada = Tarefa.atualizar(id, titulo, descricao, prioridade, categoria)
+            const { titulo, descricao, prioridadeNv, categoriaNV} = req.body
+            const tarefaAtualizada = await Tarefa.atualizar(id, titulo, descricao, prioridadeNv, categoriaNV)
             if (!tarefaAtualizada) {
                 return respostaHTTP.erro(404, "Erro ao utilizar tarefa. Tarefa não encontrada.");
             }

@@ -1,14 +1,17 @@
-const RespostaHTTP = require('../../models/resposta-http');
-
 class CadastroMiddleware {
     // Middleware para validar os dados da tarefa ao cadastrar
     static validarDadosTarefa(req, res, next) {
-        const respostaHTTP = new RespostaHTTP(res);
-        const { titulo, descricao, prioridade, categoria } = req.body;
+        const { titulo, prioridadeNv, categoriaNV } = req.body;
 
-        if (!titulo  || !prioridade || !categoria) {
-            return respostaHTTP.erro(400, "Campos obrigatórios não preenchidos.");
-        }
+       if(!titulo){
+        return res.status(400).json({message: "Campo título não preenchido"});
+       }
+       if(!prioridadeNv){
+        return res.status(400).json({message: "Campo prioridade não preenchido"})
+       }
+       if(!categoriaNV){
+        return res.status(400).json({message: "Campo categoria não preenchido"})
+       }
 
         // Se todos os dados estiverem corretos, passa para o próximo middleware
         next();

@@ -58,10 +58,18 @@ class Tarefa {
    * @param {string} categoria - Categoria da tarefa.
    * @returns {boolean} True se a tarefa foi cadastrada com sucesso, False caso contrário.
    */
-  static async cadastrar(idUsuario, titulo, descricao, prioridade, categoria) {
-    const RetornoDoCadastro =
-      await SqlServices.executar`INSERT INTO ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} ("idUsuario", "titulo", "descricao", "prioridade", categoria) 
-                VALUES('${idUsuario}', '${titulo}', '${descricao}', '${prioridade}', '${categoria}');`;
+  static async cadastrar(
+    idUsuario,
+    titulo,
+    descricao,
+    prioridadeNv,
+    categoriaNV
+  ) {
+    // Aqui você pode adicionar um console.log para a construção da SQL também
+    const comandoSql = `INSERT INTO ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} ("idUsuario", "titulo", "descricao", "prioridadeNv", "categoriaNV") 
+                        VALUES (${idUsuario}, '${titulo}', '${descricao}', ${prioridadeNv}, ${categoriaNV});`;
+
+    const RetornoDoCadastro = await SqlServices.executar(comandoSql);
     return RetornoDoCadastro.rowCount > 0;
   }
 
@@ -104,12 +112,12 @@ class Tarefa {
     idUsuario,
     titulo,
     descricao,
-    prioridade,
-    categoria
+    prioridadeNv,
+    categoriaNV
   ) {
     const ComandoAtualizar = `
         UPDATE ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
-        SET titulo = ${titulo}, descricao = ${descricao}, prioridade = ${prioridade}, categoria = ${categoria}
+        SET titulo = ${titulo}, descricao = ${descricao}, prioridadeNv = ${prioridadeNv}, categoriaNV = ${categoriaNV}
         WHERE id = ${id} AND "idUsuario" = ${idUsuario};
     `;
     const resultado = await SqlServices.executar(ComandoAtualizar);
@@ -117,11 +125,11 @@ class Tarefa {
   }
 
   /**
- * Remove uma tarefa do banco de dados pelo ID e ID do usuário.
- * @param {number} id - ID da tarefa a ser removida.
- * @param {number} idUsuario - ID do usuário que possui a tarefa.
- * @returns {boolean} True se a tarefa foi removida, False caso contrário.
- */
+   * Remove uma tarefa do banco de dados pelo ID e ID do usuário.
+   * @param {number} id - ID da tarefa a ser removida.
+   * @param {number} idUsuario - ID do usuário que possui a tarefa.
+   * @returns {boolean} True se a tarefa foi removida, False caso contrário.
+   */
   static async remover(id, idUsuario) {
     const ComandoRemover = `DELETE FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
         WHERE id = ${id} AND "idUsuario" = ${idUsuario}`;

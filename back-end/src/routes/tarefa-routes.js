@@ -17,7 +17,6 @@ router.post('/tarefa', AutenticacaoMiddleware.verificarAutenticacao, CadastroMid
 router.put('/tarefa/:id', AutenticacaoMiddleware.verificarAutenticacao, AlteracaoMiddleware.validarIdTarefa, AlteracaoMiddleware.validarDadosTarefa, Controller.alterar);
 
 // Rota para excluir uma tarefa específica
-router.delete('/tarefa/:id', AutenticacaoMiddleware.verificarAutenticacao, AlteracaoMiddleware.validarIdTarefa, Controller.excluir
-);
+router.delete('/tarefa/:id', AutenticacaoMiddleware.verificarAutenticacao, AlteracaoMiddleware.validarIdTarefa, Controller.excluir);
 
 module.exports = router;
