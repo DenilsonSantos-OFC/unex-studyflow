@@ -3,7 +3,7 @@
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Perfil</title>
+        <title>StudyFlow</title>
         <!-- BOOTSTRAP -->
             <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
 
@@ -16,46 +16,97 @@
             <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         
         <!-- CSS -->
-            <link rel="stylesheet" href="../src/css/perfil.css">
+            <link rel="stylesheet" href="../src/css/home.css">
 
         <!-- FONT AWASOME -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
         
         <!-- Js -->
-            <script src="../src/js/carregamento.js" defer></script>
-            <script src="../src/js/login_cadastro.js" defer></script>
-        </head>
+            <script src="../src/js/home.js" defer></script>
+      </head>
       <body>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-1 center">
-                    <img src="" class="image" alt="Login">
+            
+            <div class="row nav1">
+                <div class="col-lg-3 center">
+                    <img src="../src/img/logo.png" class="image" alt="logo">
+                </div>
+
+                <div class="col-lg-6 center">
+                    <div class="input-group mb-3 search">
+                        <span class="input-group-text" id="basic-addon1">
+                            <img src="../src/img/search-icon.png" alt="Procurar">
+                        </span>
+                        <input type="text" class="form-control" placeholder="Buscar tarefas...."  aria-describedby="basic-addon1">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 center">
+                    <div class="perfil">
+                        <div>
+                            <a href="../views/ajuda.html" class="ajuda">
+                                <img src="../src/img/ajuda-icon.png" alt="Perfil">
+                            </a>
+                        </div>
+                       <div>
+                            <a href="../views/perfil.html" class="perfil-foto">
+                                <img class="perfil-img" src="../src/img/Group 560.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="horizontal-line"></div>
+
+            </div>
+
+            <div class="row ">
+                <div class="col-lg-2 center nav2">
+                    <div class="links">
+                        <ul>
+                            <li>
+                                <a href="../views/home.html" class="center">
+                                    <div>
+                                        <img src="../src/img/task-square-icon.png" alt="">
+                                    </div>
+                                    <p>Tarefa</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../views/ajuda.html">
+                                    <div>
+                                        <img src="../src/img/config-icon.png" alt="">
+                                    </div>
+                                    <p>Ajuda</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="apoio">
+                        <div class="fundo">
+                            <div class="fundo-apoio"></div>
+                            <img src="../src/img/medical-doctor.png" alt="Medico">
+                        </div>
+                        <div>
+                            <h2>Apoio profissional</h2>
+                            <p>Precisa de apoio? Converse diretamente com um profissional de saúde para orientação e suporte</p>
+                            <a href="">
+                                <button type="button">Falar Agora</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <div class="vertical-line"></div>
+                </div>
+
+                <div class="col-lg-9 center cadastro">
+                    <div class="row">
+                        
+                    </div>
                 </div>
                 
-                <div class="col-lg-11 center login">
-                    <div >
-                        <h1>BEM-VINDO AO <br> <span>STUDY FLOW!</span></h1>
-                    </div>
-                    <form action="" method="post">
-                        <div class="forms center">
-                            <div>
-                                <input type="email" name="Email" id="Email" placeholder="&#xf0e0;     Email*" required>
-    
-                                <input type="password" name="Password" id="Password" placeholder="&#xf023;     Senha*" required>
-                            </div>
-                            <div class="btns ">
-                                <button type="submit" class="btn btn-primary">Entrar</button>
-                                <button type="button" class="btn btn-outline-primary btn-login">Cadastre-se</button>
-                            </div>
-    
-                        </div>
-                    </form>
-                    
-                </div>
-             
             </div>
         </div>
-       
 
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
