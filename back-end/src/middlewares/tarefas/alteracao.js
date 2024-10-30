@@ -1,5 +1,6 @@
 const RespostaHTTP = require('../../models/resposta-http');
 const Tarefa = require('../../models/tarefa');
+const UsuarioServices = require('../../services/usuario-services');
 
 class AlteracaoMiddleware {
     // Middleware para validar os dados da tarefa ao atualizar
@@ -9,11 +10,11 @@ class AlteracaoMiddleware {
         if(!titulo){
             return res.status(400).json({message: "Campo título não preenchido"});
            }
-           if(!prioridadeNv){
-            return res.status(400).json({message: "Campo prioridade não preenchido"})
+           if(!prioridadeNv == undefined || isNaN(prioridadeNv)){
+            return res.status(400).json({message: "Campo prioridade não preenchido ou inválido"})
            }
-           if(!categoriaNV){
-            return res.status(400).json({message: "Campo categoria não preenchido"})
+           if(!categoriaNV == undefined || isNaN(prioridadeNv)){
+            return res.status(400).json({message: "Campo prioridade não preenchido ou inválido"})
            }
     
             // Se todos os dados estiverem corretos, passa para o próximo middleware
@@ -23,7 +24,8 @@ class AlteracaoMiddleware {
     // Middleware para validar a existência de uma tarefa
     static async validarIdTarefa(req, res, next) {
         const respostaHTTP = new RespostaHTTP(res);
-        const {idUsuario, id} = req.params;
+        const {id} = req.params;
+        const {id: idUsuario} = UsuarioServices.obterToken(req);
 
         const tarefa = await Tarefa.consultar(idUsuario, id);
         if (!tarefa) {

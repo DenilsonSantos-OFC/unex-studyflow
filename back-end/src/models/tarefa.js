@@ -68,7 +68,6 @@ class Tarefa {
     // Aqui você pode adicionar um console.log para a construção da SQL também
     const comandoSql = `INSERT INTO ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} ("idUsuario", "titulo", "descricao", "prioridadeNv", "categoriaNV") 
                         VALUES (${idUsuario}, '${titulo}', '${descricao}', ${prioridadeNv}, ${categoriaNV});`;
-
     const RetornoDoCadastro = await SqlServices.executar(comandoSql);
     return RetornoDoCadastro.rowCount > 0;
   }
@@ -105,14 +104,7 @@ class Tarefa {
    * @param {string} categoria - Nova categoria da tarefa.
    * @returns {boolean} True se a tarefa foi atualizada, False caso contrário.
    */
-  static async atualizar(
-    idUsuario,
-    id,
-    titulo,
-    descricao,
-    prioridadeNv,
-    categoriaNV
-  ) {
+  static async atualizar(idUsuario, id, titulo, descricao, prioridadeNv, categoriaNV) {
     const ComandoAtualizar = `UPDATE ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
       SET "titulo" = '${titulo}', "descricao" = '${descricao}', "prioridadeNv" = ${prioridadeNv}, "categoriaNV" = ${categoriaNV}
       WHERE "idUsuario" = ${idUsuario} AND "id" = ${id};`;
