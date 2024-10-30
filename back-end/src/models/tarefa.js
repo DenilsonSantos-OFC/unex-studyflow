@@ -78,12 +78,11 @@ class Tarefa {
    * @param {number} id - ID da tarefa a ser consultada.
    * @returns {Tarefa|null} A tarefa encontrada ou null, se não existir.
    */
-  static async consultar(id, idUsuario) {
-    const resultado = await SqlServices.executar(`
-            SELECT * FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} 
-            WHERE "id" = ${id} AND "idUsuario" = ${idUsuario}`);
-    const linha = resultado.rows[0];
-    return linha ? Tarefa.criarUsandoSql(linha) : null;
+  static async consultar(idUsuario, id) {
+    const comandoSql = `SELECT * FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} 
+            WHERE "idUsuario" = ${idUsuario} AND "id" = ${id}`;
+    const { rows } = await SqlServices.executar(comandoSql);
+    return rows;
   }
 
   /**
@@ -91,11 +90,10 @@ class Tarefa {
    * @returns {Tarefa[]} Um array com todas as tarefas encontradas.
    */
   static async listar(idUsuario) {
-    const resultado = await SqlServices.executar(
-      `SELECT * FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} 
-            WHERE "idUsuario" = ${idUsuario}`
-    );
-    return resultado.rows.map(Tarefa.criarUsandoSql);
+    const comandoSql = `SELECT * FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} 
+            WHERE "idUsuario" = ${idUsuario}`;
+    const { rows } = await SqlServices.executar(comandoSql, [idUsuario]);
+    return rows;
   }
 
   /**
@@ -108,18 +106,16 @@ class Tarefa {
    * @returns {boolean} True se a tarefa foi atualizada, False caso contrário.
    */
   static async atualizar(
-    id,
     idUsuario,
+    id,
     titulo,
     descricao,
     prioridadeNv,
     categoriaNV
   ) {
-    const ComandoAtualizar = `
-        UPDATE ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
-        SET titulo = ${titulo}, descricao = ${descricao}, prioridadeNv = ${prioridadeNv}, categoriaNV = ${categoriaNV}
-        WHERE id = ${id} AND "idUsuario" = ${idUsuario};
-    `;
+    const ComandoAtualizar = `UPDATE ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
+      SET "titulo" = '${titulo}', "descricao" = '${descricao}', "prioridadeNv" = ${prioridadeNv}, "categoriaNV" = ${categoriaNV}
+      WHERE "idUsuario" = ${idUsuario} AND "id" = ${id};`;
     const resultado = await SqlServices.executar(ComandoAtualizar);
     return resultado.rowCount > 0;
   }
@@ -130,9 +126,9 @@ class Tarefa {
    * @param {number} idUsuario - ID do usuário que possui a tarefa.
    * @returns {boolean} True se a tarefa foi removida, False caso contrário.
    */
-  static async remover(id, idUsuario) {
+  static async remover(idUsuario, id) {
     const ComandoRemover = `DELETE FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
-        WHERE id = ${id} AND "idUsuario" = ${idUsuario}`;
+        WHERE "idUsuario" = ${idUsuario} AND "id" = ${id}`;
     const resultado = await SqlServices.executar(ComandoRemover);
     return resultado.rowCount > 0;
   }

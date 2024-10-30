@@ -23,9 +23,9 @@ class AlteracaoMiddleware {
     // Middleware para validar a existência de uma tarefa
     static async validarIdTarefa(req, res, next) {
         const respostaHTTP = new RespostaHTTP(res);
-        const id = req.params;
+        const {idUsuario, id} = req.params;
 
-        const tarefa = await Tarefa.consultar(id);
+        const tarefa = await Tarefa.consultar(idUsuario, id);
         if (!tarefa) {
             return respostaHTTP.erro(404, "Tarefa não encontrada.");
         }

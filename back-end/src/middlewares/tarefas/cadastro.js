@@ -12,8 +12,8 @@ class CadastroMiddleware {
        if(!categoriaNV){
         return res.status(400).json({message: "Campo categoria não preenchido"})
        }
-
         // Se todos os dados estiverem corretos, passa para o próximo middleware
         next();
     }
+
 } module.exports = CadastroMiddleware;
