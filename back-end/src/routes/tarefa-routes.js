@@ -10,6 +10,9 @@ router.get('/tarefas/', AutenticacaoMiddleware.verificarAutenticacao, Controller
 // Rota para buscar uma tarefa específica
 router.get('/tarefa/:id', AutenticacaoMiddleware.verificarAutenticacao, AlteracaoMiddleware.validarIdTarefa, Controller.buscarTarefa);
 
+// Rota para buscar tarefas com uma palavra-chave no título ou na descrição
+router.get('/tarefas/filtro', AutenticacaoMiddleware.verificarAutenticacao, Controller.buscarTarefasFiltro);
+
 // Rota para cadastrar uma nova tarefa
 router.post('/tarefa', AutenticacaoMiddleware.verificarAutenticacao, CadastroMiddleware.validarDadosTarefa, Controller.cadastrar);
 

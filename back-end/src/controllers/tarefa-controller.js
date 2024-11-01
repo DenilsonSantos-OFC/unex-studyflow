@@ -6,7 +6,7 @@ class TarefaController {
   static async buscarTarefas(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
     try {
-      // Extrai o id do usuário do token e renomeando para idUsuario
+      // Extrai o id do usuário do token e o renomeia para idUsuario
       const { id: idUsuario } = UsuarioServices.obterToken(req);
       const tarefas = await Tarefa.listar(idUsuario);
       return respostaHTTP.sucesso("Tarefas recuperadas com sucesso.", tarefas);
@@ -19,7 +19,7 @@ class TarefaController {
   static async buscarTarefa(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
     try {
-        // Extrai o id do usuário do token e renomeando para idUsuario
+        // Extrai o id do usuário do token e o renomeia para idUsuario
       const { id: idUsuario } = UsuarioServices.obterToken(req);
       const { id } = req.params;
       const tarefa = await Tarefa.consultar(idUsuario, id);
@@ -33,11 +33,31 @@ class TarefaController {
     }
   }
 
+  static async buscarTarefasFiltro(req, res) {
+    const respostaHTTP = new RespostaHTTP(res);
+    try{
+      // Extrai o id do usuário do token e o renomeia para idUsuario
+      const {id: idUsuario} = UsuarioServices.obterToken(req);
+      const {titulo = '', descricao = ''} = req.query;
+      // Chama a função que faz a busca no banco com base nos filtros fornecidos
+      const tarefas = await Tarefa.listarPorFiltro(idUsuario, titulo, descricao);
+      // Verifica se a busca retornou algum resultado
+      if (!tarefas || tarefas.length == 0){
+        return respostaHTTP.erro(404, "Tarefa não enncontrada.");
+      }
+      return respostaHTTP.sucesso("Tarefa encontrada", tarefas);
+    }
+    catch (erro){
+      console.error(erro);
+      return respostaHTTP.erroInterno();
+    }
+  }
+
   static async cadastrar(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
     const { titulo, descricao, prioridadeNv, categoriaNV } = req.body;
     try {
-        // Extrai o id do usuário do token e renomeando para idUsuario
+        // Extrai o id do usuário do token e o renomeia para idUsuario
       const { id: idUsuario} = UsuarioServices.obterToken(req);
       const tarefaCriada = await Tarefa.cadastrar( idUsuario, titulo, descricao, prioridadeNv, categoriaNV);
       if (!tarefaCriada) {
@@ -53,7 +73,7 @@ class TarefaController {
   static async alterar(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
     try {
-      // Extrai o id do usuário do token e renomeando para idUsuario
+      // Extrai o id do usuário do token e o renomeia para idUsuario
       const { id: idUsuario } = UsuarioServices.obterToken(req);
       const {id} = req.params;
       const { titulo, descricao, prioridadeNv, categoriaNV } = req.body;
@@ -71,7 +91,7 @@ class TarefaController {
   static async excluir(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
     try {
-      // Extrai o id do usuário do token e renomeando para idUsuario
+      // Extrai o id do usuário do token e o renomeia para idUsuario
       const { id: idUsuario } = UsuarioServices.obterToken(req);
       const { id } = req.params;
       const tarefaRemovida = await Tarefa.remover(idUsuario, id);

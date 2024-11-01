@@ -17,6 +17,7 @@ class Tarefa {
    */
   constructor(
     id,
+    idUsuario,
     titulo,
     descricao,
     prioridade,
@@ -25,6 +26,7 @@ class Tarefa {
     dataConclusao
   ) {
     this.id = id;
+    this.idUsuario = idUsuario
     this.titulo = titulo;
     this.descricao = descricao;
     this.prioridade = prioridade;
@@ -41,6 +43,7 @@ class Tarefa {
   static criarUsandoSql(linhaDeRetornoSql) {
     return new Tarefa(
       linhaDeRetornoSql.id,
+      linhaDeRetornoSql.idUsuario,
       linhaDeRetornoSql.titulo,
       linhaDeRetornoSql.descricao,
       linhaDeRetornoSql.prioridade,
@@ -92,6 +95,16 @@ class Tarefa {
     const comandoSql = `SELECT * FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} 
             WHERE "idUsuario" = ${idUsuario}`;
     const { rows } = await SqlServices.executar(comandoSql, [idUsuario]);
+    return rows;
+  }
+
+  static async listarPorFiltro (idUsuario, titulo = '', descricao = ''){
+    const comandoSql = `SELECT * FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
+        WHERE "idUsuario" = ${idUsuario} AND 
+        (('${titulo}' != '' AND "titulo" ILIKE '%' || '${titulo}' || '%') 
+            OR 
+        ('${descricao}' != '' AND "descricao" ILIKE '%' || '${descricao}' || '%'))`
+    const {rows} = await SqlServices.executar(comandoSql, [idUsuario, titulo, descricao]);
     return rows;
   }
 
