@@ -16,43 +16,42 @@
 //                 IMPORTAÇÕES DE RECURSOS NECESSÁRIOS
 // ------------------------------------------------------------------ //
 
-const router = require('express').Router()
 const Controller = require('../controllers/usuario-controller')
-const UsuarioServices = require('../services/usuario-services')
-const { checarAutenticacao, checarCredenciais } = require('../middlewares/usuarios/autenticacao')
-const { checarDadosDeCadastro } = require('../middlewares/usuarios/cadastro')
-const { checarUpload, checarMudancasNoBD, tratarNovosDados } = require('../middlewares/usuarios/alteracao')
+const ChecagemMid = require('../middlewares/usuarios/checagem-middlewares')
+const TratamentoMid = require('../middlewares/usuarios/tratamento-middlewares')
 
 // ------------------------------------------------------------------ //
 //                             ROTAS
 // ------------------------------------------------------------------ //
+
+const router = require('express').Router()
 
 /**
  * @route POST /autenticar
  * @description Rota para verificar se as credenciais passadas batem com algum registro no banco de dados.
  * @returns {Object} JSON contendo o código HTTP, a mensagem de retorno e o token de acesso (se ação bem-sucedida).
  */
-router.post('/autenticar', checarCredenciais, Controller.autenticar)
+router.post('/autenticar', ChecagemMid.checarCredenciais, TratamentoMid.tratarDadosDeAutenticacao, Controller.autenticar)
 
 /**
  * @route POST /cadastrar
  * @description Rota para cadastrar um novo usuário no banco de dados usando as informações passadas por meio da requisição.
  * @returns {Object} JSON contendo o código HTTP, a mensagem de retorno e o token de acesso (se ação bem-sucedida).
  */
-router.post('/cadastrar', checarDadosDeCadastro, tratarNovosDados, Controller.cadastrar)
+router.post('/perfil', ChecagemMid.checarDadosDeCadastro, TratamentoMid.tratarDadosDeCadastro, Controller.cadastrar)
 
 /**
  * @route GET /perfil
  * @description Rota para obter todas as informações do usuário a partir do banco de dados.
  * @returns {Object} JSON contendo o código HTTP, a mensagem de retorno e as informações do usuário (se ação bem-sucedida).
  */
-router.get('/perfil', checarAutenticacao, Controller.consultar)
+router.get('/perfil', ChecagemMid.checarAutenticacao, Controller.consultar)
 
 /**
  * @route PUT /perfil
  * @description Rota para atualizar as informações do usuário armazenadas no banco de dados.
  * @returns {Object} JSON contendo o código HTTP e a mensagem de retorno.
  */
-router.put('/perfil', checarAutenticacao, checarUpload, checarMudancasNoBD, tratarNovosDados, Controller.alterar)
+router.put('/perfil', ChecagemMid.checarAutenticacao, ChecagemMid.checarAlteracoesSolicitadas, TratamentoMid.tratarDadosDeAlteracao, Controller.alterar)
 
 module.exports = router;

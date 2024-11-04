@@ -9,10 +9,9 @@ class TarefaController {
       // Extrai o id do usuário do token e o renomeia para idUsuario
       const { id: idUsuario } = UsuarioServices.obterToken(req);
       const tarefas = await Tarefa.listar(idUsuario);
-      return respostaHTTP.sucesso("Tarefas recuperadas com sucesso.", tarefas);
+      return respostaHTTP.enviarOk("Tarefas recuperadas com sucesso.", tarefas);
     } catch (erro) {
-      console.error(erro);
-      return respostaHTTP.erroInterno();
+        return respostaHTTP.enviarErroInternoPraDebug(erro)
     }
   }
 
@@ -24,12 +23,11 @@ class TarefaController {
       const { id } = req.params;
       const tarefa = await Tarefa.consultar(idUsuario, id);
       if (!tarefa || tarefa.length == 0) {
-        return respostaHTTP.erro(404, "Tarefa não encontrada.");
+        return respostaHTTP.enviarErroDeAusencia("Tarefa não encontrada.")
       }
-      return respostaHTTP.sucesso("Tarefa encontrada", tarefa);
+      return respostaHTTP.enviarOk("Tarefa encontrada.", tarefa);
     } catch (erro) {
-      console.error(erro);
-      return respostaHTTP.erroInterno();
+        return respostaHTTP.enviarErroInternoPraDebug(erro)
     }
   }
 
@@ -43,30 +41,28 @@ class TarefaController {
       const tarefas = await Tarefa.listarPorFiltro(idUsuario, titulo, descricao);
       // Verifica se a busca retornou algum resultado
       if (!tarefas || tarefas.length == 0){
-        return respostaHTTP.erro(404, "Tarefa não enncontrada.");
+        return respostaHTTP.enviarErroDeAusencia("Tarefa não encontrada.")
       }
-      return respostaHTTP.sucesso("Tarefa encontrada", tarefas);
+      return respostaHTTP.enviarOk("Tarefas encontradas.", tarefas);
     }
     catch (erro){
-      console.error(erro);
-      return respostaHTTP.erroInterno();
+        return respostaHTTP.enviarErroInternoPraDebug(erro)
     }
   }
 
   static async cadastrar(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
-    const { titulo, descricao, prioridadeNv, categoriaNV } = req.body;
+    const { titulo, descricao, prioridadeNv, categoriaNv } = req.body;
     try {
         // Extrai o id do usuário do token e o renomeia para idUsuario
       const { id: idUsuario} = UsuarioServices.obterToken(req);
-      const tarefaCriada = await Tarefa.cadastrar( idUsuario, titulo, descricao, prioridadeNv, categoriaNV);
+      const tarefaCriada = await Tarefa.cadastrar( idUsuario, titulo, descricao, prioridadeNv, categoriaNv);
       if (!tarefaCriada) {
-        return respostaHTTP.erroInterno("Erro ao cadastrar tarefa.");
+        return respostaHTTP.enviarErroInterno("Erro ao cadastrar tarefa.");
       }
-      return respostaHTTP.cadastroOk("Tarefa cadastrada com sucesso.");
+      return respostaHTTP.enviarOkPraCadastro("Tarefa cadastrada com sucesso.");
     } catch (erro) {
-      console.error(erro);
-      return respostaHTTP.erroInterno();
+        return respostaHTTP.enviarErroInternoPraDebug(erro)
     }
   }
 
@@ -76,15 +72,14 @@ class TarefaController {
       // Extrai o id do usuário do token e o renomeia para idUsuario
       const { id: idUsuario } = UsuarioServices.obterToken(req);
       const {id} = req.params;
-      const { titulo, descricao, prioridadeNv, categoriaNV } = req.body;
-      const tarefaAtualizada = await Tarefa.atualizar(idUsuario, id, titulo, descricao, prioridadeNv, categoriaNV);
+      const { titulo, descricao, prioridadeNv, categoriaNv } = req.body;
+      const tarefaAtualizada = await Tarefa.atualizar(idUsuario, id, titulo, descricao, prioridadeNv, categoriaNv);
       if (!tarefaAtualizada) {
-        return respostaHTTP.erro(404,"Erro ao utilizar tarefa. Tarefa não encontrada.");
+        return respostaHTTP.enviarErroDeAusencia("Erro ao utilizar tarefa. Tarefa não encontrada.")
       }
-      return respostaHTTP.sucesso("Tarefa alterada com sucesso.");
+      return respostaHTTP.enviarOk("Tarefa alterada com sucesso.");
     } catch (erro) {
-      console.error(erro);
-      return respostaHTTP.erroInterno();
+        return respostaHTTP.enviarErroInternoPraDebug(erro)
     }
   }
 
@@ -96,12 +91,11 @@ class TarefaController {
       const { id } = req.params;
       const tarefaRemovida = await Tarefa.remover(idUsuario, id);
       if (!tarefaRemovida) {
-        return respostaHTTP.erro(404, "Erro ao excluir a tarefa. Tarefa não encontrada.");
+        return respostaHTTP.enviarErroDeAusencia("Erro ao excluir a tarefa. Tarefa não encontrada.")
       }
-      return respostaHTTP.sucesso("Tarefa excluída com sucesso!");
+      return respostaHTTP.enviarOk("Tarefa excluída com sucesso!");
     } catch (erro) {
-      console.error(erro);
-      return respostaHTTP.erroInterno();
+        return respostaHTTP.enviarErroInternoPraDebug(erro)
     }
   }
 }

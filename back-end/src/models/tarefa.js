@@ -1,5 +1,5 @@
 const SqlServices = require("../services/sql-services");
-
+  
 /**
  * Classe que representa uma Tarefa com seus atributos e métodos relacionados.
  * @author Luan Vinicius
@@ -8,6 +8,7 @@ class Tarefa {
   /**
    * Construtor da classe Tarefa.
    * @param {number} id - ID da tarefa.
+   * @param {number} idUsuario - ID do usuário responsável pela tarefa.
    * @param {string} titulo - Título da tarefa.
    * @param {string} descricao - Descrição da tarefa.
    * @param {string} prioridade - Prioridade da tarefa.
@@ -66,11 +67,11 @@ class Tarefa {
     titulo,
     descricao,
     prioridadeNv,
-    categoriaNV
+    categoriaNv
   ) {
     // Aqui você pode adicionar um console.log para a construção da SQL também
-    const comandoSql = `INSERT INTO ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} ("idUsuario", "titulo", "descricao", "prioridadeNv", "categoriaNV") 
-                        VALUES (${idUsuario}, '${titulo}', '${descricao}', ${prioridadeNv}, ${categoriaNV});`;
+    const comandoSql = `INSERT INTO ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} ("idUsuario", "titulo", "descricao", "prioridadeNv", "categoriaNv") 
+                        VALUES (${idUsuario}, '${titulo}', '${descricao}', ${prioridadeNv}, ${categoriaNv});`;
     const RetornoDoCadastro = await SqlServices.executar(comandoSql);
     return RetornoDoCadastro.rowCount > 0;
   }
@@ -117,9 +118,9 @@ class Tarefa {
    * @param {string} categoria - Nova categoria da tarefa.
    * @returns {boolean} True se a tarefa foi atualizada, False caso contrário.
    */
-  static async atualizar(idUsuario, id, titulo, descricao, prioridadeNv, categoriaNV) {
+  static async atualizar(idUsuario, id, titulo, descricao, prioridadeNv, categoriaNv) {
     const ComandoAtualizar = `UPDATE ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
-      SET "titulo" = '${titulo}', "descricao" = '${descricao}', "prioridadeNv" = ${prioridadeNv}, "categoriaNV" = ${categoriaNV}
+      SET "titulo" = '${titulo}', "descricao" = '${descricao}', "prioridadeNv" = ${prioridadeNv}, "categoriaNv" = ${categoriaNv}
       WHERE "idUsuario" = ${idUsuario} AND "id" = ${id};`;
     const resultado = await SqlServices.executar(ComandoAtualizar);
     return resultado.rowCount > 0;
@@ -135,6 +136,23 @@ class Tarefa {
     const ComandoRemover = `DELETE FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
         WHERE "idUsuario" = ${idUsuario} AND "id" = ${id}`;
     const resultado = await SqlServices.executar(ComandoRemover);
+    return resultado.rowCount > 0;
+  }
+
+  /**
+   * Marca a tarefa passada como concluída.
+   * O banco de dados atribuirá automaticamente o horário de conclusão.
+   * Ele usará de referência o horário em que a operação está sendo realizada.
+   * @param {number} idUsuario - ID do usuário que possui a tarefa.
+   * @param {number} id - ID da tarefa a ser removida.
+   * @returns {boolean} True se a tarefa foi marcada como concluída com sucesso, False caso contrário.
+   */
+  static async concluir(idUsuario, id) {
+    const comandoSql = `
+        UPDATE ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
+        SET "horarioDeConclusao" = NOW() AT TIME ZONE 'America/Sao_Paulo'
+        WHERE "idUsuario" = ${idUsuario} and ${id}`
+    const resultado = await SqlServices.executar(comandoSql);
     return resultado.rowCount > 0;
   }
 }

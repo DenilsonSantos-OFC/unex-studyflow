@@ -1,8 +1,7 @@
-const SqlServices = require('../services/sql-services')
-
 /**
  * @class Usuario
  * @file usuario.js
+ * @author Denilson Santos
  * @classdesc Esta classe representa um usuário da plataforma StudyFlow e lida com operações de cadastro, atualização e autenticação dos usuários.
  * @description
  * Esta classe interage diretamente com o banco de dados.
@@ -11,8 +10,9 @@ const SqlServices = require('../services/sql-services')
  * Por isso, os argumentos recebidos por cada método aqui devem ter sido previamente tratados.
  * Além disso, erros podem acontecer durante uma interação com o banco de dados.
  * Sendo assim, os recursos que chamam os métodos daqui precisam lidar com os erros disparados.
- * @author Denilson Santos
- */
+*/
+
+const SqlServices = require('../services/sql-services')
 
 class Usuario {
 
@@ -43,7 +43,7 @@ class Usuario {
     }
 
     // ------------------------------------------------------------------- //
-    // -------------- MÉTODOS CONSTRUTORES (SECUNDÁRIOS) ----------------- //
+    // -------------- MÉTODOS DE CONSTRUÇÃO (SECUNDÁRIOS) ---------------- //
     // ------------------------------------------------------------------- //
 
     /**
