@@ -7,6 +7,11 @@ expandir(variaveisDeAmbiente())
 const rotasDeUsuario = require('./routes/usuario-routes')
 const rotasDeTarefas = require('./routes/tarefa-routes')
 
+// Configuração da documentação
+const Swagger = require('./models/documentacao-swagger')
+const swaggerUi = require('swagger-ui-express')
+const swaggerConfig = new Swagger().exportarConfigs()
+
 // Importação do middleware para tratamento de erros
 const ExecucaoMid = require('./middlewares/execucao-middleware')
 
@@ -18,6 +23,7 @@ app.use(rotasDeUsuario)
 app.use(rotasDeTarefas)
 app.use(ExecucaoMid.depurarErroSeOcorrer)
 app.use('/perfil/imagens', express.static(process.env.IMG_PROFILES))
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig))
 
 // Inicialização do Servidor
 app.listen(process.env.SRV_PORTA, () => {

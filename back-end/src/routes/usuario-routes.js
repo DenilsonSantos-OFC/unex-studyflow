@@ -21,17 +21,51 @@ const ChecagemMid = require('../middlewares/usuarios/checagem-middlewares')
 const TratamentoMid = require('../middlewares/usuarios/tratamento-middlewares')
 
 // ------------------------------------------------------------------ //
-//                             ROTAS
+//                    ROTAS (COM DOCUMENTAÇÃO SWAGGER)
 // ------------------------------------------------------------------ //
 
 const router = require('express').Router()
+
+/**
+ * @swagger
+ * /autenticar:
+ *   post:
+ *     summary: Verifica se as credenciais passadas batem com algum registro no banco de dados.
+ *     responses:
+ *      200:
+ *         description: OK, se credenciais forem válidas.
+ *                      Um token de acesso será anexado no cabeçalho da resposta para identificar o usuário.
+ *                      Este token precisa ficar armazenado no navegador do cliente,
+ *                      para que ele possa ser reenviado junto com as próximas requisições.
+ *                      Dessa forma, a API conseguirá reconhecer o usuário e realizar a operaçõo correta.
+ *      400: 
+ *          description: Bad Request, se nem todas as informações requeridas forem enviadas na requisição ou se ela estiver "mal-formada" (contiver erros de sintaxe JSON).
+ *      401:
+ *          description: Acesso negado, se as credenciais passadas forem inválidas.
+ *      403:
+ *          description: Acesso rejeitado, se a API detectar que o token foi manipulado ou adulterado.
+ *      500:
+ *          description: Aviso de erro interno do lado do servidor, caso ocorra algum erro inesperado durante o processamento da requisição.
+ */
+router.post('/autenticar', ChecagemMid.checarCredenciais, TratamentoMid.tratarDadosDeAutenticacao, Controller.autenticar)
+
+// ------------------------------------------------------------------ //
+//                             ROTAS
+// ------------------------------------------------------------------ //
+
+
+
+
+
+
+
 
 /**
  * @route POST /autenticar
  * @description Rota para verificar se as credenciais passadas batem com algum registro no banco de dados.
  * @returns {Object} JSON contendo o código HTTP, a mensagem de retorno e o token de acesso (se ação bem-sucedida).
  */
-router.post('/autenticar', ChecagemMid.checarCredenciais, TratamentoMid.tratarDadosDeAutenticacao, Controller.autenticar)
+
 
 /**
  * @route POST /cadastrar
