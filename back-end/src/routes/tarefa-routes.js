@@ -23,9 +23,17 @@ const router = require('express').Router()
 
 /**
  * @swagger
+ * tags:
+ *   - name: Tarefas
+ *     description: Endpoints para criar, atualizar, listar, consultar e remover tarefas associadas aos usuários. 
+ *                  Permite o gerenciamento completo de tarefas individuais, com funcionalidades para organizar e priorizar as atividades dos usuários.
+ */
+
+/**
+ * @swagger
  * /tarefas:
  *   get:
- *     summary: Retorna todas as tarefas do usuário autenticado.
+ *     summary: Retorna todas as tarefas do usuário autenticado. Esta rota é útil para visualizar o panorama geral das tarefas do usuário, incluindo detalhes como título, descrição, prioridade, categoria, data de criação e, caso aplicável, data de conclusão.
  *     responses:
  *       200:
  *         description: OK, se a consulta for bem-sucedida, retorna uma lista de todas as tarefas do usuário.
@@ -50,7 +58,7 @@ router.get('/tarefas/', Middlewares.verificarAutenticacao, Controller.buscarTare
  * @swagger
  * /tarefa/{id}:
  *   get:
- *     summary: Retorna uma tarefa específica a partir do ID fornecido.
+ *     summary: Retorna uma tarefa específica a partir do ID fornecido. Essa rota é utilizada quando o usuário precisa visualizar detalhes de uma tarefa específica sem precisar filtrar ou buscar em todas as tarefas.
  *     parameters:
  *       - name: id
  *         in: path
@@ -82,7 +90,7 @@ router.get('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validar
  * @swagger
  * /tarefas/filtro:
  *   get:
- *     summary: Retorna tarefas com base em um filtro de palavra-chave no título ou descrição.
+ *     summary: Retorna tarefas com base em um filtro de palavra-chave no título ou descrição. Essa rota permite ao usuário encontrar rapidamente tarefas que correspondam a um tema ou categoria desejada.
  *     parameters:
  *       - name: keyword
  *         in: query
@@ -112,7 +120,7 @@ router.get('/tarefas/filtro', Middlewares.verificarAutenticacao, Controller.busc
  * @swagger
  * /tarefa:
  *   post:
- *     summary: Cadastra uma nova tarefa para o usuário autenticado.
+ *     summary:  Cria uma nova tarefa associada ao usuário autenticado. O usuário precisa fornecer informações como título, descrição, prioridade e categoria. A rota garante que o usuário consiga organizar novas atividades de maneira fácil e rápida.
  *     requestBody:
  *       required: true
  *       content:
@@ -125,9 +133,9 @@ router.get('/tarefas/filtro', Middlewares.verificarAutenticacao, Controller.busc
  *               descricao:
  *                 type: string
  *               prioridade:
- *                 type: string
+ *                 type: integer
  *               categoria:
- *                 type: string
+ *                 type: integer
  *           example:
  *             titulo: "Aprender fórmula de Bháskara"
  *             descricao: "Assistir a tutoriais"
@@ -149,7 +157,7 @@ router.post('/tarefa', Middlewares.verificarAutenticacao, Middlewares.validarNov
  * @swagger
  * /tarefa/{id}:
  *   put:
- *     summary: Atualiza uma tarefa específica a partir do ID fornecido.
+ *     summary: Atualiza uma tarefa específica a partir do ID fornecido.  Essa rota permite ao usuário modificar informações da tarefa, como título, descrição, prioridade e categoria. É útil para quando o usuário precisa atualizar o status ou detalhes de uma tarefa.
  *     parameters:
  *       - name: id
  *         in: path
@@ -167,9 +175,9 @@ router.post('/tarefa', Middlewares.verificarAutenticacao, Middlewares.validarNov
  *               descricao:
  *                 type: string
  *               prioridade:
- *                 type: string
+ *                 type: integer
  *               categoria:
- *                 type: string
+ *                 type: integer
  *           example:
  *             titulo: "Atualizar artigo científico"
  *             descricao: "Melhorar a coesão textual"
@@ -193,7 +201,7 @@ router.put('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validar
  * @swagger
  * /tarefa/{id}:
  *   delete:
- *     summary: Exclui uma tarefa específica a partir do ID fornecido.
+ *     summary: Exclui uma tarefa específica a partir do ID fornecido.  Permite que o usuário remova tarefas que já não são mais relevantes, garantindo que o painel de tarefas fique atualizado e sem informações desnecessárias.
  *     parameters:
  *       - name: id
  *         in: path
