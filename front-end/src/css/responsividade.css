@@ -1,0 +1,84 @@
+@media (max-width: 1200px) {
+        /* Home */
+    /* Login */
+
+}
+
+@media (max-width: 992px) {
+    /* Home */
+    
+    .nav2{
+        display: none !important;
+    }
+    .vertical-line{
+        display: none !important;
+    }
+    .perfil{
+        display: none;
+    }
+    .search{
+        width: 50%;
+        justify-content: end;
+    }
+    .container-search{
+        display: flex;
+        justify-content: end;
+    }
+    .cadastro div div{
+        margin-bottom: 1rem;
+    }
+    img.image {
+        position: absolute;
+    }
+    .add button{
+        width: 50%;
+    }
+
+
+    /* Login */
+    .image{
+        width: 50%;
+    }
+
+    .login h1, .cadastro h1{
+        font-size: 3em;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Login */
+
+    .image{
+        width: 40%;
+    }
+
+    input[type="email"], input[type="password"], input[type="text"]  {
+        
+        height: 4rem;
+        width: 70vw;
+        font-size: 1.4em;
+     
+    }
+
+    .forms button.btn{
+        width: 35vw;
+        height: 4rem;
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 450px) {
+    /* Login */
+
+    .login h1, .cadastro h1{
+        font-size: 2em;
+    }
+    input[type="email"], input[type="password"], input[type="text"]  {
+        font-size: 1em;
+     
+    }
+
+    .forms button.btn{
+        font-size: 1em;    
+    }
+}
