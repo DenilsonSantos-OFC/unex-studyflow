@@ -2,17 +2,17 @@
  * @module TarefaRoutes
  * @file tarefa-routes.js
  * @author Luan Vinicius
- * @description Define as rotas relacionadas à gestão das tarefas de um usuário.
- * Este módulo lida com as operações de busca, cadastro, atualização e exclusão de tarefas.
- * Cada operação requer que o usuário esteja autenticado, sendo verificado através do token de acesso.
- * Caso o token não seja fornecido ou seja inválido, a operação será negada.
+ * @description Este módulo define as rotas relacionadas ao gerenciamento de tarefas de um usuário.
+ * O gerenciamento de tarefas inclui operações como buscar, cadastrar, alterar, excluir e filtrar tarefas.
+ * As rotas exigem que o usuário esteja autenticado, garantindo a segurança e a privacidade dos dados.
+ * Cada rota está protegida por autenticação e permite manipulações específicas das tarefas.
  */
 
 /**
  * @swagger
  * tags:
  *   - name: Tarefa
- *     description:  Rotas para o envio de requisições relacionadas ao gerenciamento de tarefas do usuário StudyFlow.
+ *     description: Rotas para o envio de requisições relacionadas ao gerenciamento de tarefas do usuário.
  */
 
 // ------------------------------------------------------------------ //
@@ -32,10 +32,15 @@ const router = require('express').Router()
  * @swagger
  * /tarefas:
  *   get:
- *   tags:
- *   - Tarefa
+ *     tags:
+ *       - Tarefa
  *     summary: Retorna todas as tarefas do usuário autenticado.
- *     description: Esta rota é útil para visualizar o panorama geral das tarefas do usuário, incluindo detalhes como título, descrição, prioridade, categoria, data de criação e, caso aplicável, data de conclusão.
+ *     description: Esta rota retorna uma lista de todas as tarefas associadas ao usuário autenticado. 
+ *       Ela permite que o usuário visualize as tarefas cadastradas, com detalhes como título, descrição, 
+ *       prioridade, categoria e data de conclusão, se disponível. A autenticação do usuário é necessária para 
+ *       garantir a privacidade dos dados.
+ *     security:
+ *       - bearerAuth: []  # Requer que o usuário esteja autenticado.
  *     responses:
  *       200:
  *         description: OK, se a consulta for bem-sucedida, retorna uma lista de todas as tarefas do usuário.
@@ -45,8 +50,8 @@ const router = require('express').Router()
  *               - id: 1
  *                 titulo: "Estudar Assunto X"
  *                 descricao: "Ler documentação"
- *                 prioridade: "2"
- *                 categoria: "1"
+ *                 prioridade: 2
+ *                 categoria: 1
  *                 dataCriacao: "2024-01-01"
  *                 dataConclusao: null
  *       401:
@@ -60,15 +65,18 @@ router.get('/tarefas/', Middlewares.verificarAutenticacao, Controller.buscarTare
  * @swagger
  * /tarefa/{id}:
  *   get:
- *   tags:
- *   - Tarefa
+ *     tags:
+ *       - Tarefa
  *     summary: Retorna uma tarefa específica a partir do ID fornecido.
- *     description: Essa rota é utilizada quando o usuário precisa visualizar detalhes de uma tarefa específica sem precisar filtrar ou buscar em todas as tarefas.
+ *     description: Essa rota permite consultar uma tarefa específica usando seu ID. O usuário poderá visualizar 
+ *       os detalhes dessa tarefa, incluindo título, descrição, prioridade, categoria e datas associadas.
  *     parameters:
  *       - name: id
  *         in: path
  *         required: true
  *         description: ID da tarefa a ser consultada.
+ *     security:
+ *       - bearerAuth: []  # Requer que o usuário esteja autenticado.
  *     responses:
  *       200:
  *         description: OK, se a tarefa for encontrada.
@@ -78,8 +86,8 @@ router.get('/tarefas/', Middlewares.verificarAutenticacao, Controller.buscarTare
  *               id: 1
  *               titulo: "Estudar Aula 1"
  *               descricao: "Ler a página X"
- *               prioridade: "1"
- *               categoria: "2"
+ *               prioridade: 1
+ *               categoria: 2
  *               dataCriacao: "2024-01-01"
  *               dataConclusao: null
  *       401:
@@ -95,15 +103,18 @@ router.get('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validar
  * @swagger
  * /tarefas/filtro:
  *   get:
- *  tags:
- *   - Tarefa
- *     summary: Retorna tarefas com base em um filtro de palavra-chave no título ou descrição.
- *     description: . Essa rota permite ao usuário encontrar rapidamente tarefas que correspondam a um tema ou categoria desejada.
+ *     tags:
+ *       - Tarefa
+ *     summary: Retorna tarefas filtradas por palavra-chave no título ou descrição.
+ *     description: A rota permite que o usuário busque por tarefas que correspondam a uma palavra-chave no título 
+ *       ou na descrição, facilitando a localização de tarefas específicas entre muitas.
  *     parameters:
  *       - name: keyword
  *         in: query
  *         required: true
  *         description: Palavra-chave para filtrar as tarefas.
+ *     security:
+ *       - bearerAuth: []  # Requer que o usuário esteja autenticado.
  *     responses:
  *       200:
  *         description: OK, se a consulta com filtro for bem-sucedida.
@@ -113,8 +124,8 @@ router.get('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validar
  *               - id: 2
  *                 titulo: "Realizar Atividade Y"
  *                 descricao: "Entregar até amanhã"
- *                 prioridade: "2"
- *                 categoria: "3"
+ *                 prioridade: 2
+ *                 categoria: 3
  *                 dataCriacao: "2024-01-02"
  *                 dataConclusao: null
  *       401:
@@ -128,10 +139,14 @@ router.get('/tarefas/filtro', Middlewares.verificarAutenticacao, Controller.busc
  * @swagger
  * /tarefa:
  *   post:
- *  tags:
- *   - Tarefa
+ *     tags:
+ *       - Tarefa
  *     summary: Cadastra uma nova tarefa para o usuário autenticado.
- *     description: O usuário precisa fornecer informações como título, descrição, prioridade e categoria. A rota garante que o usuário consiga organizar novas atividades de maneira fácil e rápida.
+ *     description: Esta rota permite que o usuário cadastre uma nova tarefa, fornecendo informações como título, descrição, 
+ *       prioridade e categoria. A tarefa será associada ao usuário autenticado. A autenticação é necessária para 
+ *       garantir que apenas usuários autorizados possam adicionar tarefas.
+ *     security:
+ *       - bearerAuth: []  # Requer que o usuário esteja autenticado.
  *     requestBody:
  *       required: true
  *       content:
@@ -150,11 +165,19 @@ router.get('/tarefas/filtro', Middlewares.verificarAutenticacao, Controller.busc
  *           example:
  *             titulo: "Aprender fórmula de Bháskara"
  *             descricao: "Assistir a tutoriais"
- *             prioridade: "2"
- *             categoria: "2"
+ *             prioridade: 2
+ *             categoria: 2
  *     responses:
  *       201:
  *         description: OK, se a tarefa for cadastrada com sucesso.
+ *         content:
+ *           application/json:
+ *             example:
+ *               id: 3
+ *               titulo: "Aprender fórmula de Bháskara"
+ *               descricao: "Assistir a tutoriais"
+ *               prioridade: 2
+ *               categoria: 2
  *       400:
  *         description: Bad Request, se os dados da tarefa estiverem incompletos ou inválidos.
  *       401:
@@ -168,15 +191,19 @@ router.post('/tarefa', Middlewares.verificarAutenticacao, Middlewares.validarNov
  * @swagger
  * /tarefa/{id}:
  *   put:
- *  tags:
- *   - Tarefa
+ *     tags:
+ *       - Tarefa
  *     summary: Atualiza uma tarefa específica a partir do ID fornecido.
- *     description: Essa rota permite ao usuário modificar informações da tarefa, como título, descrição, prioridade e categoria. É útil para quando o usuário precisa atualizar o status ou detalhes de uma tarefa.
+ *     description: Esta rota permite ao usuário atualizar os detalhes de uma tarefa existente, como título, descrição, 
+ *       prioridade e categoria. A autenticação do usuário é obrigatória para garantir que apenas o dono da tarefa possa 
+ *       modificá-la.
  *     parameters:
  *       - name: id
  *         in: path
  *         required: true
  *         description: ID da tarefa a ser atualizada.
+ *     security:
+ *       - bearerAuth: []  # Requer que o usuário esteja autenticado.
  *     requestBody:
  *       required: true
  *       content:
@@ -195,8 +222,8 @@ router.post('/tarefa', Middlewares.verificarAutenticacao, Middlewares.validarNov
  *           example:
  *             titulo: "Atualizar artigo científico"
  *             descricao: "Melhorar a coesão textual"
- *             prioridade: "0"
- *             categoria: "2"
+ *             prioridade: 0
+ *             categoria: 2
  *     responses:
  *       200:
  *         description: OK, se a tarefa for atualizada com sucesso.
@@ -215,18 +242,28 @@ router.put('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validar
  * @swagger
  * /tarefa/{id}:
  *   delete:
- *  tags:
- *   - Tarefa
+ *     tags:
+ *       - Tarefa
  *     summary: Exclui uma tarefa específica a partir do ID fornecido.
- *     description: Permite que o usuário remova tarefas que já não são mais relevantes, garantindo que o painel de tarefas fique atualizado e sem informações desnecessárias.
+ *     description: Esta rota permite que o usuário exclua uma tarefa existente usando o ID da tarefa. 
+ *       A exclusão só será permitida se o usuário estiver autenticado e se a tarefa pertencente ao ID informado 
+ *       for válida. A autenticação do usuário é obrigatória para garantir que apenas o dono da tarefa possa excluí-la.
  *     parameters:
  *       - name: id
  *         in: path
  *         required: true
  *         description: ID da tarefa a ser excluída.
+ *     security:
+ *       - bearerAuth: []  # Requer que o usuário esteja autenticado.
  *     responses:
  *       200:
  *         description: OK, se a tarefa for excluída com sucesso.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: "Tarefa excluída com sucesso."
+ *       400:
+ *         description: Bad Request, se o ID da tarefa for inválido ou não puder ser processado.
  *       401:
  *         description: Acesso negado, se o token de autenticação não for fornecido ou for inválido.
  *       404:
