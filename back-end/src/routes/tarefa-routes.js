@@ -12,7 +12,7 @@
  * @swagger
  * tags:
  *   - name: Tarefa
- *     description: Endpoints para gerenciamento de tarefas do usuário
+ *     description:  Rotas para o envio de requisições relacionadas ao gerenciamento de tarefas do usuário StudyFlow.
  */
 
 // ------------------------------------------------------------------ //
