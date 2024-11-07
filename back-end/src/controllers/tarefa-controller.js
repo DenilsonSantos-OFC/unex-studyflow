@@ -1,8 +1,29 @@
+/**
+ * @class TarefaController
+ * @file tarefa-controller.js
+ * @author Luan Vinicius
+ * @classdesc Controlador responsável pela gestão de tarefas da plataforma StudyFlow.
+ * @description
+ * Esta classe lida com as requisições de tarefas, como buscar, cadastrar, alterar e excluir. Ela interage diretamente com o modelo de Tarefa, realizando operações no banco de dados, e envia as respostas adequadas ao cliente.
+ * Todos os métodos da classe utilizam os objetos "req" (requisição) e "res" (resposta), sendo que a requisição contém os dados necessários e a resposta é manipulada conforme o resultado da operação.
+ * O controlador garante que o usuário autenticado através do token realiza ações apenas em suas próprias tarefas.
+ */
+
 const UsuarioServices = require("../services/usuario-services");
 const RespostaHTTP = require("../models/resposta-http");
 const Tarefa = require("../models/tarefa");
 
 class TarefaController {
+
+    /**
+   * @method buscarTarefas
+   * @static @async
+   * @description
+   * Recupera todas as tarefas associadas ao usuário autenticado.
+   * @param {Request} req - Objeto de requisição, que contém o token de autenticação do usuário.
+   * @param {Response} res - Objeto de resposta, que será manipulada pelo controlador.
+   * @returns {Object} - Um objeto com o status da operação e a lista de tarefas.
+   */
   static async buscarTarefas(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
     try {
@@ -15,6 +36,15 @@ class TarefaController {
     }
   }
 
+  /**
+   * @method buscarTarefa
+   * @static @async
+   * @description
+   * Recupera uma tarefa específica do usuário autenticado.
+   * @param {Request} req - Objeto de requisição, contendo o ID da tarefa nos parâmetros.
+   * @param {Response} res - Objeto de resposta, que será manipulada pelo controlador.
+   * @returns {Object} - Um objeto com o status da operação e os detalhes da tarefa.
+   */
   static async buscarTarefa(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
     try {
@@ -31,6 +61,15 @@ class TarefaController {
     }
   }
 
+    /**
+   * @method buscarTarefasFiltro
+   * @static @async
+   * @description
+   * Recupera as tarefas do usuário autenticado, com a possibilidade de aplicar filtros.
+   * @param {Request} req - Objeto de requisição, contendo os filtros de título e descrição como parâmetros de consulta.
+   * @param {Response} res - Objeto de resposta, que será manipulada pelo controlador.
+   * @returns {Object} - Um objeto com o status da operação e a lista filtrada de tarefas.
+   */
   static async buscarTarefasFiltro(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
     try{
@@ -50,6 +89,15 @@ class TarefaController {
     }
   }
 
+    /**
+   * @method cadastrar
+   * @static @async
+   * @description
+   * Cadastra uma nova tarefa para o usuário autenticado.
+   * @param {Request} req - Objeto de requisição, contendo os dados necessários para cadastrar a tarefa.
+   * @param {Response} res - Objeto de resposta, que será manipulada pelo controlador.
+   * @returns {Object} - Um objeto com o status da operação e uma mensagem de sucesso.
+   */
   static async cadastrar(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
     const { titulo, descricao, prioridadeNv, categoriaNv } = req.body;
@@ -66,6 +114,15 @@ class TarefaController {
     }
   }
 
+    /**
+   * @method alterar
+   * @static @async
+   * @description
+   * Altera uma tarefa existente do usuário autenticado.
+   * @param {Request} req - Objeto de requisição, contendo os dados da tarefa a ser alterada.
+   * @param {Response} res - Objeto de resposta, que será manipulada pelo controlador.
+   * @returns {Object} - Um objeto com o status da operação e uma mensagem de sucesso ou erro.
+   */
   static async alterar(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
     try {
@@ -83,6 +140,15 @@ class TarefaController {
     }
   }
 
+    /**
+   * @method excluir
+   * @static @async
+   * @description
+   * Exclui uma tarefa existente do usuário autenticado.
+   * @param {Request} req - Objeto de requisição, contendo o ID da tarefa a ser excluída.
+   * @param {Response} res - Objeto de resposta, que será manipulada pelo controlador.
+   * @returns {Object} - Um objeto com o status da operação e uma mensagem de sucesso ou erro.
+   */
   static async excluir(req, res) {
     const respostaHTTP = new RespostaHTTP(res);
     try {
