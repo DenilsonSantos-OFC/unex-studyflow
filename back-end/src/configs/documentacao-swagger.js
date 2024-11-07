@@ -1,5 +1,5 @@
 const Documentacao = require('./documentacao')
-const Servidor = require('./servidor')
+const Servidor = require('../models/servidor')
 const swaggerJSDoc = require('swagger-jsdoc')
 
 class DocumentacaoSwagger extends Documentacao {
@@ -25,8 +25,8 @@ class DocumentacaoSwagger extends Documentacao {
                 version: this.versao,
                 description: this.descricao},
             servers: [
-                this.servidorLocal.abstrair(),
-                this.servidorDeProducao.abstrair()]}
+                this.servidorLocal,
+                this.servidorDeProducao]}
         const options = {
             swaggerDefinition,
             apis: this.rotasPraDocumentacao}

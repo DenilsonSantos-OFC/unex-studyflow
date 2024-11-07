@@ -142,13 +142,29 @@ class Tarefa {
    * @returns {boolean} True se a tarefa foi atualizada, False caso contrário.
    * @throws {Error} Se ocorrer um erro durante a execução da consulta no banco de dados.
    */
+
   static async atualizar(idUsuario, id, titulo, descricao, prioridadeNv, categoriaNv) {
-    const ComandoAtualizar = `UPDATE ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS}
-      SET "titulo" = '${titulo}', "descricao" = '${descricao}', "prioridadeNv" = ${prioridadeNv}, "categoriaNv" = ${categoriaNv}
-      WHERE "idUsuario" = ${idUsuario} AND "id" = ${id};`;
-    const resultado = await SqlServices.executar(ComandoAtualizar);
-    return resultado.rowCount > 0;
-  }
+    // Ligação entre colunas e valores
+    const parDeMudancas = {
+      titulo: titulo,
+      descricao: descricao,
+      prioridadeNv: prioridadeNv,
+      categoriaNv: categoriaNv,
+    }
+    // Construção do comando parcial
+    const comandoSetParcial = "SET " + Object.entries(parDeMudancas)
+        .filter(([_, valor]) => valor !== undefined) // Valores não-definidos não serão incluídos na criação do comando
+        .map(([chave, valor]) => valor === null ? `"${chave}"=NULL` : `"${chave}"='${valor}'`) // Une os pares de "coluna" e "atributo" corretamente (null é enviado como NULL para evitar erros de sintaxe SQL)
+        .join(', '); // Junta os pares de "coluna" e "atributo" em uma string única
+    // Execução SQL
+    const retornoDaAlteracao = await SqlServices.executar(
+      `UPDATE ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_TAREFAS} ${comandoSetParcial} 
+      WHERE "idUsuario" = ${idUsuario} AND "id" = ${id};`)
+    const registrosAlterados = retornoDaAlteracao.rowCount
+    if (registrosAlterados)
+        return true
+    return false
+}
 
   /**
    * Remove uma tarefa do banco de dados pelo ID e ID do usuário.

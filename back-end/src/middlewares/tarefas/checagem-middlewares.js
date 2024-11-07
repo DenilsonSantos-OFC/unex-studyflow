@@ -1,20 +1,20 @@
+const RespostaHTTP = require('../../models/resposta-http')
+const Tarefa = require('../../models/tarefa')
+const UsuarioServices = require('../../services/usuario-services')
+
 class ChecagemMiddlewares {
 
     // Middleware para validar os dados da tarefa ao atualizar
     static validarDadosAtualizadosDeTarefa(req, res, next) {
-        const { titulo, prioridadeNv, categoriaNv } = req.body;
         const respostaHTTP = new RespostaHTTP(res);
-        if (!titulo)
-            return respostaHTTP.enviarErroDeCampoAusente("titulo")
-        if (!prioridadeNv)
-            return respostaHTTP.enviarErroDeCampoAusente("prioridade")
-        if (!categoriaNv)
-            return respostaHTTP.enviarErroDeCampoAusente("categoria")
-        if (isNaN(prioridadeNv))
-            return respostaHTTP.enviarErroDeDadoInvalido("prioridade")
-        if (isNaN(categoriaNv))
-            return respostaHTTP.enviarErroDeDadoInvalido("categoria")
-        // Se todos os dados estiverem corretos, passa para o próximo middleware
+        const { titulo, prioridadeNv, categoriaNv } = req.body;
+        const novosValores = Object.values({ titulo, prioridadeNv, categoriaNv })
+        let precisaMexerNoBD
+        novosValores.forEach(valor => {
+            if (valor)
+                precisaMexerNoBD = true})
+        if (!precisaMexerNoBD)
+            return respostaHTTP.enviarErro(400, "Nenhuma alteração válida foi recebida.")
         next()
     }
 
@@ -37,10 +37,10 @@ class ChecagemMiddlewares {
         const respostaHTTP = new RespostaHTTP(res)
         if (!titulo)
             return respostaHTTP.enviarErroDeCampoAusente("titulo")
-        if (!prioridadeNv)
-            return respostaHTTP.enviarErroDeCampoAusente("prioridade")
-        if (!categoriaNv)
-            return respostaHTTP.enviarErroDeCampoAusente("categoria")
+        if (isNaN(prioridadeNv))
+            return respostaHTTP.enviarErroDeDadoInvalido("prioridadeNv")
+        if (isNaN(categoriaNv))
+            return respostaHTTP.enviarErroDeDadoInvalido("categoriaNv")
         // Se todos os dados estiverem corretos, passa para o próximo middleware
         next();
     }

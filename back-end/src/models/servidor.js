@@ -1,16 +1,10 @@
 class Servidor {
-    host
-    descricao
+    url
+    description
 
     constructor(host, descricao) {
-        this.host = host
-        this.descricao = descricao
+        this.url = host
+        this.description = descricao
     }
 
-    abstrair() {
-        return {
-            url: this.host,
-            description: this.descricao
-        }
-    }
 } module.exports = Servidor
