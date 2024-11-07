@@ -11,7 +11,7 @@
 /**
  * @swagger
  * tags:
- *   - name: Tarefas
+ *   - name: Tarefa
  *     description: Endpoints para gerenciamento de tarefas do usuário
  */
 
