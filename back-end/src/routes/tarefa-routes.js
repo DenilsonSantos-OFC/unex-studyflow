@@ -32,6 +32,8 @@ const router = require('express').Router()
  * @swagger
  * /tarefas:
  *   get:
+ *   tags:
+ *   - Tarefa
  *     summary: Retorna todas as tarefas do usuário autenticado.
  *     description: Esta rota é útil para visualizar o panorama geral das tarefas do usuário, incluindo detalhes como título, descrição, prioridade, categoria, data de criação e, caso aplicável, data de conclusão.
  *     responses:
@@ -58,6 +60,8 @@ router.get('/tarefas/', Middlewares.verificarAutenticacao, Controller.buscarTare
  * @swagger
  * /tarefa/{id}:
  *   get:
+ *   tags:
+ *   - Tarefa
  *     summary: Retorna uma tarefa específica a partir do ID fornecido.
  *     description: Essa rota é utilizada quando o usuário precisa visualizar detalhes de uma tarefa específica sem precisar filtrar ou buscar em todas as tarefas.
  *     parameters:
@@ -91,6 +95,8 @@ router.get('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validar
  * @swagger
  * /tarefas/filtro:
  *   get:
+ *  tags:
+ *   - Tarefa
  *     summary: Retorna tarefas com base em um filtro de palavra-chave no título ou descrição.
  *     description: . Essa rota permite ao usuário encontrar rapidamente tarefas que correspondam a um tema ou categoria desejada.
  *     parameters:
@@ -122,6 +128,8 @@ router.get('/tarefas/filtro', Middlewares.verificarAutenticacao, Controller.busc
  * @swagger
  * /tarefa:
  *   post:
+ *  tags:
+ *   - Tarefa
  *     summary: Cadastra uma nova tarefa para o usuário autenticado.
  *     description: O usuário precisa fornecer informações como título, descrição, prioridade e categoria. A rota garante que o usuário consiga organizar novas atividades de maneira fácil e rápida.
  *     requestBody:
@@ -160,6 +168,8 @@ router.post('/tarefa', Middlewares.verificarAutenticacao, Middlewares.validarNov
  * @swagger
  * /tarefa/{id}:
  *   put:
+ *  tags:
+ *   - Tarefa
  *     summary: Atualiza uma tarefa específica a partir do ID fornecido.
  *     description: Essa rota permite ao usuário modificar informações da tarefa, como título, descrição, prioridade e categoria. É útil para quando o usuário precisa atualizar o status ou detalhes de uma tarefa.
  *     parameters:
@@ -205,6 +215,8 @@ router.put('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validar
  * @swagger
  * /tarefa/{id}:
  *   delete:
+ *  tags:
+ *   - Tarefa
  *     summary: Exclui uma tarefa específica a partir do ID fornecido.
  *     description: Permite que o usuário remova tarefas que já não são mais relevantes, garantindo que o painel de tarefas fique atualizado e sem informações desnecessárias.
  *     parameters:
