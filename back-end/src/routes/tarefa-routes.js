@@ -27,11 +27,21 @@ const router = require('express').Router()
  *   get:
  *     summary: Retorna todas as tarefas do usuário autenticado.
  *     responses:
- *      200:
+ *       200:
  *         description: OK, se a consulta for bem-sucedida, retorna uma lista de todas as tarefas do usuário.
- *      401:
+ *         content:
+ *           application/json:
+ *             example:
+ *               - id: 1
+ *                 titulo: "Estudar Assunto X"
+ *                 descricao: "Ler documentação"
+ *                 prioridade: "2"
+ *                 categoria: "1"
+ *                 dataCriacao: "2024-01-01"
+ *                 dataConclusao: null
+ *       401:
  *         description: Acesso negado, se o token de autenticação não for fornecido ou for inválido.
- *      500:
+ *       500:
  *         description: Erro interno do servidor.
  */
 router.get('/tarefas/', Middlewares.verificarAutenticacao, Controller.buscarTarefas)
@@ -47,13 +57,23 @@ router.get('/tarefas/', Middlewares.verificarAutenticacao, Controller.buscarTare
  *         required: true
  *         description: ID da tarefa a ser consultada.
  *     responses:
- *      200:
+ *       200:
  *         description: OK, se a tarefa for encontrada.
- *      401:
+ *         content:
+ *           application/json:
+ *             example:
+ *               id: 1
+ *               titulo: "Estudar Aula 1"
+ *               descricao: "Ler a página X"
+ *               prioridade: "1"
+ *               categoria: "2"
+ *               dataCriacao: "2024-01-01"
+ *               dataConclusao: null
+ *       401:
  *         description: Acesso negado, se o token de autenticação não for fornecido ou for inválido.
- *      404:
+ *       404:
  *         description: Não encontrada, se a tarefa com o ID fornecido não existir.
- *      500:
+ *       500:
  *         description: Erro interno do servidor.
  */
 router.get('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validarIdTarefa, Controller.buscarTarefa)
@@ -69,11 +89,21 @@ router.get('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validar
  *         required: true
  *         description: Palavra-chave para filtrar as tarefas.
  *     responses:
- *      200:
+ *       200:
  *         description: OK, se a consulta com filtro for bem-sucedida.
- *      401:
+ *         content:
+ *           application/json:
+ *             example:
+ *               - id: 2
+ *                 titulo: "Realizar Atividade Y"
+ *                 descricao: "Entregar até amanhã"
+ *                 prioridade: "2"
+ *                 categoria: "3"
+ *                 dataCriacao: "2024-01-02"
+ *                 dataConclusao: null
+ *       401:
  *         description: Acesso negado, se o token de autenticação não for fornecido ou for inválido.
- *      500:
+ *       500:
  *         description: Erro interno do servidor.
  */
 router.get('/tarefas/filtro', Middlewares.verificarAutenticacao, Controller.buscarTarefasFiltro)
@@ -83,14 +113,34 @@ router.get('/tarefas/filtro', Middlewares.verificarAutenticacao, Controller.busc
  * /tarefa:
  *   post:
  *     summary: Cadastra uma nova tarefa para o usuário autenticado.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               titulo:
+ *                 type: string
+ *               descricao:
+ *                 type: string
+ *               prioridade:
+ *                 type: string
+ *               categoria:
+ *                 type: string
+ *           example:
+ *             titulo: "Aprender fórmula de Bháskara"
+ *             descricao: "Assistir a tutoriais"
+ *             prioridade: "2"
+ *             categoria: "2"
  *     responses:
- *      201:
+ *       201:
  *         description: OK, se a tarefa for cadastrada com sucesso.
- *      400:
+ *       400:
  *         description: Bad Request, se os dados da tarefa estiverem incompletos ou inválidos.
- *      401:
+ *       401:
  *         description: Acesso negado, se o token de autenticação não for fornecido ou for inválido.
- *      500:
+ *       500:
  *         description: Erro interno do servidor.
  */
 router.post('/tarefa', Middlewares.verificarAutenticacao, Middlewares.validarNovosDadosDaTarefa, Controller.cadastrar)
@@ -105,16 +155,36 @@ router.post('/tarefa', Middlewares.verificarAutenticacao, Middlewares.validarNov
  *         in: path
  *         required: true
  *         description: ID da tarefa a ser atualizada.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               titulo:
+ *                 type: string
+ *               descricao:
+ *                 type: string
+ *               prioridade:
+ *                 type: string
+ *               categoria:
+ *                 type: string
+ *           example:
+ *             titulo: "Atualizar artigo científico"
+ *             descricao: "Melhorar a coesão textual"
+ *             prioridade: "0"
+ *             categoria: "2"
  *     responses:
- *      200:
+ *       200:
  *         description: OK, se a tarefa for atualizada com sucesso.
- *      400:
+ *       400:
  *         description: Bad Request, se os dados da tarefa estiverem inválidos.
- *      401:
+ *       401:
  *         description: Acesso negado, se o token de autenticação não for fornecido ou for inválido.
- *      404:
+ *       404:
  *         description: Não encontrada, se a tarefa com o ID fornecido não existir.
- *      500:
+ *       500:
  *         description: Erro interno do servidor.
  */
 router.put('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validarIdTarefa, Middlewares.validarDadosAtualizadosDeTarefa, Controller.alterar)
@@ -130,13 +200,13 @@ router.put('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validar
  *         required: true
  *         description: ID da tarefa a ser excluída.
  *     responses:
- *      200:
+ *       200:
  *         description: OK, se a tarefa for excluída com sucesso.
- *      401:
+ *       401:
  *         description: Acesso negado, se o token de autenticação não for fornecido ou for inválido.
- *      404:
+ *       404:
  *         description: Não encontrada, se a tarefa com o ID fornecido não existir.
- *      500:
+ *       500:
  *         description: Erro interno do servidor.
  */
 router.delete('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validarIdTarefa, Controller.excluir)
