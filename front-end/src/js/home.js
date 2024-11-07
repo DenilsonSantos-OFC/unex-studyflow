@@ -14,7 +14,7 @@ function create(tipo, nivel, titulo, texto) {
         default:
             cor = "";
             break;
-}
+    }
 
     // Adicionando a estrutura interna da tarefa
     tarefa.innerHTML = `
@@ -80,7 +80,6 @@ function create(tipo, nivel, titulo, texto) {
         window.location.href = '../views/editarTarefa.html'; // Altere para a URL da sua página de edição
     });
 }
-
 
 document.querySelector('.add-tarefa.fazer').addEventListener('click', function() {
     create(1,"Baixa", "teste1", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur aliquam sint dignissimos eos aut, consectetur mollitia aperiam maxime tempore inventore delectus tempora blanditiis explicabo voluptatem voluptatum molestias minima necessitatibus! Iste?");
