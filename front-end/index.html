@@ -37,27 +37,26 @@
                     <div >
                         <h1>BEM-VINDO AO <br> <span>STUDY FLOW!</span></h1>
                     </div>
-                    <form action="" method="post">
+                    <form id="loginForm" onsubmit="event.preventDefault(); login();">
                         <div class="forms center">
-                            <div>
-                                <input type="email" name="Email" id="Email" placeholder="&#xf0e0;     Email*" required>
-    
-                                <input type="password" name="Password" id="Password" placeholder="&#xf023;     Senha*" required>
-                            </div>
-                            <div class="btns ">
-                                <button type="submit" class="btn btn-primary">Entrar</button>
-                                <button type="button" class="btn btn-outline-primary btn-login">Cadastre-se</button>
-                            </div>
-    
+                          <div>
+                            <input type="email" name="Email" id="Email" placeholder="&#xf0e0;     Email*" required>
+                            <input type="password" name="Password" id="Password" placeholder="&#xf023;     Senha*" required>
+                          </div>
+                          <div class="btns">
+                            <button type="submit" class="btn btn-primary" onclick="login(event)">Entrar</button>
+                            <button type="button" class="btn btn-outline-primary btn-login">Cadastre-se</button>
+                          </div>
                         </div>
-                    </form>
+                      </form>
+                      
                     
                 </div>
                 <div class="col-lg-6 center cadastro">
                     <div >
                         <h1>FAÇA O SEU <br> <span>CADASTRO!</span></h1>
                     </div>
-                    <form action="" id="forms">
+                    <form action="" method="post" id="forms" >
                         <div class="forms center">
                             <div>
                                 <input type="text" name="Nome" id="Nome" placeholder="&#xf007;     Nome de Usuário*" required>
@@ -68,7 +67,7 @@
                             </div>
                             <div class="btns ">
                                 <button type="button" class="btn btn-primary btn-cadastro">Voltar</button>
-                                <button type="submit" class="btn btn-outline-primary ">Cadastre-se</button>
+                                <button type="submit" class="btn btn-outline-primary " onclick="register()">Cadastre-se</button>
                             </div>
     
                         </div>
@@ -81,6 +80,9 @@
 
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="./API/register.js"></script>
+        <script src="./API/login.js"></script>
+
 
     </body>
 </html>
