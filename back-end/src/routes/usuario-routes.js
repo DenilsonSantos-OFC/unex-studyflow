@@ -67,13 +67,20 @@ const router = require('express').Router()
  *                      OK, se as credenciais forem confirmadas. Um token de acesso será anexado no cabeçalho da resposta para identificar o usuário.
  *                      Este token precisa ficar armazenado no navegador do cliente, para que ele possa ser reenviado junto com as próximas requisições.
  *                      Dessa forma, a API conseguirá reconhecer o usuário e realizar a operaçõo correta.
- *                      O token será fixado no campo "Authorization" do cabeçalho e seguirá o seguinte formato string: 
- *         headers:
- *           Authorization:
- *             description: Token de acesso gerado pela API para o usuário autenticado.
+ *         content:
+ *           application/json:
  *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
  *                   type: string
- *                   example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ *                   description: Mensagem de retorno para o usuário.
+ *                   example: "Usuário autenticado com sucesso."
+ *                 objeto:
+ *                   type: object
+ *                   description: Um objeto de retorno para o usuário.
+ *                   example:
+ *                     token: "Bearer oiuyhsapda8907213hpoi..."
  *       400:
  *         description: Indica que há algo errado com a requisição recebida, seja por não ter enviado uma informação obrigatória ou ter enviado uma requisição com erros de sintaxe JSON.
  *       401:
