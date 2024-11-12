@@ -28,7 +28,7 @@
         margin-bottom: 1rem;
     }
     img.image {
-        position: absolute;
+        /* position: absolute; */
     }
     .add button{
         width: 50%;

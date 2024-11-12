@@ -3,63 +3,38 @@ async function login(event) {
   
     const email = document.getElementById('Email').value;
     const password = document.getElementById('Password').value;
-    
-console.log(email+" "+ password)
 
-    console.log( {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-    })
-  
     try {
-      const response = await fetch('https://unex-studyflow.onrender.com/autenticar', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-        
-      if (response.ok) {
-        
-        // const data = await response.json();
-        // sessionStorage.setItem('auth_token', data.token);
-        // console.log('Login bem-sucedido e token armazenado no sessionStorage');
-        // window.location.href = '/front-end/views/home.html';
-      } else {
-        alert('Erro ao fazer login.');
-      }
+        const response = await fetch('https://unex-studyflow.onrender.com/autenticar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, senha: password }), // Ajuste para "senha" no corpo
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const token = data.objeto.token; // Acessa o token corretamente
+            sessionStorage.setItem('auth_token', token); // Armazena o token no sessionStorage
+            console.log('Login bem-sucedido e token armazenado no sessionStorage');
+
+            // Redireciona o usuário para a página inicial
+            window.location.href = './views/home.html';
+        } else {
+            const errorData = await response.json(); // Captura a resposta de erro
+            alert(`Erro: ${errorData.mensagem}`); // Exibe a mensagem de erro
+        }
     } catch (error) {
-      console.error('Erro:', error);
+        console.error('Erro:', error);
     }
+}
+  
+
+  
+  function logout() {
+    sessionStorage.removeItem('auth_token');
+    console.log('Logout realizado e token removido do sessionStorage');
   }
-  
 
-  
-//   function logout() {
-//     sessionStorage.removeItem('auth_token');
-//     console.log('Logout realizado e token removido do sessionStorage');
-//   }
-
-  
-//   async function fetchData() {
-//     const token = sessionStorage.getItem('auth_token');
-  
-//     const response = await fetch('https://api.example.com/protected-data', {
-//       method: 'GET',
-//       headers: {
-//         'Authorization': `Bearer ${token}`, // Adiciona o token ao cabeçalho
-//       },
-//     });
-  
-//     if (response.ok) {
-//       const data = await response.json();
-//       console.log('Dados protegidos:', data);
-//     } else {
-//       console.error('Erro ao acessar dados protegidos.');
-//     }
-//   }
   
