@@ -26,6 +26,7 @@
   "author": "Denilson Santos, Rafael Pinto, Luan Vinicius",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "express": "^4.21.0",

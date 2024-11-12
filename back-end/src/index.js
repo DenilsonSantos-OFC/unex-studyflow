@@ -16,8 +16,10 @@ const swaggerConfig = new Swagger().exportarConfigs()
 const ExecucaoMid = require('./middlewares/execucao-middleware')
 
 // Configuração do Servidor Express
+const cors = require('cors')
 const express = require('express')
 const app = express()
+app.use(cors())
 app.use(express.json())
 app.use(rotasDeUsuario)
 app.use(rotasDeTarefas)
