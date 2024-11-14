@@ -1,18 +1,24 @@
 const RespostaHTTP = require('../../models/resposta-http')
+const Hasher = require('../../configs/hasher')
 const UsuarioServices = require('../../services/usuario-services')
 
 class ChecagemMiddlewares {
 
     static checarAlteracoesSolicitadas(req, res, next) {
-        const respostaHTTP = new RespostaHTTP(res)
         const { nome, genero, email, senha, dataDeNascimento } = req.body
         const novosValores = Object.values({ nome, genero, email, senha, dataDeNascimento })
-        let precisaMexerNoBD
-        novosValores.forEach(valor => {
+        const naoPodeHashearSenhaPassada = (senha)? !Hasher.podeHashear(senha) : undefined
+        const respostaHTTP = new RespostaHTTP(res)
+        let precisaMexerNoBD = false
+        novosValores.forEach( valor => {
             if (valor)
-                precisaMexerNoBD = true})
+                precisaMexerNoBD = true
+        })
+        if (naoPodeHashearSenhaPassada)
+            return respostaHTTP.enviarErro(400, `Senha informada excedeu o limite de ${Hasher.limiteSeguroDeCaracteres} caracteres.`)
         if (!precisaMexerNoBD)
             return respostaHTTP.enviarErro(400, "Nenhuma alteração válida foi recebida.")
+
         next()
     }
     
@@ -45,6 +51,8 @@ class ChecagemMiddlewares {
             return respostaHTTP.enviarErroDeCampoAusente("email")
         if (!senha)
             return respostaHTTP.enviarErroDeCampoAusente("senha")
+        if (!Hasher.podeHashear(senha))
+            return respostaHTTP.enviarErro(400, `Senha informada excedeu o limite de ${Hasher.limiteSeguroDeCaracteres} caracteres.`)
         next()
     }
 

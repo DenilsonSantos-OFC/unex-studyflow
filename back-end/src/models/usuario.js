@@ -12,6 +12,7 @@
  * Sendo assim, os recursos que chamam os métodos daqui precisam lidar com os erros disparados.
 */
 
+const Hasher = require('../configs/hasher')
 const SqlServices = require('../services/sql-services')
 
 class Usuario {
@@ -28,16 +29,16 @@ class Usuario {
      * @param {string} nome - Nome do usuário (inclui nome e sobrenome).
      * @param {string} genero - Gênero do usuário (armazenado com somente 1 caractere no banco de dados, M para masculino, F para feminino ou NULL para não-especificado).
      * @param {string} email - Email do usuário.
-     * @param {string} senha - Senha do usuário (a senha pode conter até 16 caracteres, conforme limitação do banco de dados).
+     * @param {string} hashDaSenha - Hash da senha do usuário cadastrado (é suportado usar uma senha de até 32 caracteres).
      * @param {string} dataDeNascimento - Data de nascimento do usuário (formato: YYYY-MM-DD).
      * @param {string} horarioDeRegistro - Horário em que o usuário se registrou na plataforma (formato ISO 8601: YYYY-MM-DDTHH:mm:ss.sssZ, onde "T" é o separador entre data e hora, "sss" são os milissegundos e "Z" indica o fuso horário "Zulu", em UTC).
      */
-    constructor(id, nome, genero, email, senha, dataDeNascimento, horarioDeRegistro){
+    constructor(id, nome, genero, email, hashDaSenha, dataDeNascimento, horarioDeRegistro){
         this.id = id;
         this.nome = nome;
         this.genero = genero;
         this.email = email;
-        this.senha = senha;
+        this.hash = hashDaSenha;
         this.dataDeNascimento = dataDeNascimento;
         this.horarioDeRegistro = horarioDeRegistro;
     }
@@ -58,7 +59,7 @@ class Usuario {
             linhaDeRetornoSql.nome,
             linhaDeRetornoSql.genero,
             linhaDeRetornoSql.email,
-            linhaDeRetornoSql.senha,
+            linhaDeRetornoSql.hash,
             linhaDeRetornoSql.dataDeNascimento,
             linhaDeRetornoSql.horarioDeRegistro
         )
@@ -79,11 +80,10 @@ class Usuario {
      */
     static async consultar(id) {
         const retornoDaConsulta = await SqlServices.executar(`SELECT * FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_USUARIOS} WHERE id = ${id}`)
-        const registroDoUsuario = retornoDaConsulta.rows[0]
-        const usuarioNaoEncontrado = (!registroDoUsuario)
-        if (usuarioNaoEncontrado){
+        const registrosEncontrados = retornoDaConsulta.rowCount
+        if (registrosEncontrados == 0)
             return null
-        }
+        const registroDoUsuario = retornoDaConsulta.rows[0]
         return Usuario.criarUsandoSql(registroDoUsuario)
     }
 
@@ -92,12 +92,13 @@ class Usuario {
      * @static @async
      * @param {string} nome - Nome do usuário (inclui nome e sobrenome).
      * @param {string} email - Email do usuário.
-     * @param {string} senha - Senha do usuário (a nova senha a ser cadastrada pode conter até 16 caracteres, conforme limitação do banco de dados).
+     * @param {string} senha - Senha do usuário (é possível utilizar uma senha de até 32 caracteres). Somente o hash da senha será armazenado.
      * @returns {boolean} True se o cadastro for realizado com sucesso ou False se algo de errado aconteceu e o registro não foi adicionado corretamente, mesmo na ausência de erro.
      * @throws {Error} Erros podem ocorrer durante a interação com o banco de dados. Precisa tratá-los nas camadas de execução superiores.
     */
     static async cadastrar(nome, email, senha) {
-        const retornoDoCadastro = await SqlServices.executar(`INSERT INTO ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_USUARIOS} (nome, email, senha) VALUES ('${nome}', '${email}', '${senha}');`)
+        const hashDoUsuario = new Hasher().hashear(senha)
+        const retornoDoCadastro = await SqlServices.executar(`INSERT INTO ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_USUARIOS} (nome, email, hash) VALUES ('${nome}', '${email}', '${hashDoUsuario}');`)
         const linhasNovasAdicionadas = retornoDoCadastro.rowCount
         const registroFoiAdicionado = (linhasNovasAdicionadas > 0)
         if (registroFoiAdicionado)
@@ -107,18 +108,23 @@ class Usuario {
 
     /**
      * Verifica as credenciais passadas para autenticação (email e senha).
-     * O email e senha passados devem corresponder a algum registro no banco de dados.
      * @static @async
      * @param {string} email - Email informado pelo usuário.
      * @param {string} senha - Senha informada pelo usuário.
-     * @returns {number|null} O id do usuário que bate com as credenciais informadas. Se nenhum usuário for encontrado, retorna null.
+     * @returns {number|null} O id do usuário que contenha as credenciais informadas. Se nenhum usuário for encontrado, retorna null.
      * @throws {Error} Erros podem ocorrer durante a interação com o banco de dados. Precisa tratá-los nas camadas de execução superiores.
     */
     static async autenticar(email, senha) {
-        const retornoDaConsulta = await SqlServices.executar(`SELECT * FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_USUARIOS} WHERE email='${email}' AND senha='${senha}'`)
+        const retornoDaConsulta = await SqlServices.executar(`SELECT * FROM ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_USUARIOS} WHERE email='${email}'`)
         const registrosEncontrados = retornoDaConsulta.rowCount
-        const registroDoUsuario = registrosEncontrados? retornoDaConsulta.rows[0] : null
-        const id = registrosEncontrados? registroDoUsuario.id : null
+        if (!registrosEncontrados)
+            return null
+        const registroDoUsuario = retornoDaConsulta.rows[0]
+        const hashDoUsuario = registroDoUsuario.hash
+        const senhaOk = new Hasher().comparar(senha, hashDoUsuario)
+        if (!senhaOk)
+            return null
+        const id = registroDoUsuario.id
         return id
     }
 
@@ -135,7 +141,7 @@ class Usuario {
      * @param {string} nome - Nome do usuário (inclui nome e sobrenome).
      * @param {string} genero - Gênero do usuário (armazenado com somente 1 caractere no banco de dados, M para masculino, F para feminino ou NULL para não-especificado).
      * @param {string} email - Novo email a ser registrado.
-     * @param {string} senha - Nova senha a ser armazenada (a senha pode conter até 16 caracteres, conforme limitação do banco de dados).
+     * @param {string} senha - Nova senha a ser armazenada (é possível utilizar uma senha de até 32 caracteres). Somente o hash da senha será armazenado.
      * @param {Date} dataDeNascimento - Data de nascimento do usuário (formato: YYYY-MM-DD).
      * @returns {boolean} True se os dados forem alterados com sucesso ou False se algo de errado aconteceu e o registro não foi alterado corretamente, mesmo na ausência de erro.
      * @throws {Error} Erros podem ocorrer durante a interação com o banco de dados. Precisa tratá-los nas camadas de execução superiores.
@@ -146,15 +152,16 @@ class Usuario {
             nome: nome,
             genero: genero,
             email: email,
-            senha: senha,
+            hash: (senha)? new Hasher().hashear(senha) : undefined,
             dataDeNascimento: dataDeNascimento
         }
         // Construção do comando parcial
         const comandoSetParcial = "SET " + Object.entries(parDeMudancas)
             .filter(([_, valor]) => valor !== undefined) // Valores não-definidos não serão incluídos na criação do comando
-            .map(([chave, valor]) => valor === null ? `"${chave}"=NULL` : `"${chave}"='${valor}'`) // Une os pares de "coluna" e "atributo" corretamente (null é enviado como NULL para evitar erros de sintaxe SQL)
+            .map(([chave, valor]) => valor === null ? `'${chave}'=NULL` : `"${chave}"='${valor}'`) // Une os pares de "coluna" e "atributo" corretamente (null é enviado como NULL para evitar erros de sintaxe SQL)
             .join(', '); // Junta os pares de "coluna" e "atributo" em uma string única
         // Execução SQL
+        console.log(`UPDATE ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_USUARIOS} ${comandoSetParcial} WHERE id=${id}`)
         const retornoDaAlteracao = await SqlServices.executar(`UPDATE ${process.env.DB_ESQUEMA}.${process.env.DB_TBL_USUARIOS} ${comandoSetParcial} WHERE id = ${id}`)
         const registrosAlterados = retornoDaAlteracao.rowCount
         if (registrosAlterados)

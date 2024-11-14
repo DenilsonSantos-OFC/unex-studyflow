@@ -74,10 +74,10 @@ class RespostaHTTP {
      */
     enviarComMsg(codigoHTTP, mensagem=undefined, objeto=undefined) {
         const codigosComMsgPadrao = RespostaHTTP.obterCodigosComMsgPadrao()
-        const codigoPossuiMsgPadrao = codigosComMsgPadrao.includes(codigoHTTP)
+        const codigoPossuiMsgPadrao = codigosComMsgPadrao.includes(codigoHTTP.toString())
         const msgNaoFoiPassada = !mensagem
         if ( (msgNaoFoiPassada) && (codigoPossuiMsgPadrao))
-            mensagem = msgsPadrao[codigoHTTP]
+            mensagem = RespostaHTTP.msgsPadrao[codigoHTTP]
         this.enviar(codigoHTTP, mensagem, objeto)
     }
 
@@ -222,21 +222,6 @@ class RespostaHTTP {
     enviarProibicao(mensagem=undefined, objeto=undefined) {
         const codigoHTTP = 403
         this.enviarComMsg(codigoHTTP, mensagem, objeto)
-    }
-
-    // ------------------------------------------------------------------- //
-    // -------------- MÉTODOS PARA MANIPULAÇÃO DO CABEÇALHO -------------- //
-    // ------------------------------------------------------------------- //
-
-    /**
-     * Registra o token passado no cabeçalho da resposta HTTP.
-     * @param {string} token - Token que será registrado no cabeçalho da resposta HTTP.
-     */
-    registrarToken(token) {
-        const campoDoToken = RespostaHTTP.campoTokenNoCabecalho
-        const prefixoDeToken = RespostaHTTP.prefixoDeToken
-        token = `${prefixoDeToken} ${token}`
-        this.registrar(campoDoToken, token)
     }
 
 } module.exports = RespostaHTTP

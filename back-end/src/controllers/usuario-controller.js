@@ -33,7 +33,6 @@ class UsuarioController {
         }
         if (!idDoUsuario)
             return respostaHTTP.enviarProibicao(msgFalha)
-        respostaHTTP.registrarToken()
         return respostaHTTP.enviarOk(msgOk, {token: UsuarioServices.gerarToken(idDoUsuario)})
     }
 
@@ -47,7 +46,7 @@ class UsuarioController {
         try {
             registroDoUsuario = await Usuario.consultar(idDoUsuario)
         } catch (error) {
-            return respostaHTTP.enviarErroInternoPraDebug()
+            return respostaHTTP.enviarErroInternoPraDebug(erro)
         }
         if (!registroDoUsuario) {
             return respostaHTTP.enviar (`ID ${idDoUsuario}: ${msgErro}`, msgErro)
@@ -61,9 +60,9 @@ class UsuarioController {
         const { nome, email, senha } = req.body
         let usuarioFoiCadastrado
         try {
-            usuarioFoiCadastrado = await Usuario.cadastrar(nome, email, senha)
+            usuarioFoiCadastrado = await Usuario.cadastrar(nome, email, senha, teste)
         } catch (erro) {
-            return respostaHTTP.enviarErroInternoPraDebug()
+            return respostaHTTP.enviarErroInternoPraDebug(erro)
         }
         if (!usuarioFoiCadastrado)
             return respostaHTTP.enviarErroInterno(msgFalha)
