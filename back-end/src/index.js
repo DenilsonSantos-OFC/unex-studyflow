@@ -16,9 +16,11 @@ const swaggerConfig = new Swagger().exportarConfigs()
 const ExecucaoMid = require('./middlewares/execucao-middleware')
 
 // Configuração do Servidor Express
+const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const express = require('express')
 const app = express()
+app.use(cookieParser())
 app.use(cors())
 app.use(express.json())
 app.use(rotasDeUsuario)

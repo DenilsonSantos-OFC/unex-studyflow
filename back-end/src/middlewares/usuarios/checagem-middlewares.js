@@ -1,5 +1,5 @@
-const RespostaHTTP = require('../../models/resposta-http')
 const Hasher = require('../../configs/hasher')
+const RespostaHTTP = require('../../models/resposta-http')
 const UsuarioServices = require('../../services/usuario-services')
 
 class ChecagemMiddlewares {
@@ -18,7 +18,6 @@ class ChecagemMiddlewares {
             return respostaHTTP.enviarErro(400, `Senha informada excedeu o limite de ${Hasher.limiteSeguroDeCaracteres} caracteres.`)
         if (!precisaMexerNoBD)
             return respostaHTTP.enviarErro(400, "Nenhuma alteração válida foi recebida.")
-
         next()
     }
     

@@ -245,4 +245,17 @@ router.post('/perfil', ChecagemMid.checarDadosDeCadastro, TratamentoMid.tratarDa
  */
 router.get('/perfil', ChecagemMid.checarAutenticacao, Controller.consultar)
 
-module.exports = router;
+router.get('/cookie', (req, res) => {
+    const RespostaHTTP = require('../models/resposta-http')
+    const UsuarioServices = require('../services/usuario-services')
+    const respostaHTTP = new RespostaHTTP(res)
+    const token = UsuarioServices.obterToken(req)
+    console.log(token)
+    if (token) {
+        return respostaHTTP.enviarErro(400, 'Cookie já presente!')
+    }
+    respostaHTTP.enviarCookieDeAuth(UsuarioServices.gerarToken(1))
+    return respostaHTTP.enviarOk('Cookie-teste enviado!')
+})
+
+module.exports = router

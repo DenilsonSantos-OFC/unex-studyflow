@@ -33,7 +33,8 @@ class UsuarioController {
         }
         if (!idDoUsuario)
             return respostaHTTP.enviarProibicao(msgFalha)
-        return respostaHTTP.enviarOk(msgOk, {token: UsuarioServices.gerarToken(idDoUsuario)})
+        respostaHTTP.enviarCookieDeAuth(UsuarioServices.gerarToken(idDoUsuario))
+        return respostaHTTP.enviarOk(msgOk)
     }
 
     static async consultar(req, res) {

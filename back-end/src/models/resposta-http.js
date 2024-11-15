@@ -1,3 +1,5 @@
+const Cookie = require('../configs/cookie')
+
 /**
  * @class RespostaHTTP
  * @file resposta-http.js
@@ -8,13 +10,11 @@
  * Por isso ela acopla métodos comumente utilizados para retorno.
  * A intenção é que toda resposta retornada para o cliente siga um padrão.
  * @instance @property {Response} res - Objeto de resposta do Express.
- * @static @property {string} campoTokenNoCabecalho - Nome do campo no cabeçalho onde o token é armazenado.
  * @static @property {string} prefixoDeToken - Prefixo do token no cabeçalho.
  * @static @property {Object} msgsPadrao - Mensagens padrão para cada código HTTP.
  */
 
 class RespostaHTTP {
-    static campoTokenNoCabecalho = 'Authorization'
     static prefixoDeToken = 'Bearer'
     static msgsPadrao = {
         200: 'Operação realizada com sucesso.',
@@ -222,6 +222,19 @@ class RespostaHTTP {
     enviarProibicao(mensagem=undefined, objeto=undefined) {
         const codigoHTTP = 403
         this.enviarComMsg(codigoHTTP, mensagem, objeto)
+    }
+
+    // ------------------------------------------------------------------- //
+    // ------------------------- MÉTODOS ESPECIAIS ----------------------- //
+    // ------------------------------------------------------------------- //
+    
+    /**
+     * Envia um cookie de autenticação pré-configurado para o cliente.
+     * @param {string} token - Token de acesso do usuário, que ficará armazenado no cookie.
+     */
+    enviarCookieDeAuth(token) {
+        const cookie = new Cookie(token)
+        cookie.enviar(this)
     }
 
 } module.exports = RespostaHTTP

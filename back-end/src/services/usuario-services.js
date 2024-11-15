@@ -7,7 +7,6 @@
  */
 
 const jwt = require('jsonwebtoken')
-const { campoTokenNoCabecalho } = require('../models/resposta-http')
 const { existsSync: existe } = require('fs')
 
 class UsuarioServices {
@@ -127,8 +126,7 @@ class UsuarioServices {
      * Caso a requisição não contenha um token, retornará undefined.
      */
     static obterToken(req) {
-        const campoDoToken = campoTokenNoCabecalho.toLowerCase()
-        let token = req.headers[campoDoToken]?.split(" ")[1]
+        const token = req.cookies?.auth
         if (!token)
             return undefined
         try {
