@@ -60,94 +60,122 @@
                 <div class="horizontal-line"></div>
 
             </div>
-            
-            <div class="row">
-                <div class="container-edit">
-                    <h1>Criar nova tarefa</h1>
-                    <!-- Campo de Título -->
+            <form method="post" onsubmit="return validateForm(event);">
+                                
+                            
+                <div class="row">
+                    <div class="container-edit">
+                        <h1>Criar nova tarefa</h1>
+                        <!-- Campo de Título -->
 
-                    <div class="teste">
-                        <div>
-                            <label for="titulo" class="form-label">Título</label>
-                            <input type="text" class="form-control custom-input" id="titulo" placeholder="Insira o título">
-                        </div>
-                    </div>
-
-                    <!-- Campo de Descrição -->
-                    <div class="teste">
-                        <div>
-                            <label for="descricao" class="form-label">Descrição</label>
-                            <input type="text" class="form-control custom-input" id="descricao" placeholder="Insira a descrição">
-                        </div>
-                    </div>                            
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="row-edit">
-                    <div class="box-edit">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h5>Prioridade</h5>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="prioridade" id="prioridade-baixa" value="baixa">
-                                    <label class="form-check-label" for="prioridade-baixa">
-                                    <span class="badge bg-success me-2"><div class="corvermelha"></div></span> Baixa
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="prioridade" id="prioridade-media" value="media">
-                                    <label class="form-check-label" for="prioridade-media">
-                                    <span class="badge bg-warning me-2"><div class="corverde"></div></span> Média
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="prioridade" id="prioridade-alta" value="alta">
-                                    <label class="form-check-label" for="prioridade-alta">
-                                    <span class="badge bg-danger me-2"><div class="coramarela"></div></span> Alta
-                                    </label>
-                                </div>
-                            </div>
-            
-                            <div class="col-lg-6">
-                                <h5>Categoria</h5>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categoria" id="categoria-fazer" value="fazer">
-                                    <label class="form-check-label" for="categoria-fazer">
-                                    <span class="badge bg-danger me-2"><div class="coramarela"></div></span> Fazer
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categoria" id="categoria-andamento" value="andamento">
-                                    <label class="form-check-label" for="categoria-andamento">
-                                    <span class="badge bg-warning me-2"><div class="corvermelha"></div></span> Em andamento
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categoria" id="categoria-concluida" value="concluida">
-                                    <label class="form-check-label" for="categoria-concluida">
-                                    <span class="badge bg-success me-2"><div class="corverde"></div></span> Concluída
-                                    </label>
-                                </div>
+                        <div class="teste">
+                            <div>
+                                <label for="titulo" class="form-label">Título</label>
+                                <input type="text" class="form-control custom-input" id="titulo" placeholder="Insira o título" required>
                             </div>
                         </div>
+
+                        <!-- Campo de Descrição -->
+                        <div class="teste">
+                            <div>
+                                <label for="descricao" class="form-label">Descrição</label>
+                                <input type="text" class="form-control custom-input" id="descricao" placeholder="Insira a descrição" required>
+                            </div>
+                        </div>                            
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="row-edit">
+                        <div class="box-edit">
+                            <div class="row">
+                                
+                                <div class="col-lg-6">
+                                    <h5>Prioridade</h5>
+                                    <div class="form-check" >
+                                        <input class="form-check-input" type="radio" name="prioridade" id="prioridade-baixa" value="1">
+                                        <label class="form-check-label" for="prioridade-baixa">
+                                        <span class="badge bg-success me-2"><div class="corvermelha"></div></span> Baixa
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="prioridade" id="prioridade-media" value="2">
+                                        <label class="form-check-label" for="prioridade-media">
+                                        <span class="badge bg-warning me-2"><div class="corverde"></div></span> Média
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="prioridade" id="prioridade-alta" value="3">
+                                        <label class="form-check-label" for="prioridade-alta">
+                                        <span class="badge bg-danger me-2"><div class="coramarela"></div></span> Alta
+                                        </label>
+                                    </div>
+                                </div>
                 
-                    
-            
-            </div>
-            <div class="row">
-                <div class="gradient-background">
-                    <button type="button" class="btn-edit btn btn-outline-primary">Cancelar</button>
-                    <button type="submit" class="btn-edit btn btn-primary">Salvar</button>
+                                <div class="col-lg-6">
+                                    <h5>Categoria</h5>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="categoria" id="categoria-fazer" value="1">
+                                        <label class="form-check-label" for="categoria-fazer">
+                                        <span class="badge bg-danger me-2"><div class="coramarela"></div></span> Fazer
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="categoria" id="categoria-andamento" value="2">
+                                        <label class="form-check-label" for="categoria-andamento">
+                                        <span class="badge bg-warning me-2"><div class="corvermelha"></div></span> Em andamento
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="categoria" id="categoria-concluida" value="3">
+                                        <label class="form-check-label" for="categoria-concluida">
+                                        <span class="badge bg-success me-2"><div class="corverde"></div></span> Concluída
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
-            </div>
+
+                    
+                        
+                
+                </div>
+
+                <div class="row">
+                    <div class="gradient-background">
+                        <button type="button" class="btn-edit btn btn-outline-primary" onclick="history.back()">Cancelar</button>
+                        <button type="submit" class="btn-edit btn btn-primary">Salvar</button>
+                    </div>
+                </div>
+            </form>
         </div>
 
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../API/tarefa.js"></script>
+        
+        <script>
+        function validateForm(event) {
+            
+            const prioridade = document.querySelector('input[name="prioridade"]:checked');
+            const categoria = document.querySelector('input[name="categoria"]:checked');
+
+            if (!prioridade) {
+                alert("Por favor, selecione uma prioridade.");
+                return false; // Impede o envio do formulário
+            }
+
+            if (!categoria) {
+                alert("Por favor, selecione uma categoria.");
+                return false; // Impede o envio do formulário
+            }
+
+            // Se ambos os campos estiverem preenchidos, chama a função createTarefa
+            createTarefa(event);
+            return false; // Impede o envio padrão do formulário
+        }
+        </script>
 
     </body>
 </html>

@@ -219,7 +219,7 @@ ul, li, a{
 }
 
 
-.add button{
+.add a button{
     display: flex;
     width: 80%;
     height: 3rem;
@@ -233,6 +233,10 @@ ul, li, a{
     color: #959BA3;
     background-color: #ffffff;
     gap: 1rem;
+}
+.add a{
+    width: 100%;
+    display: contents;
 }
 
 .tarefas{

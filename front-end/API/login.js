@@ -8,19 +8,21 @@ async function login(event) {
         const response = await fetch('https://unex-studyflow.onrender.com/autenticar', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ email, senha: password }), // Ajuste para "senha" no corpo
         });
 
         if (response.ok) {
             const data = await response.json();
-            const token = data.objeto.token; // Acessa o token corretamente
-            sessionStorage.setItem('auth_token', token); // Armazena o token no sessionStorage
+            const token = data.objeto.token; 
+            console.log(token);
+            await salvarAuth(token);
             console.log('Login bem-sucedido e token armazenado no sessionStorage');
+            
 
             // Redireciona o usuário para a página inicial
-            window.location.href = './views/home.html';
+            // window.location.href = './views/home.html';
         } else {
             const errorData = await response.json(); // Captura a resposta de erro
             alert(`Erro: ${errorData.mensagem}`); // Exibe a mensagem de erro
@@ -32,9 +34,19 @@ async function login(event) {
   
 
   
-  function logout() {
+function logout() {
     sessionStorage.removeItem('auth_token');
     console.log('Logout realizado e token removido do sessionStorage');
-  }
+}
+
+
+async function salvarAuth(token) {
+    const nome = 'auth';
+    const ttl = 604800000;
+    // const dominio = 'unex-studyflow.onrender.com';
+    document.cookie = `${nome}=${token}; expires=${new Date(Date.now() + ttl).toUTCString()}; path=/; sameSite=None; secure=true;`
+}
+
+
 
   
