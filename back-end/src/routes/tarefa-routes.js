@@ -20,6 +20,7 @@
 // ------------------------------------------------------------------ //
 
 const Middlewares = require('../middlewares/tarefas/checagem-middlewares')
+const ChecagemMid = require('../middlewares/usuarios/checagem-middlewares')
 const Controller = require('../controllers/tarefa-controller')
 
 // ------------------------------------------------------------------ //
@@ -59,7 +60,7 @@ const router = require('express').Router()
  *       500:
  *         description: Erro interno do servidor.
  */
-router.get('/tarefas/', Middlewares.verificarAutenticacao, Controller.buscarTarefas)
+router.get('/tarefas/', ChecagemMid.checarAutenticacao, Controller.buscarTarefas)
 
 /**
  * @swagger
@@ -97,7 +98,7 @@ router.get('/tarefas/', Middlewares.verificarAutenticacao, Controller.buscarTare
  *       500:
  *         description: Erro interno do servidor.
  */
-router.get('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validarIdTarefa, Controller.buscarTarefa)
+router.get('/tarefa/:id', ChecagemMid.checarAutenticacao, Middlewares.validarIdTarefa, Controller.buscarTarefa)
 
 /**
  * @swagger
@@ -133,7 +134,7 @@ router.get('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validar
  *       500:
  *         description: Erro interno do servidor.
  */
-router.get('/tarefas/filtro', Middlewares.verificarAutenticacao, Controller.buscarTarefasFiltro)
+router.get('/tarefas/filtro', ChecagemMid.checarAutenticacao, Controller.buscarTarefasFiltro)
 
 /**
  * @swagger
@@ -185,7 +186,7 @@ router.get('/tarefas/filtro', Middlewares.verificarAutenticacao, Controller.busc
  *       500:
  *         description: Erro interno do servidor.
  */
-router.post('/tarefa', Middlewares.verificarAutenticacao, Middlewares.validarNovosDadosDaTarefa, Controller.cadastrar)
+router.post('/tarefa', ChecagemMid.checarAutenticacao, Middlewares.validarNovosDadosDaTarefa, Controller.cadastrar)
 
 /**
  * @swagger
@@ -236,7 +237,7 @@ router.post('/tarefa', Middlewares.verificarAutenticacao, Middlewares.validarNov
  *       500:
  *         description: Erro interno do servidor.
  */
-router.put('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validarIdTarefa, Middlewares.validarDadosAtualizadosDeTarefa, Controller.alterar)
+router.put('/tarefa/:id', ChecagemMid.checarAutenticacao, Middlewares.validarIdTarefa, Middlewares.validarDadosAtualizadosDeTarefa, Controller.alterar)
 
 /**
  * @swagger
@@ -271,6 +272,6 @@ router.put('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validar
  *       500:
  *         description: Erro interno do servidor.
  */
-router.delete('/tarefa/:id', Middlewares.verificarAutenticacao, Middlewares.validarIdTarefa, Controller.excluir)
+router.delete('/tarefa/:id', ChecagemMid.checarAutenticacao, Middlewares.validarIdTarefa, Controller.excluir)
 
 module.exports = router

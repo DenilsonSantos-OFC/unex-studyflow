@@ -46,8 +46,9 @@ class ChecagemMiddlewares {
     }
 
     static verificarAutenticacao(req, res, next) {
-        const respostaHTTP = new RespostaHTTP(res);
-        const usuarioToken = UsuarioServices.obterToken(req);
+        const respostaHTTP = new RespostaHTTP(res)
+        const usuarioToken = UsuarioServices.obterToken(req)
+        console.log(usuarioToken)
         if (!usuarioToken || !usuarioToken.id) {
           return respostaHTTP.enviarNegacao("Usuário não autenticado.")
         }
