@@ -13,7 +13,7 @@ class Cookie {
         const {res} = respostaHTTP
         res.cookie(this.nomeDoCookie, this.valor, {
             httpOnly: true,
-            secure: true,
+            secure: false,
             SameSite: 'Lax',
             maxAge: this.tempoDeVida
         })
