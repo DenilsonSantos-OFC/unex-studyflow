@@ -61,7 +61,7 @@ class UsuarioController {
         const { nome, email, senha } = req.body
         let usuarioFoiCadastrado
         try {
-            usuarioFoiCadastrado = await Usuario.cadastrar(nome, email, senha, teste)
+            usuarioFoiCadastrado = await Usuario.cadastrar(nome, email, senha)
         } catch (erro) {
             return respostaHTTP.enviarErroInternoPraDebug(erro)
         }
