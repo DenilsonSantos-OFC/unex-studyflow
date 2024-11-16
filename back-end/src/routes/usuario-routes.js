@@ -250,7 +250,6 @@ router.get('/cookie', (req, res) => {
     const UsuarioServices = require('../services/usuario-services')
     const respostaHTTP = new RespostaHTTP(res)
     const token = UsuarioServices.obterToken(req)
-    console.log(token)
     if (token) {
         return respostaHTTP.enviarErro(400, 'Cookie já presente!')
     }
