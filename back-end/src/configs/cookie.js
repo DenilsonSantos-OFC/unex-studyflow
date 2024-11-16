@@ -14,7 +14,7 @@ class Cookie {
         res.cookie(this.nomeDoCookie, this.valor, {
             httpOnly: true,
             secure: false,
-            SameSite: 'Lax',
+            SameSite: 'None',
             maxAge: this.tempoDeVida
         })
     }
