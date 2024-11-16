@@ -126,7 +126,8 @@ class UsuarioServices {
      * Caso a requisição não contenha um token, retornará undefined.
      */
     static obterToken(req) {
-        const token = req.cookies?.auth
+        const token = req.headers.Authorization
+        console.log(token)
         if (!token)
             return undefined
         try {
