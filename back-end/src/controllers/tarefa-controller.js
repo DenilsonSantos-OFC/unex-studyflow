@@ -75,7 +75,8 @@ class TarefaController {
     try{
       // Extrai o id do usuário do token e o renomeia para idUsuario
       const {id: idUsuario} = UsuarioServices.obterToken(req);
-      const {titulo = '', descricao = ''} = req.query;
+      const { keyword: titulo } = req.query
+      const { keyword: descricao } = req.query
       // Chama a função que faz a busca no banco com base nos filtros fornecidos
       const tarefas = await Tarefa.listarPorFiltro(idUsuario, titulo, descricao);
       // Verifica se a busca retornou algum resultado

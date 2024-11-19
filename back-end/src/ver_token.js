@@ -5,7 +5,7 @@ expandir(variaveisDeAmbiente())
 const jwt = require('jsonwebtoken')
 
 let tokens = [
-    ' eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJpYXQiOjE3MzE3ODEyMzQsImV4cCI6MTczOTU1NzIzNH0.ae5p-H1MFUg8ITmE3nJaxsEDEBpKzQ-0arO9WP4rvII',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJpYXQiOjE3MzE3ODM3MTMsImV4cCI6MTczOTU1OTcxM30.R6D7R2cTXMGCL3dKW-fzIMOR6V5r5ApRQyB6Q_V2WNk',
 ]
 
 for (let token of tokens) {
