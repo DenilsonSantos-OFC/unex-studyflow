@@ -14,7 +14,7 @@ function populateProfile(data) {
 
     // profileImage.src = data.objeto.avatar; 
     // profileImage2.src = data.objeto.avatar; 
-    profileImage.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrZx34TJ3OIdLFtbEvpG86yEer0OvKYJCB9w&s";
-    profileImage2.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrZx34TJ3OIdLFtbEvpG86yEer0OvKYJCB9w&s";
+    // profileImage.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrZx34TJ3OIdLFtbEvpG86yEer0OvKYJCB9w&s";
+    // profileImage2.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrZx34TJ3OIdLFtbEvpG86yEer0OvKYJCB9w&s";
 
 } 
