@@ -36,10 +36,11 @@
 
                 <div class="col-lg-6 container-search">
                     <div class="input-group mb-3 search">
-                        <span class="input-group-text" id="basic-addon1">
-                            <img src="../src/img/search-icon.png" alt="Procurar">
-                        </span>
-                        <input type="text" class="form-control" placeholder="Buscar tarefas...."  aria-describedby="basic-addon1">
+                        
+                        <button class="btn btn-outline-secondary" id="searchButton">
+                                <img src="../src/img/search-icon.png" alt="Procurar">
+                        </button>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Buscar tarefas...." aria-describedby="basic-addon1">
                     </div>
                 </div>
 
@@ -158,6 +159,21 @@
         <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
         <script src="../API/getUser.js"></script>
+        <script src="../API/getCookie.js"></script>
+        <script src="../API/getAllTasks.js"></script>
+        <script src="../src/js/criarTarefa.js"></script>
+        <script src="../API/deleteTask.js"></script>
+        <script src="../API/getFilteredTasks.js"></script>
 
+
+        <script>
+            function populateProfile(data) {                
+                const profileImage = document.querySelector('.perfil-img');
+
+                // profileImage.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrZx34TJ3OIdLFtbEvpG86yEer0OvKYJCB9w&s";
+
+                // profileImage.src = data.objeto.avatar; 
+            } 
+        </script>
     </body>
 </html>

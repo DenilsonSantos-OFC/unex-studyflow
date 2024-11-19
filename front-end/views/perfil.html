@@ -52,7 +52,7 @@
                         </div>
                        <div>
                             <a href="../views/perfil.html" class="perfil-foto">
-                                <img class="perfil-img" src="../src/img/Group 560.svg" alt="">
+                                <img class="perfil-img2" src="../src/img/Group 560.svg" alt="">
                             </a>
                         </div>
                     </div>
@@ -103,12 +103,12 @@
                     <div class="perfil-edit">
                         <h2>Foto de perfil</h2>
                         <div class="imagem-perfil">
-                            <img src="../src/img/Group 560.svg" alt="">
+                            <img class="perfil-img" src="../src/img/Group 560.svg" alt="">
                         </div>
     
                         <div class="buttons2">
                             <div class="continue-button">
-                                <button type="button" class="btn-edit btn btn-primary">Carregar nova foto</button>
+                                <button type="button" class="btn-edit btn btn-primary" onclick="fetchUserProfile(event)">Carregar nova foto</button>
                                 <button type="button" class="btn-edit">Excluir</button>
                             </div>
                         </div>
@@ -120,9 +120,6 @@
                 <div class="col-lg-8 center cadastro">
                     <div class="row">
                         <div class="container">
-                            <div class="form-image">
-                                <img src="assets/img//undraw_shopping_re_3wst.svg" alt="">
-                            </div>
                             <div class="form">
                                 <form action="#">
                                     <div class="form-header">
@@ -133,8 +130,8 @@
                     
                                     <div class="input-group">
                                         <div class="input-box">
-                                            <label for="email">E-mail</label>
-                                            <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
+                                            <label for="nome">Nome</label>
+                                            <input id="nome" type="nome" name="nome" placeholder="Digite seu nome" required>
                                         </div>
                                         <div class="input-box ">
                                             <div class="row">
@@ -143,10 +140,9 @@
                                                         <label class="gender-title" for="genderSelect">Gênero</label>
                                                         <select class="form-control custom-select" id="genderSelect" name="gender">
                                                             <option value="" disabled selected>Selecione...</option>
-                                                            <option value="feminino">Feminino</option>
-                                                            <option value="masculino">Masculino</option>
-                                                            <option value="outros">Outros</option>
-                                                            <option value="prefiro_nao_dizer">Prefiro não dizer</option>
+                                                            <option value="f">Feminino</option>
+                                                            <option value="m">Masculino</option>
+                                                            <option value="null">Prefiro não dizer</option>
                                                         </select>
                                                     </div>
                                                     
@@ -161,30 +157,22 @@
                                             </div>
                                         </div>
                                         <div class="input-box">
-                                            <label for="number">Celular</label>
-                                            <input id="number" type="tel" name="number" placeholder="(xx) xxxx-xxxx" required>
+                                            <label for="email">E-mail</label>
+                                            <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
                                         </div>
                     
                                         <div class="input-box">
                                             <label for="password">Senha</label>
                                             <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
                                         </div>
-                    
-                    
-                                        <div class="input-box">
-                                            <label for="confirmPassword">Confirme sua Senha</label>
-                                            <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Digite sua senha novamente" required>
-                                        </div>
-                    
                                     </div>
-                    
                                    
                     
                                     <div class="continue-button">
                                         <div class="buttons">
                                             <div class="continue-button">
                                                 <button type="button" class="btn-edit btn ">Voltar</button>
-                                                <button type="button" class="btn-edit btn btn-primary">Salvar</button>
+                                                <button type="button" class="btn-edit btn btn-primary" onclick="EditUser(event)">Salvar</button>
                                             </div>
                                         </div>                                    
                                     </div>
@@ -197,8 +185,13 @@
             </div>
         </div>
 
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../API/populateProfile.js"></script>
+        <script src="../API/getUser.js"></script>
+        <script src="../API/edituser.js"></script>
+        <script src="../API/getCookie.js"></script>
+
 
     </body>
 </html>

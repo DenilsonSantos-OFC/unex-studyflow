@@ -22,7 +22,7 @@ async function login(event) {
             
 
             // Redireciona o usuário para a página inicial
-            // window.location.href = './views/home.html';
+            window.location.href = './views/home.html';
         } else {
             const errorData = await response.json(); // Captura a resposta de erro
             alert(`Erro: ${errorData.mensagem}`); // Exibe a mensagem de erro
@@ -35,7 +35,8 @@ async function login(event) {
 
   
 function logout() {
-    sessionStorage.removeItem('auth_token');
+    const nome = 'auth';
+    document.cookie = `${nome}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     console.log('Logout realizado e token removido do sessionStorage');
 }
 

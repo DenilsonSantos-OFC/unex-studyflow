@@ -79,7 +79,10 @@
                             <label for="descricao" class="form-label">Descrição</label>
                             <input type="text" class="form-control custom-input" id="descricao" placeholder="Insira a descrição">
                         </div>
-                    </div>                            
+                    </div>
+
+                    <!-- Campo oculto para armazenar o ID da tarefa -->
+                    <input type="hidden" id="tarefaId" value="">
                 </div>
             </div>
 
@@ -90,19 +93,19 @@
                             <div class="col-lg-6">
                                 <h5>Prioridade</h5>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="prioridade" id="prioridade-baixa" value="baixa">
+                                    <input class="form-check-input" type="radio" name="prioridade" id="prioridade-baixa" value="1">
                                     <label class="form-check-label" for="prioridade-baixa">
                                     <span class="badge bg-success me-2"><div class="corvermelha"></div></span> Baixa
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="prioridade" id="prioridade-media" value="media">
+                                    <input class="form-check-input" type="radio" name="prioridade" id="prioridade-media" value="2">
                                     <label class="form-check-label" for="prioridade-media">
                                     <span class="badge bg-warning me-2"><div class="corverde"></div></span> Média
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="prioridade" id="prioridade-alta" value="alta">
+                                    <input class="form-check-input" type="radio" name="prioridade" id="prioridade-alta" value="3">
                                     <label class="form-check-label" for="prioridade-alta">
                                     <span class="badge bg-danger me-2"><div class="coramarela"></div></span> Alta
                                     </label>
@@ -112,19 +115,19 @@
                             <div class="col-lg-6">
                                 <h5>Categoria</h5>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categoria" id="categoria-fazer" value="fazer">
+                                    <input class="form-check-input" type="radio" name="categoria" id="categoria-fazer" value="1">
                                     <label class="form-check-label" for="categoria-fazer">
                                     <span class="badge bg-danger me-2"><div class="coramarela"></div></span> Fazer
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categoria" id="categoria-andamento" value="andamento">
+                                    <input class="form-check-input" type="radio" name="categoria" id="categoria-andamento" value="2">
                                     <label class="form-check-label" for="categoria-andamento">
                                     <span class="badge bg-warning me-2"><div class="corvermelha"></div></span> Em andamento
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="categoria" id="categoria-concluida" value="concluida">
+                                    <input class="form-check-input" type="radio" name="categoria" id="categoria-concluida" value="3">
                                     <label class="form-check-label" for="categoria-concluida">
                                     <span class="badge bg-success me-2"><div class="corverde"></div></span> Concluída
                                     </label>
@@ -146,8 +149,11 @@
             </div>
         </div>
 
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../API/getCookie.js"></script>
+        <script src="../API/getTask.js"></script>
+        <script src="../API/editTask.js"></script>
 
     </body>
 </html>

@@ -1,7 +1,4 @@
-
-
-
-function create(tipo, nivel, titulo, texto) {
+function create(tipo, nivel, titulo, texto, id) {
     // Criando o elemento div que contém a nova tarefa
     const tarefa = document.createElement('div');
 
@@ -11,7 +8,7 @@ function create(tipo, nivel, titulo, texto) {
         case "Alta":
             cor = "v";
             break;
-        case "Média":
+        case "Media":
             cor = "a";
             break;
         default:
@@ -28,10 +25,10 @@ function create(tipo, nivel, titulo, texto) {
                     <p>${nivel}</p>
                 </div>
                 <div class="icones">
-                    <button type="button" class="editar">
+                    <button type="button" data-id="${id}" class="editar">
                         <img src="../src/img/editar-icon.png" alt="editar">
                     </button>
-                    <button type="button" class="deletar">
+                    <button type="button"data-id="${id}" class="deletar" onclick="deletTask(this)">
                         <img src="../src/img/deletar-icon.png" alt="deletar">
                     </button>
                 </div>
@@ -71,27 +68,13 @@ function create(tipo, nivel, titulo, texto) {
 
     // Adiciona evento de deletar ao botão deletar
     tarefa.querySelector('.deletar').addEventListener('click', function() {
-        // Encontra o elemento da tarefa e remove
-        if (tarefa && tarefa.parentNode) {
-            tarefa.parentNode.removeChild(tarefa); // Remove o elemento da árvore DOM
-        }
+        deletTask();
     });
 
     // Adiciona evento de editar ao botão editar
     tarefa.querySelector('.editar').addEventListener('click', function() {
         // Redireciona para a página de edição
-        window.location.href = '../views/editarTarefa.html'; // Altere para a URL da sua página de edição
+        window.location.href = `../views/editarTarefa.html?id=${id}`;
     });
 }
 
-document.querySelector('.add-tarefa.fazer').addEventListener('click', function() {
-    create(1,"Baixa", "teste1", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur aliquam sint dignissimos eos aut, consectetur mollitia aperiam maxime tempore inventore delectus tempora blanditiis explicabo voluptatem voluptatum molestias minima necessitatibus! Iste?");
-});
-
-document.querySelector('.add-tarefa.andamento').addEventListener('click', function() {
-    create(2,"Média", "teste2", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur aliquam sint dignissimos eos aut, consectetur mollitia aperiam maxime tempore inventore delectus tempora blanditiis explicabo voluptatem voluptatum molestias minima necessitatibus! Iste?");
-});
-
-document.querySelector('.add-tarefa.concluido').addEventListener('click', function() {
-    create(3,"Alta", "teste3", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur aliquam sint dignissimos eos aut, consectetur mollitia aperiam maxime tempore inventore delectus tempora blanditiis explicabo voluptatem voluptatum molestias minima necessitatibus! Iste?");
-});

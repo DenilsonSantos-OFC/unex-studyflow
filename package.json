@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "exports": "^0.0.1",
+    "module": "^1.2.5"
+  }
+}

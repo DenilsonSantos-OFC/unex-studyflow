@@ -18,21 +18,12 @@ async function createTarefa(e) {
         });
 
 
-        console.log({
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth'), // Substitua 'nome_do_cookie' pelo nome do seu cookie
-            },
-            body: JSON.stringify({ titulo, descricao, prioridadeNv, categoriaNv }), 
-        });
-
-        console.log(response.ok);
-
         if (response.ok) {
             const data = await response.json();
             console.log('Tarefa cadastrada:', data);
             alert('Cadastro bem-sucedido!');
+            window.location.href = './home.html'; // Altere para a URL da sua página de edição
+
            
         } else {
             const errorData = await response.json(); // Captura a resposta de erro
@@ -44,11 +35,11 @@ async function createTarefa(e) {
     }
 }
 
-// Função para obter um cookie pelo nome
 function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
+
 
 

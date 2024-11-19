@@ -1,3 +1,10 @@
+// Importa a função populateProfile
+// (Se você estiver usando módulos, caso contrário, apenas certifique-se de que o arquivo esteja incluído no HTML)
+
+document.addEventListener('DOMContentLoaded', function(e) {
+    fetchUserProfile(e)
+});
+
 async function fetchUserProfile(event) {
     event.preventDefault(); // Impede o comportamento padrão do botão
         
@@ -6,40 +13,19 @@ async function fetchUserProfile(event) {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': getCookie('auth') 
             }
         });
 
-
-        console.log({
-            method: 'GET', 
-            headers: {
-                'Content-Type': 'application/json',
-
-            }
-        })
-        console.log(response.ok);
-        
         if (response.ok) {
             const data = await response.json();
-            console.log('Dados do perfil:', data);
-
-            // Armazenar os dados em uma lista
-            const userProfile = [
-                data.registro.nome,
-                data.registro.email,
-                data.registro.dataDeNascimento,
-                data.avatar
-            ];
-
-            console.log('Perfil do usuário:', userProfile);
+            // Chama a função populateProfile para preencher os inputs
+            populateProfile(data);
         } else {
             console.error('Erro ao acessar dados do perfil.');
-            const data = await response.json();
-            console.log('Dados do perfil:', data);
         }
     } catch (error) {
         console.error('Erro na requisição:', error);
     }
 }
-
 
