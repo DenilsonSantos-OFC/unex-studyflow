@@ -32,7 +32,7 @@
     }
     
     img.image {
-        position: absolute;
+        /* position: absolute; */
     }
     .add a button{
         width: 50%;
@@ -56,6 +56,9 @@
     .perfil-edit{
         margin-left: 0;
         
+    }
+    .search.form2{
+        display: none;
     }
 }
 
