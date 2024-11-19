@@ -1,7 +1,13 @@
 @media (max-width: 1200px) {
         /* Home */
     /* Login */
+    .nav-tarefas {
+        gap: 3rem;
+    }
 
+    h3{
+        font-size: 1.1em;
+    }
 }
 
 @media (max-width: 992px) {
@@ -24,11 +30,9 @@
         display: flex;
         justify-content: end;
     }
-    .cadastro div div{
-        margin-bottom: 1rem;
-    }
+    
     img.image {
-        /* position: absolute; */
+        position: absolute;
     }
     .add a button{
         width: 50%;
@@ -42,6 +46,16 @@
 
     .login h1, .cadastro h1{
         font-size: 3em;
+    }
+    .nav-tarefas {
+        gap: 20rem;
+    }
+    .container-tarefas {
+        margin-bottom: 2rem;
+    }
+    .perfil-edit{
+        margin-left: 0;
+        
     }
 }
 
@@ -65,6 +79,14 @@
         height: 4rem;
         font-size: 1.5em;
     }
+    .nav-tarefas {
+        gap: 14rem;
+    }
+    input[type="email"], input[type="password"], input[type="text"] {
+        height: 7rem;
+        height: 2.5rem;
+        font-size: 1.4em;
+    }
 }
 
 @media (max-width: 450px) {
@@ -80,5 +102,8 @@
 
     .forms button.btn{
         font-size: 1em;    
+    }
+    .nav-tarefas {
+        gap: 6rem;
     }
 }
