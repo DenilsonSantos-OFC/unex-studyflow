@@ -49,6 +49,13 @@ async function getAllTasks() {
 
     } catch (error) {
         console.error('Erro ao buscar tarefas:', error);
-        window.location.href = '../';
+        Swal.fire({
+            icon: "error",
+            title: error.response?.data?.mensagem || error.message || 'Erro ao pegar tarefas.',
+        }).then((result) => {
+            window.location.href = '../';
+        });
+
+    
     }
 }

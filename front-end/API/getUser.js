@@ -23,7 +23,12 @@ async function fetchUserProfile(event) {
             populateProfile(data);
         } else {
             console.error('Erro ao acessar dados do perfil.');
-            window.location.href = '../';
+            Swal.fire({
+                icon: "error",
+                title: error.response?.data?.mensagem || error.message || 'Erro ao pegar Usuario.',
+            }).then((result) => {
+                window.location.href = '../';
+            });
         }
     } catch (error) {
         console.error('Erro na requisição:', error);
