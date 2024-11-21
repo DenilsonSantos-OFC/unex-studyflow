@@ -34,9 +34,6 @@ class UsuarioController {
         if (!idDoUsuario)
             return respostaHTTP.enviarProibicao(msgFalha)
         return respostaHTTP.enviarOk(msgOk, { token: UsuarioServices.gerarToken(idDoUsuario) })
-        // resultado.
-        // respostaHTTP.enviarCookieDeAuth(UsuarioServices.gerarToken(idDoUsuario))
-        // return respostaHTTP.enviarOk(msgOk)
     }
 
     static async consultar(req, res) {
@@ -48,7 +45,7 @@ class UsuarioController {
         let registroDoUsuario
         try {
             registroDoUsuario = await Usuario.consultar(idDoUsuario)
-        } catch (error) {
+        } catch (erro) {
             return respostaHTTP.enviarErroInternoPraDebug(erro)
         }
         if (!registroDoUsuario) {
