@@ -32,6 +32,12 @@ async function fetchUserProfile(event) {
         }
     } catch (error) {
         console.error('Erro na requisição:', error);
+        Swal.fire({
+            icon: "error",
+            title: error.response?.data?.mensagem || error.message || 'Erro ao pegar Usuario.',
+        }).then((result) => {
+            window.location.href = '../';
+        });
     }
 }
 
