@@ -33,11 +33,10 @@ async function createTarefa(e) {
            
         } else {
             const errorData = await response.json(); // Captura a resposta de erro
-            alert(`Erro: ${errorData.mensagem || 'Erro ao cadastrar.'}`); // Exibe a mensagem de erro
             Swal.fire({
                 position: "center",
                 icon: "error",
-                title: error.response?.data?.mensagem || error.message || 'Erro ao cadastrar.',
+                title: errorData.mensagem || 'Erro ao Criar .',
                 showConfirmButton: false,
                 timer: 1500
               }).then((result) => {
