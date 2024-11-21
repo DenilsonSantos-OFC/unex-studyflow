@@ -49,5 +49,6 @@ async function getAllTasks() {
 
     } catch (error) {
         console.error('Erro ao buscar tarefas:', error);
+        window.location.href = '../';
     }
 }
