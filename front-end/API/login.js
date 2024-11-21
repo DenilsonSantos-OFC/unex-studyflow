@@ -16,16 +16,18 @@ async function login(event) {
         if (response.ok) {
             const data = await response.json();
             const token = data.objeto.token; 
-            console.log(token);
-            await salvarAuth(token);
-            console.log('Login bem-sucedido e token armazenado no sessionStorage');
-            
+            await salvarAuth(token);            
 
             // Redireciona o usuário para a página inicial
             window.location.href = './views/home.html';
         } else {
             const errorData = await response.json(); // Captura a resposta de erro
-            alert(`Erro: ${errorData.mensagem}`); // Exibe a mensagem de erro
+            Swal.fire({
+                icon: "error",
+                title: "`Erro: ${errorData.mensagem}`",
+                text: "Something went wrong!",
+            });
+            
         }
     } catch (error) {
         console.error('Erro:', error);

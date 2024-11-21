@@ -34,11 +34,13 @@ async function register(e) {
             const data = await response.json();
             console.log('Usuário cadastrado:', data);
             alert('Cadastro bem-sucedido!');
+            
             loginAfterRegister(email, senha)
             // Redirecionar ou limpar o formulário, se necessário
         } else {
             const errorData = await response.json(); // Captura a resposta de erro
             alert(`Erro: ${errorData.mensagem || 'Erro ao cadastrar.'}`); // Exibe a mensagem de erro
+
         }
     } catch (error) {
         console.error('Erro:', error);
