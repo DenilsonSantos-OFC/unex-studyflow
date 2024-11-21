@@ -17,7 +17,7 @@ async function login(event) {
             const data = await response.json();
             const token = data.objeto.token; 
             console.log(token);
-            await salvarAuth(token);
+            // await salvarAuth(token);
             console.log('Login bem-sucedido e token armazenado no sessionStorage');
             
 
