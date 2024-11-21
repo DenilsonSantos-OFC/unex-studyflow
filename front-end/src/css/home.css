@@ -34,7 +34,6 @@ img.image{
     justify-content: start;
     margin-top: 0.5rem;
     width: 11rem;
-    position: fixed;
 
 }
 
@@ -68,6 +67,76 @@ ul, li, a{
     margin: 3rem 0;
 
 }
+
+
+.navbar2.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+}
+
+
+.navbar2.navbar .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #000000;
+    display: none; /* Inicialmente oculto */
+    flex-direction: column;
+}
+#navbarNav .nav-item{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.navbar2.navbar .menu li {
+    margin: 10px 0;
+}
+
+.navbar2.navbar .menu li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+}
+
+/* Torna visível no desktop */
+@media (min-width: 768px) {
+    .menu {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .menu li {
+        margin: 0 15px;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+}
+
+.perfil-img{
+    border-radius: 50%;
+}
+
+
+
+
 
 .apoio{
     width: 16.5%;
@@ -140,11 +209,12 @@ ul, li, a{
 
 .container-tarefas .tarefas{
     width: 90%;
-    height: 14rem;
-    padding: 0.5rem;
+    height: auto;
+    padding: 2.5rem 0.5rem;
     border-radius: 10px;
     background-color: #ffffff;
     flex-direction: column;
+    overflow: hidden;
 }
 .container-tarefas div{
     justify-content: space-evenly;
@@ -216,6 +286,8 @@ ul, li, a{
     font-size: 0.7em;
     padding: 15px;
     font-weight: 600;
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
 }
 
 
@@ -241,4 +313,12 @@ ul, li, a{
 
 .tarefas{
     margin-top: 1rem;
+}
+
+.navbar2.navbar {
+    position: absolute; /* Define a posição como absoluta */
+    top: 0; /* Alinha ao topo da tela */
+    left: 0; /* Alinha à esquerda da tela */
+    width: 100%; /* Largura total da tela */
+    z-index: 1000; /* Garante que a navbar fique acima de outros elementos */
 }

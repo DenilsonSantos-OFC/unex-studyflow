@@ -31,9 +31,7 @@
     margin-bottom: 3rem;
 }
 
-.input-group {
-    padding: 1rem 0;
-}
+
 
 .input-box {
     display: flex;
@@ -111,7 +109,6 @@ label.gender-title {
 
 
 .perfil-edit{
-    margin-left: 3rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -157,10 +154,6 @@ label.gender-title {
         width: 100%;
     }
 
-    .input-group {
-        margin-left: 3rem;
-    }
-
     .gender-inputs {
         margin-left: 5rem;
     }
@@ -171,15 +164,7 @@ label.gender-title {
         width: 90%;
         height: auto;
     }
-    .input-group {
-        flex-direction: column;
-        z-index: 5;
-        padding-right: 5rem;
-        max-height: 10rem;
-        overflow-y: scroll;
-        flex-wrap: nowrap;
-        margin-left: 4rem;
-    }
+
     .gender-inputs {
         margin-top: 2rem;
         margin-left: 5rem;
@@ -194,7 +179,4 @@ label.gender-title {
         margin-top: 0.5rem;
     }
 
-    .continue-button {
-        margin-left: 1.5rem;
-    }
 }

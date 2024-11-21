@@ -20,18 +20,40 @@ async function createTarefa(e) {
 
         if (response.ok) {
             const data = await response.json();
-            console.log('Tarefa cadastrada:', data);
-            alert('Cadastro bem-sucedido!');
-            window.location.href = './home.html'; // Altere para a URL da sua página de edição
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Cadastro bem-sucedido!",
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                window.location.href = './home.html'; // Altere para a URL da sua página de edição
+            });
 
            
         } else {
             const errorData = await response.json(); // Captura a resposta de erro
-            alert(`Erro: ${errorData.mensagem || 'Erro ao cadastrar.'}`); // Exibe a mensagem de erro
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: errorData.mensagem || 'Erro ao Criar .',
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                window.location.href = './home.html'; // Altere para a URL da sua página de edição
+            });
         }
     } catch (error) {
         console.error('Erro:', error);
-        alert('Erro ao fazer a requisição. Tente novamente.');
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: 'Erro ao fazer a requisição. Tente novamente.',
+            showConfirmButton: false,
+            timer: 1500
+          }).then((result) => {
+            window.location.href = './home.html'; // Altere para a URL da sua página de edição
+        });
     }
 }
 

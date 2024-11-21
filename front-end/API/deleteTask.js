@@ -12,10 +12,17 @@ async function deletTask(button) {
         });
 
         if (response.ok) {
-            alert('Tarefa deletada com sucesso!');
-            location.reload(true)
-            // Remove a tarefa do DOM
-            button.closest('.task').remove(); // Remove o elemento pai que contém a tarefa
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Cadastro bem-sucedido!",
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                location.reload(true)
+                // Remove a tarefa do DOM
+                button.closest('.task').remove();             
+            });
             
 
         } else {
