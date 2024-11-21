@@ -23,6 +23,7 @@ async function fetchUserProfile(event) {
             populateProfile(data);
         } else {
             console.error('Erro ao acessar dados do perfil.');
+            window.location.href = '../';
         }
     } catch (error) {
         console.error('Erro na requisição:', error);
