@@ -15,7 +15,7 @@ async function deletTask(button) {
             Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "Cadastro bem-sucedido!",
+                title: "Deletado com sucesso!",
                 showConfirmButton: false,
                 timer: 1500
               }).then((result) => {
@@ -27,7 +27,15 @@ async function deletTask(button) {
 
         } else {
             const errorData = await response.json(); // Captura a resposta de erro
-            alert(`Erro: ${errorData.mensagem || 'Erro ao Deletar.'}`); // Exibe a mensagem de erro
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: errorData.mensagem || 'Erro ao Deletar.',
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                location.reload(true)           
+            });
         }
     } catch (error) {
         console.error('Erro na requisição:', error);

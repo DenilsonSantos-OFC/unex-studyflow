@@ -15,7 +15,15 @@ document.getElementById('searchButton').addEventListener('click', async function
             displayFilteredTasks(data); // Chama a função para exibir as tarefas filtradas
         } else {
             const errorData = await response.json();
-            alert(`Erro: ${errorData.mensagem || 'Erro ao buscar tarefas.'}`);
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: errorData.mensagem || 'Erro ao buscar tarefas.',
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                location.reload(true)           
+            }); 
         }
     } catch (error) {
         console.error('Erro na requisição:', error);

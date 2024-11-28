@@ -19,7 +19,7 @@ async function createTarefa(e) {
 
 
         if (response.ok) {
-            const data = await response.json();
+            
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -33,6 +33,7 @@ async function createTarefa(e) {
            
         } else {
             const errorData = await response.json(); // Captura a resposta de erro
+            
             Swal.fire({
                 position: "center",
                 icon: "error",

@@ -23,12 +23,27 @@ async function EditUser(e) {
         if (response.ok) {
             const data = await response.json();
             console.log('Usuário Editado:', data);
-            alert('Edição bem-sucedido!');
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Editado com sucesso!",
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {          
+                location.reload(true)           
+            });
 
         }else{
             const errorData = await response.json(); // Captura a resposta de erro
-            alert(`Erro: ${errorData.mensagem || 'Erro ao Editar.'}`); // Exibe a mensagem de erro
-        }
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: errorData.mensagem || 'Erro ao Editar.',
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                location.reload(true)           
+            });         }
 
       
     } catch (error) {

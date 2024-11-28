@@ -24,8 +24,7 @@ async function login(event) {
             const errorData = await response.json(); // Captura a resposta de erro
             Swal.fire({
                 icon: "error",
-                title: "`Erro: ${errorData.mensagem}`",
-                text: "Something went wrong!",
+                title: errorData.mensagem,
             });
             
         }

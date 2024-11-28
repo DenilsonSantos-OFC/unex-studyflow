@@ -44,7 +44,15 @@ async function getAllTasks() {
           }else{
             console.error('Erro ao acessar as tarefas.');
             const errorData = await response.json(); // Captura a resposta de erro
-            alert(`Erro: ${errorData.mensagem || 'Erro ao pegar tarefas.'}`); // Exibe a mensagem de erro
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: errorData.mensagem || 'Erro ao pegar tarefas.',
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                location.reload(true)           
+            }); 
           }
 
     } catch (error) {

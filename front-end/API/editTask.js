@@ -27,11 +27,27 @@ async function editTask() {
             const data = await response.json();
             console.log('Tarefa Editada:', data);
 
-            alert('Tarefa atualizada com sucesso!');
-            window.location.href = './home.html';
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Editado com sucesso!",
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {          
+                window.location.href = './home.html';
+            });
         }else{
-             const errorData = await response.json(); // Captura a resposta de erro
-            alert(`Erro: ${errorData.mensagem || 'Erro ao Editar.'}`); // Exibe a mensagem de erro
+            const errorData = await response.json(); // Captura a resposta de erro
+
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: errorData.mensagem || 'Erro ao Editar.',
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                location.reload(true)           
+            });        
         }
       
     } catch (error) {
