@@ -30,6 +30,14 @@ async function login(event) {
         }
     } catch (error) {
         console.error('Erro:', error);
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title:  error,
+            showConfirmButton: false,
+          }).then((result) => {
+            location.reload(true)           
+        });
     }
 }
   

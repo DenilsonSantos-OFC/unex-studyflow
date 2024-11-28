@@ -17,8 +17,15 @@ async function register(e) {
 
         if (loginResponse.ok) {
             // Se a autenticação for bem-sucedida, significa que o email já está cadastrado
-            alert('Este email já está cadastrado. Tente outro.');
-            return; // Interrompe a função de cadastro
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Este email já está cadastrado. Tente outro.",
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                return; // Interrompe a função de cadastro
+            });
         }
 
         // Se a autenticação falhar, significa que o email não está cadastrado
@@ -33,18 +40,40 @@ async function register(e) {
         if (response.ok) {
             const data = await response.json();
             console.log('Usuário cadastrado:', data);
-            alert('Cadastro bem-sucedido!');
+
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Editado com sucesso!",
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {          
+                loginAfterRegister(email, senha)
+            });
             
-            loginAfterRegister(email, senha)
-            // Redirecionar ou limpar o formulário, se necessário
         } else {
             const errorData = await response.json(); // Captura a resposta de erro
-            alert(`Erro: ${errorData.mensagem || 'Erro ao cadastrar.'}`); // Exibe a mensagem de erro
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: errorData.mensagem || 'Erro ao Cadastrar.',
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                location.reload(true)           
+            });
 
         }
     } catch (error) {
         console.error('Erro:', error);
-        alert('Erro ao fazer a requisição. Tente novamente.');
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Erro ao fazer a requisição. Tente novamente.",
+            showConfirmButton: false,
+          }).then((result) => {
+            location.reload(true)           
+        });
     }
 }
 

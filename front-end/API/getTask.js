@@ -46,6 +46,14 @@ async function getTask() {
         })
         .catch(error => {
             console.error('Erro ao buscar a tarefa:', error);
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: 'Erro na requisição:', error,
+                showConfirmButton: false,
+              }).then((result) => {
+                location.reload(true)           
+            });
         });
     }
 };

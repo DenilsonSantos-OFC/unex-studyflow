@@ -52,6 +52,14 @@ async function editTask() {
       
     } catch (error) {
         console.error('Erro na requisição:', error);
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: 'Erro na requisição:', error,
+            showConfirmButton: false,
+          }).then((result) => {
+            location.reload(true)           
+        });
     }    
     
 }
