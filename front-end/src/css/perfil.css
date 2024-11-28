@@ -92,6 +92,7 @@ label.gender-title {
 
 
 .buttons2 .continue-button {
+    margin-left: 1rem;
     display: block;
     flex-direction: unset;
     gap: unset ;
