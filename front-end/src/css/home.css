@@ -380,3 +380,46 @@ text-decoration: none;
     width: 100%; /* Largura total da tela */
     z-index: 1000; /* Garante que a navbar fique acima de outros elementos */
 }
+
+#taskList {
+    display: none; /* Inicialmente oculto */
+    background-color: #EEF2F5;
+    width: auto;
+    height: auto;
+    padding: 2rem;
+    border-radius: 15px;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza horizontalmente */
+    z-index: 1; /* Garante que fique acima de outros elementos */
+}
+
+.taskBody{
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000029;
+    position: fixed;
+    display: none;
+}
+
+
+#taskList .titulo, #taskList p{
+    width: 4%;
+    align-items: center;
+    display: flex;
+}
+#taskList .nav-tarefas{
+    display: flex;
+}
+
+#taskList .tarefas{
+    width: auto;
+    height: auto;
+    margin: 1rem;
+    padding: 2.5rem 0.5rem;
+    border-radius: 10px;
+    background-color: #ffffff;
+    flex-direction: column;
+    overflow: hidden;
+}
