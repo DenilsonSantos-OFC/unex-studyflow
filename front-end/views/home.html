@@ -8,6 +8,7 @@
             <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="../../vendor/bootstrap/js/bootstrap.min.js" defer></script>
 
         <!-- ICONE -->
             <link rel="icon" href="../src/img/icone.png">
@@ -48,33 +49,38 @@
                             </button>
                             <input type="text" class="form-control" id="searchInput" placeholder="Buscar tarefas...." aria-describedby="basic-addon1">
                         </div>
-                        <nav class="navbar navbar-expand-lg navbar-light ">
-                            <div class="container-fluid">
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button> 
-                            </div>
-                        </nav>
+                        <div class="hamburger" id="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                           
                     </div>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <div class="input-group mb-3 search">
-                            
-                                    <button class="btn btn-outline-secondary" id="searchButton">
-                                            <img src="../src/img/search-icon.png" alt="Procurar">
-                                    </button>
-                                    <input type="text" class="form-control" id="searchInput" placeholder="Buscar tarefas...." aria-describedby="basic-addon1">
-                                </div>                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../views/home.html">Tarefa</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../views/ajuda.html">Ajuda</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="navbar-nav extra-menu" id="extra-menu">
+                        <li class="nav-item">
+                            <div class="input-group mb-3 search">
+                        
+                                <button class="btn btn-outline-secondary" id="searchButton">
+                                        <img src="../src/img/search-icon.png" alt="Procurar">
+                                </button>
+                                <input type="text" class="form-control" id="searchInput" placeholder="Buscar tarefas...." aria-describedby="basic-addon1">
+                            </div>   
+                            <div class="perfil perfil2">
+                               <div>
+                                    <a href="../views/perfil.html" class="perfil-foto">
+                                        <img class="perfil-img" src="../src/img/Group 560.svg" alt="">
+                                    </a>
+                                </div>
+                            </div>                         
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../views/home.html">Tarefa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../views/ajuda.html">Ajuda</a>
+                        </li>
+                    </ul>
+                   
                         
                 
     
@@ -196,7 +202,7 @@
 
         <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="../src/js/home.js"></script>
+        <script src="../src/js/navbar.js"></script>
         <script src="../API/getUser.js"></script>
         <script src="../API/getCookie.js"></script>
         <script src="../API/getAllTasks.js"></script>
@@ -216,10 +222,6 @@
 
             } 
 
-            function toggleMenu() {
-                const menu = document.getElementById("menu");
-                menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-            }
 
         </script>
     </body>

@@ -22,6 +22,9 @@
     .perfil{
         display: none;
     }
+    .perfil2{
+        display: block;
+    }
     .search{
         width: 50%;
         justify-content: end;
@@ -29,13 +32,23 @@
     .container-search{
         display: flex;
         justify-content: end;
+        position: absolute;
     }
+    .extra-menu li {
+        justify-content: center;
+        display: flex;
+        gap: 3rem;
+    }
+    
     
     img.image {
         /* position: absolute; */
     }
     .add a button{
         width: 50%;
+    }
+    .hamburger {
+        display: flex; /* Torna o botão hamburger visível */
     }
 
 
